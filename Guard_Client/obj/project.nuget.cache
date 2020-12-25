@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "z45sXa2N6hMzix2w+id7ovOJ3rXL32n9NabYRl9SwJYET9zRUqoOVimazmPw3F7AeF42mmKmRb6hcX0kJfTMPg==",
+  "success": true,
+  "projectFilePath": "W:\\programs\\repos\\GuardClient\\Guard_Client\\Guard_Client.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Marshall\\.nuget\\packages\\devexpressmvvm\\20.2.3\\devexpressmvvm.20.2.3.nupkg.sha512",
+    "C:\\Users\\Marshall\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.1\\microsoft.extensions.dependencyinjection.5.0.1.nupkg.sha512",
+    "C:\\Users\\Marshall\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

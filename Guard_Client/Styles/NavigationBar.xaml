@@ -1,0 +1,101 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Guard_Client.Styles">
+
+    <!--Colors-->
+    <Color x:Key="ColorPrimary1">#6fe7dd</Color>
+    <Color x:Key="ColorPrimary2">#3490de</Color>
+    <Color x:Key="ColorPrimary3">#6639a6</Color>
+    <Color x:Key="ColorPrimary4">#521262</Color>
+    <Color x:Key="ColorPrimary5">#323232</Color>
+    <Color x:Key="ColorPrimary6">#ff165d</Color>
+    <Color x:Key="ColorPrimary7">#9896f1</Color>
+
+    <Color x:Key="ColorPrimary01">#FFC2F1DB</Color>
+    <Color x:Key="ColorPrimary02">#FF495F75</Color>
+    <Color x:Key="ColorPrimary03">#FF283542</Color>
+    <Color x:Key="ColorPrimary04">#FF4E6A4F</Color>
+    <Color x:Key="ColorPrimary05">#FF99B276</Color>
+    <Color x:Key="ColorPrimary06">#FF344634</Color>
+    <!--Brushes-->
+    <SolidColorBrush x:Key="BrushPrimary1" Color="{StaticResource ColorPrimary01}"/>
+    <SolidColorBrush x:Key="BrushPrimary2" Color="{StaticResource ColorPrimary02}"/>
+    <SolidColorBrush x:Key="BrushPrimary3" Color="{StaticResource ColorPrimary03}"/>
+    <SolidColorBrush x:Key="BrushPrimary4" Color="{StaticResource ColorPrimary04}"/>
+    <SolidColorBrush x:Key="BrushPrimary5" Color="{StaticResource ColorPrimary05}"/>
+    <SolidColorBrush x:Key="BrushPrimary6" Color="{StaticResource ColorPrimary6}"/>
+    <SolidColorBrush x:Key="BrushPrimary7" Color="{StaticResource ColorPrimary7}"/>
+    <SolidColorBrush x:Key="BrushPrimary8" Color="{StaticResource ColorPrimary06}"/>
+
+    <Style x:Key="NatButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary1}"/>
+        
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="TimesNewRoman"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                                       Padding="13"
+                                       Background="{StaticResource BrushPrimary5}" 
+                                       Foreground="{StaticResource BrushPrimary3}"
+                                  FontFamily="Franklin Gothic Medium"
+                                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                           VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
+                        </Trigger>
+                        
+                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                        Duration="0:0:0.100" To="5,5,0,0"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                        Duration="0:0:0.100" To="0"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+       
+    </Style>
+    
+    <!--BORDER STYLE-->
+    <Style x:Key="NatBorderButton" TargetType="Border">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Margin" Value="2 10 5 5"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="Background" Value="{x:Null}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BrushPrimary3}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource BrushPrimary2}"/>
+            </Trigger>
+            
+            <Trigger Property="IsMouseOver" Value="False">
+                <Setter Property="BorderBrush" Value="{StaticResource BrushPrimary3}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+  
+</ResourceDictionary>
