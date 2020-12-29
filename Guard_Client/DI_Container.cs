@@ -1,4 +1,8 @@
-﻿using Guard_Client.Services;
+﻿using DTOs.Models;
+using DTOs.Services;
+using Guard_Client.BLL;
+using Guard_Client.Extensions;
+using Guard_Client.Services;
 using Guard_Client.Services.Abstactions;
 using Guard_Client.Services.Implementations;
 using Guard_Client.ViewModels;
@@ -6,9 +10,11 @@ using Guard_Client.Views.Pages;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using testDAL;
 
 namespace Guard_Client
 {
@@ -20,14 +26,17 @@ namespace Guard_Client
         {
             var services = new ServiceCollection();
 
-
+            services.AddSingleton<DbTestContext>();
             services.AddSingleton<PageService>();
 
+            
+
+            services.AddServiceHandler();
 
             services.AddScoped<CreatePage<CurrentPage>>(services =>
-            {
-                return () => services.GetRequiredService<CurrentPage>();
-            });
+                {
+                    return () => services.GetRequiredService<CurrentPage>();
+                });
             services.AddScoped<CreatePage<Details>>(services =>
             {
                 return () => services.GetRequiredService<Details>();
@@ -47,6 +56,8 @@ namespace Guard_Client
             services.AddScoped<History>();
 
             services.AddScoped<MainViewModel>();
+            services.AddScoped<DetailsViewModel>();
+            services.AddScoped<GeneralViewModel>();
 
             services.AddSingleton<IPageFactory, PageFactory>(services =>
             {
@@ -63,5 +74,7 @@ namespace Guard_Client
         }
 
         public MainViewModel MainViewModel => _provider.GetRequiredService<MainViewModel>();
+        public DetailsViewModel DetailsViewModel => _provider.GetRequiredService<DetailsViewModel>();
+        public GeneralViewModel GeneralViewModel => _provider.GetRequiredService<GeneralViewModel>();
     }
 }

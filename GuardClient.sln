@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTOs", "DTOs\DTOs.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Guard_Client", "Guard_Client\Guard_Client.csproj", "{966B9EBF-70F4-4F33-A5FE-5396A7CCF528}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testDAL", "testDAL\testDAL.csproj", "{18F82F29-23CA-4D6B-8032-34414ECF9634}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{FBA62FA7-2451-4D66-BBE8-F86804209B33}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{966B9EBF-70F4-4F33-A5FE-5396A7CCF528}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{966B9EBF-70F4-4F33-A5FE-5396A7CCF528}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{966B9EBF-70F4-4F33-A5FE-5396A7CCF528}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18F82F29-23CA-4D6B-8032-34414ECF9634}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18F82F29-23CA-4D6B-8032-34414ECF9634}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18F82F29-23CA-4D6B-8032-34414ECF9634}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18F82F29-23CA-4D6B-8032-34414ECF9634}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBA62FA7-2451-4D66-BBE8-F86804209B33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBA62FA7-2451-4D66-BBE8-F86804209B33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBA62FA7-2451-4D66-BBE8-F86804209B33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBA62FA7-2451-4D66-BBE8-F86804209B33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

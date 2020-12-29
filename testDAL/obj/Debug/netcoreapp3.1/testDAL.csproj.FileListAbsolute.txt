@@ -1,0 +1,15 @@
+W:\programs\repos\GuardClient\testDAL\bin\Debug\netcoreapp3.1\testDAL.deps.json
+W:\programs\repos\GuardClient\testDAL\bin\Debug\netcoreapp3.1\testDAL.runtimeconfig.json
+W:\programs\repos\GuardClient\testDAL\bin\Debug\netcoreapp3.1\testDAL.runtimeconfig.dev.json
+W:\programs\repos\GuardClient\testDAL\bin\Debug\netcoreapp3.1\testDAL.dll
+W:\programs\repos\GuardClient\testDAL\bin\Debug\netcoreapp3.1\testDAL.pdb
+W:\programs\repos\GuardClient\testDAL\bin\Debug\netcoreapp3.1\DTOs.dll
+W:\programs\repos\GuardClient\testDAL\bin\Debug\netcoreapp3.1\DTOs.pdb
+W:\programs\repos\GuardClient\testDAL\obj\Debug\netcoreapp3.1\testDAL.csprojAssemblyReference.cache
+W:\programs\repos\GuardClient\testDAL\obj\Debug\netcoreapp3.1\testDAL.AssemblyInfoInputs.cache
+W:\programs\repos\GuardClient\testDAL\obj\Debug\netcoreapp3.1\testDAL.AssemblyInfo.cs
+W:\programs\repos\GuardClient\testDAL\obj\Debug\netcoreapp3.1\testDAL.csproj.CoreCompileInputs.cache
+W:\programs\repos\GuardClient\testDAL\obj\Debug\netcoreapp3.1\testDAL.csproj.CopyComplete
+W:\programs\repos\GuardClient\testDAL\obj\Debug\netcoreapp3.1\testDAL.dll
+W:\programs\repos\GuardClient\testDAL\obj\Debug\netcoreapp3.1\testDAL.pdb
+W:\programs\repos\GuardClient\testDAL\obj\Debug\netcoreapp3.1\testDAL.genruntimeconfig.cache

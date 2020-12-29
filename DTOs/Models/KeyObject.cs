@@ -8,10 +8,10 @@ namespace DTOs.Models
 {
     public class KeyObject : DomainObject
     {
-        public int AudNum { get; set; }
+        public string AudNum { get; set; }
         public bool IsBooked { get; set; } = false;
 
-        public User User { get; set; }
-        public Guid UserId { get; set; }
+        public User? User { get; set; }
+        public Guid? UserId { get; set; }
     }
 }

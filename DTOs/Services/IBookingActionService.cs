@@ -1,0 +1,17 @@
+﻿using DTOs.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DTOs.Services
+{
+    public interface IBookingActionService : IDataService<BookingAction>
+    {
+        Task StartSession(BookingAction bookingAction);
+        Task EndSession(BookingAction bookingAction);
+        Task<BookingAction> GetByRule(Expression<Func<BookingAction, bool>> expression);
+    }
+}

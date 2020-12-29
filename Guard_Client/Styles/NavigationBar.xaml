@@ -49,10 +49,10 @@
                                            VerticalAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger Property="IsFocused" Value="True">
                             <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="False">
+                        <Trigger Property="IsFocused" Value="False">
                             <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
                         </Trigger>
                         

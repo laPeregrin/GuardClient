@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "B33O3EAFZ1bkSJT6gg2H0yPncVaUEffW3FNebpmWI7xUgjBhFtyKxNw5E1PDW9ZaKPb5YS+ep1TXGDIDSL0yoA==",
+  "dgSpecHash": "6SnMQ6HGuX5Ob7WQPFAwRUQXlXNRhvQPwEJY9SUpSD/hZcDrcKMbQv3ljRfVFYkRVkIUct/wFQonXIq33HMDOg==",
   "success": true,
   "projectFilePath": "W:\\programs\\repos\\GuardClient\\DTOs\\DTOs.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Marshall\\.nuget\\packages\\devexpressmvvm\\20.2.3\\devexpressmvvm.20.2.3.nupkg.sha512"
+  ],
   "logs": []
 }

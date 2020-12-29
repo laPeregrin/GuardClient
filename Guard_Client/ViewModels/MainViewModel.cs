@@ -16,7 +16,7 @@ namespace Guard_Client.ViewModels
     public class MainViewModel : BindableBase
     {
         private readonly PageService _pageService;
-        private readonly IPageFactory _pageFactory; 
+        private readonly IPageFactory _pageFactory;
 
 
         private Page _source;
@@ -47,7 +47,6 @@ namespace Guard_Client.ViewModels
         {
             PageSource = await _pageFactory.GetPage(PageType.Details);
         });
-
         #endregion Commands
     }
 }
