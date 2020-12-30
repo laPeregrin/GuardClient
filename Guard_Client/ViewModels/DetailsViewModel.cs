@@ -23,13 +23,16 @@ namespace Guard_Client.ViewModels
         private UserAndKeyHandler _userAndKeyHandler;
 
 
-        private ObservableCollection<DetailsView> _keyCollections;
+        private ObservableCollection<DetailsView> _BookedKeyCollections;
+        public ObservableCollection<DetailsView> BookedKeyCollections { get { return _BookedKeyCollections; } set { _BookedKeyCollections = value; RaisePropertyChanged(); } }
 
-        public ObservableCollection<DetailsView> BookedKeyCollections { get { return _keyCollections; } set { _keyCollections = value; RaisePropertyChanged(); } }
+
         private DetailsView selectedKey;
         private DetailsView currentKey;
         public DetailsView? SelectedKey { get { return selectedKey; } set { selectedKey = value; RaisePropertyChanged(); } }
         public DetailsView? CurrentKey { get { return currentKey; } set { currentKey = value; RaisePropertyChanged(); } }
+
+
         public DetailsViewModel(KeyObjectService dataService, UserAndKeyHandler handler)
         {
             _keyObjService = dataService;

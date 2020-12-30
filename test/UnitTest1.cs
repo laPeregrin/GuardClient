@@ -1,4 +1,5 @@
 using DTOs.Models;
+using Guard_Client.BLL;
 using Guard_Client.Services.Implementations;
 using NUnit.Framework;
 using System;
@@ -15,6 +16,7 @@ namespace test
         private UserService userService;
         private KeyObjectService keyObjectService;
         private BookingActionService bookingActionService;
+        private UserAndKeyHandler _userHandler;
         [SetUp]
         public void Setup()
         {
@@ -22,6 +24,7 @@ namespace test
             userService = new UserService(_service);
             keyObjectService = new KeyObjectService(_service);
             bookingActionService = new BookingActionService(_service);
+            _userHandler = new UserAndKeyHandler(keyObjectService, userService, bookingActionService);
         }
 
 
@@ -134,6 +137,33 @@ namespace test
             var key = await keyObjectService.GetByAuditoryName("132");
             //Assert
             Assert.AreEqual("132", key.AudNum);
+        }
+        [Test]
+        public async Task GetAll__ReturnUsers()
+        {
+            //Action
+            var users = await _userHandler.GetAll<User>();
+            var user = users.First(); 
+            //Assert
+            Assert.AreEqual(typeof(User), user.GetType());
+        }
+        [Test]
+        public async Task GetAll__ReturnKey()
+        {
+            //Action
+            var users = await _userHandler.GetAll<KeyObject>();
+            var user = users.First();
+            //Assert
+            Assert.AreEqual(typeof(KeyObject), user.GetType());
+        }
+        [Test]
+        public async Task GetAll__ReturnBooking()
+        {
+            //Action
+            var users = await _userHandler.GetAll<BookingAction>();
+            var user = users.First();
+            //Assert
+            Assert.AreEqual(typeof(BookingAction), user.GetType());
         }
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Guard_Client"
         mc:Ignorable="d"
         DataContext="{Binding MainViewModel, Source={StaticResource VMLocator}}"
-        Title="Guard" Height="600" Width="1000" Background="#FF3A513B" FontFamily="Segoe UI Symbol" FontSize="17" SizeToContent="Manual" WindowStartupLocation="CenterScreen">
+        Title="Guard" MinHeight="500" MinWidth="1200" Background="#FF3A513B" FontFamily="Segoe UI Symbol" FontSize="17" SizeToContent="Manual" WindowStartupLocation="CenterScreen">
     <Grid>
 
         <Grid.ColumnDefinitions>

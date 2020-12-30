@@ -24,6 +24,26 @@ namespace Guard_Client.BLL
             _bookingAction = bookingActionService;
         }
 
+        public async Task<IEnumerable<DomainObject>> GetAll<T>() where T : DomainObject
+        {
+            if (typeof(T) == typeof(User))
+            {
+                return await _userService.GetAll();
+            }
+            else if (typeof(T) == typeof(KeyObject))
+            {
+                return await _keyService.GetAll();
+            }
+            else if (typeof(T) == typeof(BookingAction))
+            {
+                return await _bookingAction.GetAll();
+            }
+            throw new ArgumentException();
+        }
+        public async Task<IEnumerable<KeyObject>> GetAll(bool visible)
+        {
+            return await _keyService.GetAll(x => x.IsBooked == visible);
+        }
         public async Task<DetailsView> GetCurrentInfoByKeyAuditory(string numberOfAuditoryOfKeys)
         {
             DetailsView model = null;
@@ -46,17 +66,18 @@ namespace Guard_Client.BLL
 
         public async Task AddBooking(string lastName, string auditoryNumber)
         {
-
-                var user = await _userService.GetByLastName(lastName);
-                var key = await _keyService.GetByAuditoryName(auditoryNumber);
-                if(key.IsBooked == true)
-                    throw new FormatException("key alreadyBooked");
-                var booking = new BookingAction(user.Id, user, key.Id, key, DateTime.Now, null, null);
-                await _bookingAction.StartSession(booking);
+            if (lastName == null || auditoryNumber == null)
+                throw new ArgumentException();
+            var user = await _userService.GetByLastName(lastName);
+            var key = await _keyService.GetByAuditoryName(auditoryNumber);
+            if (key.IsBooked == true)
+                throw new FormatException("key alreadyBooked");
+            var booking = new BookingAction(user.Id, user, key.Id, key, DateTime.Now, null, null);
+            await _bookingAction.StartSession(booking);
 
         }
 
 
-       
+
     }
 }

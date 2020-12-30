@@ -45,6 +45,7 @@ namespace Guard_Client.Services.Implementations
              bookingAction.KeyObject.IsBooked = true;
             var changeKey = bookingAction.KeyObject;
             await Task.Run(()=>_service.KeyObjects.Update(changeKey));
+            await _service.SaveChangesAsync();
         }
         public async Task StartSession(User user, KeyObject keyObject)
         {

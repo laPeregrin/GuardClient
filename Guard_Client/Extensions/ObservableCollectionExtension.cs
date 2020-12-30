@@ -17,7 +17,21 @@ namespace Guard_Client.Extensions
             var collection = new ObservableCollection<DetailsView>();
             foreach(var item in keyObjects)
             {
+                mappedItem = new DetailsView();
                 mappedItem.KeyNumber = item.AudNum;
+                // mappedItem.DateTaking = item.
+                collection.Add(mappedItem);
+            }
+            return collection;
+        }
+        public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<User> keyObjects)
+        {
+            var mappedItem = new DetailsView();
+            var collection = new ObservableCollection<DetailsView>();
+            foreach (var item in keyObjects)
+            {
+                mappedItem = new DetailsView();
+                mappedItem.LastName = item.LastName;
                 // mappedItem.DateTaking = item.
                 collection.Add(mappedItem);
             }
