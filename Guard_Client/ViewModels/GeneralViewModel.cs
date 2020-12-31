@@ -23,7 +23,12 @@ namespace Guard_Client.ViewModels
         {
             _bigService = bigService;
 
-            UpdateCollection();
+
+            var CollUser = (IEnumerable<User>)Task.Run(async () => await _bigService.GetAll<User>()).Result;
+            users = new ObservableCollection<DetailsView>(CollUser.MapToDetailsView());
+            var KeyUser = Task.Run(async () => await _bigService.GetAll(false)).Result;
+
+            keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView());
         }
 
         private string lastName; //bind in textBox for searching in list of users
@@ -73,10 +78,8 @@ namespace Guard_Client.ViewModels
         {
             try
             {
-               var task = Task.Run(()=>UpdateCollection());
-                var task1 = Task.Run(async() => await _bigService.AddBooking(CurrentUser.LastName, CurrentKey.KeyNumber));
-
-                Task.WaitAll(new[] {task,task1});
+                Task.Run(async () => await _bigService.AddBooking(CurrentUser.LastName, CurrentKey.KeyNumber));
+                UpdateCollection(CurrentKey);
             }
             catch (FormatException e)
             {
@@ -90,17 +93,9 @@ namespace Guard_Client.ViewModels
 
 
         #region MoveToSelectedItemScrollEvent
-        private void UpdateCollection()
+        private void UpdateCollection(DetailsView details)
         {
-            users = null;
-            keys = null;
-            
-            var CollUser = (IEnumerable<User>)Task.Run(async () => await _bigService.GetAll<User>()).Result;
-            var KeyUser = Task.Run(async () => await _bigService.GetAll(false)).Result;
-
-            users = new ObservableCollection<DetailsView>(CollUser.MapToDetailsView());
-            keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView());
-           
+            keys.Remove(details);
         }
         #endregion
     }

@@ -33,19 +33,19 @@ namespace Guard_Client
 
             services.AddServiceHandler();
 
-            services.AddScoped<CreatePage<CurrentPage>>(services =>
+            services.AddSingleton<CreatePage<CurrentPage>>(services =>
                 {
                     return () => services.GetRequiredService<CurrentPage>();
                 });
-            services.AddScoped<CreatePage<Details>>(services =>
+            services.AddSingleton<CreatePage<Details>>(services =>
             {
                 return () => services.GetRequiredService<Details>();
             });
-            services.AddScoped<CreatePage<GeneralPage>>(services =>
+            services.AddSingleton<CreatePage<GeneralPage>>(services =>
             {
                 return () => services.GetRequiredService<GeneralPage>();
             });
-            services.AddScoped<CreatePage<History>>(services =>
+            services.AddSingleton<CreatePage<History>>(services =>
             {
                 return () => services.GetRequiredService<History>();
             });
@@ -55,9 +55,9 @@ namespace Guard_Client
             services.AddScoped<GeneralPage>();
             services.AddScoped<History>();
 
-            services.AddScoped<MainViewModel>();
-            services.AddScoped<DetailsViewModel>();
-            services.AddScoped<GeneralViewModel>();
+            services.AddTransient<MainViewModel>();
+            services.AddTransient<DetailsViewModel>();
+            services.AddTransient<GeneralViewModel>();
 
             services.AddSingleton<IPageFactory, PageFactory>(services =>
             {

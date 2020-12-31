@@ -19,21 +19,24 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.Column="1" Text="Все занятые ключи" Foreground="{StaticResource BrushPrimary1}" FontSize="35"/>
-        <ScrollViewer Grid.Row="1" Grid.Column="0"  >
-            <ListBox Height="400" Background="{x:Null}" ItemsSource="{Binding BookedKeyCollections}" SelectedItem="{Binding SelectedKey}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <UniformGrid Width="300" Columns="1">
-                            <UniformGrid.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Margin" Value="1"/>
-                                </Style>
-                            </UniformGrid.Resources>
-                            <TextBlock Text="{Binding KeyNumber, StringFormat=ключ №{0}}" FontSize="25"/>
-                        </UniformGrid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <ScrollViewer Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <Button Command="{Binding UpdateAll}" Content="Обновить"/>
+                <ListBox Height="400" Background="{x:Null}" ItemsSource="{Binding BookedKeyCollections}" SelectedItem="{Binding SelectedKey}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <UniformGrid Width="300" Columns="1">
+                                <UniformGrid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="1"/>
+                                    </Style>
+                                </UniformGrid.Resources>
+                                <TextBlock Text="{Binding KeyNumber, StringFormat=ключ №{0}}" FontSize="25"/>
+                            </UniformGrid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
         </ScrollViewer>
         <StackPanel Grid.Row="1" Grid.Column="2">
             <Grid>
@@ -64,7 +67,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Margin="10 0 0 0" Padding="10" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Left" Content="Вернул ключ"/>
+                <Button Command="{Binding ReturnKey}" Grid.Column="0" Margin="10 0 0 0" Padding="10" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Left" Content="Вернул ключ"/>
                 <Border Grid.Column="1" Width="40"/>
                 <Button Grid.Column="2" Margin="0 0 20 0" Padding="20" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Right" Content="Выдать ещё ключ"/>
             </Grid>

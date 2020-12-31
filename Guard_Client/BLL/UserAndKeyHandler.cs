@@ -1,6 +1,7 @@
 ﻿using DTOs.Models;
 using DTOs.Services;
 using Guard_Client.DomainModels;
+using Guard_Client.Exceptions;
 using Guard_Client.Services.Implementations;
 using System;
 using System.Collections.Generic;
@@ -71,9 +72,26 @@ namespace Guard_Client.BLL
             var user = await _userService.GetByLastName(lastName);
             var key = await _keyService.GetByAuditoryName(auditoryNumber);
             if (key.IsBooked == true)
-                throw new FormatException("key alreadyBooked");
-            var booking = new BookingAction(user.Id, user, key.Id, key, DateTime.Now, null, null);
-            await _bookingAction.StartSession(booking);
+                throw new KeyIsBookingAlreadyException(key.AudNum);
+            var booking = new BookingAction(user.Id, user, key.Id, key, DateTime.Now, null, Guid.NewGuid());
+            await _bookingAction.StartSession(user, key);
+        }
+
+        public async Task FinishBooking(string AudName)
+        {
+            var key = await _keyService.GetByAuditoryName(AudName);
+            if (key.IsBooked == true)
+            {
+                var currentBooking = await _bookingAction.GetByRule(x => x.KeyObjectId == key.Id && x.UserId == key.UserId);
+                if (currentBooking == null)
+                    throw new Exception();
+
+                await _bookingAction.EndSession(currentBooking);
+            }
+            else
+            {
+                throw new KeyIsNotBooking(key.AudNum);
+            }
 
         }
 

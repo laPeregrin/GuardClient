@@ -8,13 +8,13 @@ namespace DTOs.Models
 {
     public class BookingAction : DomainObject
     {
-        public BookingAction(Guid userId, 
-            User user, 
+        public BookingAction(Guid userId,
+            User user,
             Guid keyId,
             KeyObject keyObject,
             DateTime bookingBegine,
             DateTime? bookingFinish,
-            Guid? id)
+            Guid id)
         {
             UserId = userId;
             User = user;
@@ -22,6 +22,7 @@ namespace DTOs.Models
             KeyObject = keyObject;
             BookingBegine = bookingBegine;
             BookingFinish = bookingFinish;
+            UserId = id;
         }
 
         public BookingAction()
@@ -36,15 +37,13 @@ namespace DTOs.Models
         public DateTime BookingBegine { get; set; }
         public DateTime? BookingFinish { get; set; }
 
-        public BookingAction AddStartSessionBookingAction(User user, KeyObject keyObject, Guid? id)
+        public BookingAction AddStartSessionBookingAction(User user, KeyObject keyObject, Guid id)
         {
-            if (id == null)
-                id = Guid.NewGuid();
             return new BookingAction(user.Id, user, keyObject.Id, keyObject, DateTime.Now, null, id);
         }
-        public BookingAction AddEndSessionBookingAction(BookingAction bookingAction)
+        public BookingAction AddStartSessionBookingAction(BookingAction bookingAction)
         {
-            return new BookingAction(bookingAction.UserId, bookingAction.User, bookingAction.KeyObjectId, bookingAction.KeyObject, bookingAction.BookingBegine, DateTime.Now, bookingAction.Id);
+            return new BookingAction(bookingAction.UserId, bookingAction.User, bookingAction.KeyObjectId, bookingAction.KeyObject, bookingAction.BookingBegine, null, bookingAction.Id);
         }
     }
 }

@@ -38,19 +38,10 @@ namespace Guard_Client.Services.Implementations
         /// </summary>
         /// <param name="bookingAction"></param>
         /// <returns></returns>
-        public async Task StartSession(BookingAction bookingAction)
-        {
-            var res = new BookingAction().AddStartSessionBookingAction(bookingAction.User, bookingAction.KeyObject, null);
-            await Task.Run(() => Add(res));
-             bookingAction.KeyObject.IsBooked = true;
-            var changeKey = bookingAction.KeyObject;
-            await Task.Run(()=>_service.KeyObjects.Update(changeKey));
-            await _service.SaveChangesAsync();
-        }
         public async Task StartSession(User user, KeyObject keyObject)
         {
-            var res = new BookingAction().AddStartSessionBookingAction(user, keyObject, null);
-            await Task.Run(() => Add(res));
+            var res = new BookingAction().AddStartSessionBookingAction(user, keyObject, Guid.NewGuid());
+            await Task.Run(async () => await Add(res));
             keyObject.IsBooked = true;
             keyObject.User = user;
             keyObject.UserId = user.Id;
@@ -66,13 +57,14 @@ namespace Guard_Client.Services.Implementations
         /// <returns></returns>
         public async Task EndSession(BookingAction bookingAction)
         {
-            var res = bookingAction.AddEndSessionBookingAction(bookingAction);
-            await Task.Run(() => Update(res));
+            bookingAction.BookingFinish = DateTime.Now;
+            await Task.Run(async () => await Update(bookingAction));
             bookingAction.KeyObject.IsBooked = false;
             bookingAction.KeyObject.User = null;
-            bookingAction.KeyObject.UserId =null;
+            bookingAction.KeyObject.UserId = null;
             var changeKey = bookingAction.KeyObject;
             await Task.Run(() => _service.KeyObjects.Update(changeKey));
+            await _service.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<BookingAction>> GetAll()
@@ -104,6 +96,7 @@ namespace Guard_Client.Services.Implementations
         {
             if (IsExist(obj))
                 _service.BookingActions.Update(obj);
+            await _service.SaveChangesAsync();
         }
 
 

@@ -10,7 +10,7 @@ namespace DTOs.Services
 {
     public interface IBookingActionService : IDataService<BookingAction>
     {
-        Task StartSession(BookingAction bookingAction);
+        Task StartSession(User user, KeyObject keyObject);
         Task EndSession(BookingAction bookingAction);
         Task<BookingAction> GetByRule(Expression<Func<BookingAction, bool>> expression);
     }

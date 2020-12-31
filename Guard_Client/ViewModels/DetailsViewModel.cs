@@ -14,12 +14,12 @@ using Guard_Client.DomainModels;
 using Guard_Client.BLL;
 using System.Windows.Input;
 using System.Windows;
+using Guard_Client.Exceptions;
 
 namespace Guard_Client.ViewModels
 {
     public class DetailsViewModel : BindableBase
     {
-        private IDataService<KeyObject> _keyObjService;
         private UserAndKeyHandler _userAndKeyHandler;
 
 
@@ -33,15 +33,13 @@ namespace Guard_Client.ViewModels
         public DetailsView? CurrentKey { get { return currentKey; } set { currentKey = value; RaisePropertyChanged(); } }
 
 
-        public DetailsViewModel(KeyObjectService dataService, UserAndKeyHandler handler)
+        public DetailsViewModel(UserAndKeyHandler handler)
         {
-            _keyObjService = dataService;
             _userAndKeyHandler = handler;
 
             Task.Run(async () =>
             {
-                var items = await _keyObjService.GetAll(x => x.IsBooked == true);
-                BookedKeyCollections = items.MapToDetailsView();
+                await UpdateGenerealCollection();
 
             }).GetAwaiter().GetResult();
         }
@@ -57,5 +55,32 @@ namespace Guard_Client.ViewModels
                 MessageBox.Show("Для начала выберете ключ из списка");
             }
         });
+        public ICommand ReturnKey => new AsyncCommand(async () =>
+        {
+            try
+            {
+                await _userAndKeyHandler.FinishBooking(CurrentKey.KeyNumber);
+                UpdateList(SelectedKey);
+            }
+            catch (KeyIsNotBooking e)
+            { MessageBox.Show("Этот ключ сейчас без владельца", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning); }
+            catch (Exception e)
+            { MessageBox.Show("Возможно вы получили полную информацию о текущем состоянии ключа", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+        });
+        public ICommand UpdateAll => new AsyncCommand(async()=>
+            {
+               await UpdateGenerealCollection();
+            });
+
+        public async Task UpdateGenerealCollection()
+        {
+            var items = await _userAndKeyHandler.GetAll(true);
+            BookedKeyCollections = items.MapToDetailsView();
+        }
+        private void UpdateList(DetailsView view)
+        {
+            BookedKeyCollections.Remove(view);
+        }
     }
 }
