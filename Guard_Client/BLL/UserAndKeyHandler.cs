@@ -82,7 +82,7 @@ namespace Guard_Client.BLL
             var key = await _keyService.GetByAuditoryName(AudName);
             if (key.IsBooked == true)
             {
-                var currentBooking = await _bookingAction.GetByRule(x => x.KeyObjectId == key.Id && x.UserId == key.UserId);
+                var currentBooking = await _bookingAction.GetByRule(x => x.KeyObjectId == key.Id && x.UserId == key.UserId && x.BookingFinish == null);
                 if (currentBooking == null)
                     throw new Exception();
 

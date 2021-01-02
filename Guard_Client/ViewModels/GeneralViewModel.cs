@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using Guard_Client.Extensions;
 using System.Windows.Controls;
+using Guard_Client.Exceptions;
 
 namespace Guard_Client.ViewModels
 {
@@ -29,6 +30,13 @@ namespace Guard_Client.ViewModels
             var KeyUser = Task.Run(async () => await _bigService.GetAll(false)).Result;
 
             keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView());
+        }
+        public async Task UpdateCollection()
+        {
+            var KeyUser = await _bigService.GetAll(false);
+            keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView());
+            RaisePropertyChanged(nameof(keys));
+            //RaisePropertyChanged(nameof(Auditory));
         }
 
         private string lastName; //bind in textBox for searching in list of users
@@ -74,21 +82,33 @@ namespace Guard_Client.ViewModels
         public ObservableCollection<DetailsView> users { get; set; }
         public ObservableCollection<DetailsView> keys { get; set; }
 
-        public ICommand AddBooking => new DelegateCommand(() =>
+        public ICommand AddBooking => new AsyncCommand(async() =>
         {
             try
             {
-                Task.Run(async () => await _bigService.AddBooking(CurrentUser.LastName, CurrentKey.KeyNumber));
+                await _bigService.AddBooking(CurrentUser.LastName, CurrentKey.KeyNumber);
                 UpdateCollection(CurrentKey);
             }
-            catch (FormatException e)
+
+            catch (ArgumentException e)
             {
-                MessageBox.Show("Ключ уже занят");
+                MessageBox.Show("Ключ уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+            catch (KeyIsBookingAlreadyException e)
+            {
+                MessageBox.Show("Ключ уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception e)
             {
-                MessageBox.Show("Проверьте правильно ли вы ввели информацию про преподователя и номер ключа");
+                MessageBox.Show("Проверьте правильно ли вы ввели информацию про преподователя и номер ключа. Обязательно выбирайте нужное в обеих списках", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+        });
+
+        public ICommand UpdateKeys => new AsyncCommand(async () =>
+        {
+            await UpdateCollection();
         });
 
 

@@ -29,23 +29,23 @@ namespace Guard_Client
             services.AddSingleton<DbTestContext>();
             services.AddSingleton<PageService>();
 
-            
+
 
             services.AddServiceHandler();
 
-            services.AddSingleton<CreatePage<CurrentPage>>(services =>
+            services.AddTransient<CreatePage<CurrentPage>>(services =>
                 {
                     return () => services.GetRequiredService<CurrentPage>();
                 });
-            services.AddSingleton<CreatePage<Details>>(services =>
+            services.AddTransient<CreatePage<Details>>(services =>
             {
                 return () => services.GetRequiredService<Details>();
             });
-            services.AddSingleton<CreatePage<GeneralPage>>(services =>
+            services.AddTransient<CreatePage<GeneralPage>>(services =>
             {
                 return () => services.GetRequiredService<GeneralPage>();
             });
-            services.AddSingleton<CreatePage<History>>(services =>
+            services.AddTransient<CreatePage<History>>(services =>
             {
                 return () => services.GetRequiredService<History>();
             });

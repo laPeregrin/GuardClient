@@ -1,15 +1,8 @@
 ﻿using DevExpress.Mvvm;
-using DTOs.Models;
-using DTOs.Services;
-using Guard_Client.Services.Implementations;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Guard_Client.Extensions;
-using testDAL;
 using Guard_Client.DomainModels;
 using Guard_Client.BLL;
 using System.Windows.Input;
@@ -65,12 +58,12 @@ namespace Guard_Client.ViewModels
             catch (KeyIsNotBooking e)
             { MessageBox.Show("Этот ключ сейчас без владельца", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning); }
             catch (Exception e)
-            { MessageBox.Show("Возможно вы получили полную информацию о текущем состоянии ключа", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
+            { MessageBox.Show("Возможно вы не получили полную информацию о текущем состоянии ключа", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
 
         });
-        public ICommand UpdateAll => new AsyncCommand(async()=>
+        public ICommand UpdateAll => new AsyncCommand(async () =>
             {
-               await UpdateGenerealCollection();
+                await UpdateGenerealCollection();
             });
 
         public async Task UpdateGenerealCollection()
@@ -81,6 +74,7 @@ namespace Guard_Client.ViewModels
         private void UpdateList(DetailsView view)
         {
             BookedKeyCollections.Remove(view);
+            CurrentKey = null;
         }
     }
 }

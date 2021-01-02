@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Guard_Client.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,12 +22,7 @@ namespace Guard_Client.Views.Pages
         public GeneralPage()
         {
             InitializeComponent();
-           
         }
-        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var listBox = sender as ListBox;
-            listBox.ScrollIntoView(listBox.SelectedItem);
-        }
+
     }
 }

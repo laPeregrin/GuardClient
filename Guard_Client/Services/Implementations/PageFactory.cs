@@ -34,6 +34,7 @@ namespace Guard_Client.Services.Implementations
             _getHistoryPage = getHistoryPage;
         }
 
+
         public async Task<Page> GetPage(PageType pageType)
         {
             switch(pageType)

@@ -32,16 +32,16 @@
         
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="TimesNewRoman"/>
-
+        <Setter Property="Padding" Value="13"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
                         <TextBlock Text="{TemplateBinding Content}" 
-                                       Padding="13"
+                                       Padding="{TemplateBinding Padding}"
                                        Background="{StaticResource BrushPrimary5}" 
                                        Foreground="{StaticResource BrushPrimary3}"
                                   FontFamily="Franklin Gothic Medium"
@@ -90,12 +90,11 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{StaticResource BrushPrimary2}"/>
             </Trigger>
-            
+
             <Trigger Property="IsMouseOver" Value="False">
                 <Setter Property="BorderBrush" Value="{StaticResource BrushPrimary3}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
-    
-  
+
 </ResourceDictionary>

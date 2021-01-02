@@ -59,7 +59,7 @@
                         <TextBlock Grid.Column="1" Text="{Binding CurrentKey.FirstName}" FontSize="25" />
                     </Grid>
                 </Border>
-                <TextBlock Margin="20 10 20 0" Text="{Binding CurrentKey.DateTaking, StringFormat={}{0:h:m}}" FontSize="30" Grid.Row="3" />
+                <TextBlock Margin="20 10 20 0" Text="{Binding CurrentKey.DateTaking, StringFormat={}{0:hh:mm}}" FontSize="30" Grid.Row="3" />
             </Grid>
             <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>

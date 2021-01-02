@@ -39,7 +39,6 @@
                     <ScrollViewer MinHeight="150" MaxHeight="500">
                         <ListBox Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
-                             SelectionChanged="OnSelectionChanged"
                              ItemsSource="{Binding users}"
                              SelectedItem="{Binding CurrentUser}">
                             <ListBox.ItemTemplate>
@@ -59,14 +58,18 @@
                 </Border>
 
             </Grid>
-            <Border Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" MinWidth="200">
+
+            <Border Style="{StaticResource NatBorderButton}"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" MinWidth="200">
                 <StackPanel>
+
+                    <Button Content="Обновить списки" Command="{Binding UpdateKeys}" Style="{StaticResource NatButton}" FontSize="15" Padding="10"/>
+
+
                     <TextBlock Text="Найдите в списке ваш вариант," FontSize="15" />
                     <TextBlock Text="выберете его и " FontSize="15"/>
                     <TextBlock Text="нажмите |Выдать преподавателю ключ" FontSize="15"/>
                     <TextBlock Text="поля с текстом для поиска" FontSize="15"/>
                 </StackPanel>
-
             </Border>
             <Grid  Grid.Column="2" HorizontalAlignment="Right">
                 <Grid.RowDefinitions>
@@ -79,10 +82,9 @@
                 <Border Grid.Row="2" Style="{StaticResource NatBorderButton}">
                     <ScrollViewer Grid.Row="2" MinHeight="150" MaxHeight="500">
                         <ListBox  
-                             SelectionChanged="OnSelectionChanged"
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
-                             ItemsSource="{Binding keys}"
+                             ItemsSource="{Binding keys, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              SelectedItem="{Binding CurrentKey}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -102,7 +104,27 @@
             </Grid>
         </Grid>
         <StackPanel Grid.Row="2" Margin="0 20 0 0">
-            <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0" Style="{StaticResource NatButton}" Content="Выдать преподавателю ключ" Command="{Binding AddBooking}"/>
+            <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0"  Content="Выдать преподавателю ключ" Command="{Binding AddBooking}">
+                <Button.Style>
+
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+                        <Setter Property="Foreground" Value="{StaticResource BrushPrimary1}"/>
+                        <Setter Property="FontSize" Value="25"/>
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="IsDefault" Value="True"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentUser}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding CurrentUser}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="True"/>
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

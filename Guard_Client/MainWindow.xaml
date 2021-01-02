@@ -28,28 +28,28 @@
                     <Grid>
                         <Rectangle  Width="155" Fill="#FF333C27"/>
 
-                        <Button Grid.Row="0" Command="{Binding MoveToGeneralPage}" Style="{StaticResource NatButton}" Content="Главная"/>
+                        <Button HorizontalAlignment="Stretch" Grid.Row="0" Command="{Binding MoveToGeneralPage}" Style="{StaticResource NatButton}" Content="Главная"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="1" Style="{StaticResource NatBorderButton}">
                     <Grid>
                         <Rectangle  Width="155" Fill="#FF333C27"/>
 
-                        <Button Grid.Row="1" Command="{Binding MoveToHistoryPage}"  Style="{StaticResource NatButton}" Content="История"/>
+                        <Button HorizontalAlignment="Stretch" Grid.Row="1" Command="{Binding MoveToHistoryPage}"  Style="{StaticResource NatButton}" Content="История"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" Style="{StaticResource NatBorderButton}">
                     <Grid>
                         <Rectangle  Width="155" Fill="#FF333C27"/>
 
-                        <Button Grid.Row="2" Command="{Binding MoveToCurrentPage}" Style="{StaticResource NatButton}" Content="Текущее"/>
+                        <Button HorizontalAlignment="Stretch" Grid.Row="2" Command="{Binding MoveToCurrentPage}" Style="{StaticResource NatButton}" Content="Текущее"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="3" Style="{StaticResource NatBorderButton}" >
                     <Grid>
                         <Rectangle  Width="155" Fill="#FF333C27"/>
 
-                        <Button Grid.Row="3"  Command="{Binding MoveToDetailsPage}" Style="{StaticResource NatButton}" Content="Детали"/>
+                        <Button HorizontalAlignment="Stretch" Grid.Row="3"  Command="{Binding MoveToDetailsPage}" Style="{StaticResource NatButton}" Content="Детали"/>
                     </Grid>
                 </Border>
             </Grid>
