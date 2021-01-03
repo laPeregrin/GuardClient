@@ -3,6 +3,7 @@ using Guard_Client.Services;
 using Guard_Client.Services.Abstactions;
 using Guard_Client.Services.Implementations;
 using Guard_Client.Views.Pages;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +18,13 @@ namespace Guard_Client.ViewModels
     {
         private readonly PageService _pageService;
         private readonly IPageFactory _pageFactory;
-
+        private readonly IServiceProvider _serviceProvider;
 
         private Page _source;
         public Page PageSource { get { return _source; } set { _source = value; RaisePropertiesChanged(); } }
-        public MainViewModel(PageService pageService, IPageFactory pageFactory)
+        public MainViewModel(PageService pageService, IPageFactory pageFactory, IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             _pageFactory = pageFactory;
             _pageService = pageService;
             _pageService.PageChanged += (page) => PageSource = page;
@@ -33,6 +35,7 @@ namespace Guard_Client.ViewModels
         #region Commands
         public ICommand MoveToGeneralPage => new AsyncCommand(async () =>
         {
+            //var factory = Task.Run(()=> _serviceProvider.GetRequiredService<PageFactory>()).Result;
             PageSource = await _pageFactory.GetPage(PageType.General);
         });
         public ICommand MoveToCurrentPage => new AsyncCommand(async () =>

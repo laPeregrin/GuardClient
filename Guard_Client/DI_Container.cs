@@ -50,20 +50,16 @@ namespace Guard_Client
                 return () => services.GetRequiredService<History>();
             });
 
-            services.AddScoped<CurrentPage>();
-            services.AddScoped<Details>();
-            services.AddScoped<GeneralPage>();
-            services.AddScoped<History>();
+            services.AddTransient<CurrentPage>();
+            services.AddTransient<Details>();
+            services.AddTransient<GeneralPage>();
+            services.AddTransient<History>();
 
             services.AddTransient<MainViewModel>();
             services.AddTransient<DetailsViewModel>();
             services.AddTransient<GeneralViewModel>();
 
-            services.AddSingleton<IPageFactory, PageFactory>(services =>
-            {
-                return new PageFactory(services.GetRequiredService<CreatePage<GeneralPage>>(), services.GetRequiredService<CreatePage<Details>>(),
-                services.GetRequiredService<CreatePage<CurrentPage>>(), services.GetRequiredService<CreatePage<History>>());
-            });
+            services.AddSingleton<IPageFactory, PageFactory>();
 
             _provider = services.BuildServiceProvider();
 

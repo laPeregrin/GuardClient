@@ -11,10 +11,10 @@ namespace Guard_Client.Services.Implementations
 {
     public enum PageType : byte
     {
-      General,
-      Details,
-      CurrentPage,
-      History
+        General,
+        Details,
+        CurrentPage,
+        History
     }
     public class PageFactory : IPageFactory
     {
@@ -37,7 +37,7 @@ namespace Guard_Client.Services.Implementations
 
         public async Task<Page> GetPage(PageType pageType)
         {
-            switch(pageType)
+            switch (pageType)
             {
                 case PageType.General:
                     return _getGeneralePage();

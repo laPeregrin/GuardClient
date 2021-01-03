@@ -43,23 +43,28 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+
                 </Grid.RowDefinitions>
                 <Button Margin="10 0 0 0" Style="{StaticResource NatButton}" Command="{Binding UpdateCurrentUser}" Content="Получить полную информацию"  Grid.Row="0"/>
-                <TextBlock Margin="20 10 20 0" Text="{Binding CurrentKey.KeyNumber, StringFormat= ключ от аудитории № {0}}" FontSize="25" Grid.Row="1" />
-                <Border  Grid.Row="2">
-                    <Grid Margin="20 10 20 0">
+                <Border Margin="15" Grid.Row="1" Style="{StaticResource NatBorderButton}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding CurrentKey.LastName, StringFormat=ключ у преподавателя {0}(а)}" FontSize="25" />
-                        <TextBlock Grid.Column="1" Text="{Binding CurrentKey.FirstName}" FontSize="25" />
+                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="20 10 20 0" Text="{Binding CurrentKey.KeyNumber, StringFormat= ключ от аудитории № {0}}" FontSize="25"  />
+                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding CurrentKey.LastName, StringFormat=ключ у преподавателя {0}(а)}" FontSize="25" />
+                        <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding CurrentKey.FirstName}" FontSize="25" />
+                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="20 10 20 0" Text="{Binding CurrentKey.DateTaking, StringFormat={}{0:hh:mm}}" FontSize="30" />
                     </Grid>
                 </Border>
-                <TextBlock Margin="20 10 20 0" Text="{Binding CurrentKey.DateTaking, StringFormat={}{0:hh:mm}}" FontSize="30" Grid.Row="3" />
+               
             </Grid>
             <Grid Grid.Row="4">
                 <Grid.ColumnDefinitions>
