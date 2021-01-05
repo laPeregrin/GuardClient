@@ -73,7 +73,6 @@ namespace Guard_Client.BLL
             var key = await _keyService.GetByAuditoryName(auditoryNumber);
             if (key.IsBooked == true)
                 throw new KeyIsBookingAlreadyException(key.AudNum);
-            var booking = new BookingAction(user.Id, user, key.Id, key, DateTime.Now, null, Guid.NewGuid());
             await _bookingAction.StartSession(user, key);
         }
 

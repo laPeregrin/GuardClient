@@ -22,7 +22,7 @@ namespace DTOs.Models
             KeyObject = keyObject;
             BookingBegine = bookingBegine;
             BookingFinish = bookingFinish;
-            UserId = id;
+            Id = id;
         }
 
         public BookingAction()

@@ -89,7 +89,7 @@ namespace Guard_Client.ViewModels
             }
             catch (Exception e)
             {
-                MessageBox.Show("Проверьте правильно ли вы ввели информацию про преподователя и номер ключа. Обязательно выбирайте нужное в обеих списках", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Обязательно выбирайте нужное в обеих списках", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
         });

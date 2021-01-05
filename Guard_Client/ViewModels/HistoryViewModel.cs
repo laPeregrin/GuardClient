@@ -19,21 +19,17 @@ namespace Guard_Client.ViewModels
     {
         private readonly UserAndKeyHandler service;
 
-        
+
         #region DataSorting
         private DateTime min;
         private DateTime max;
-        public DateTime CurrentDateMin { get { return min; } set{ min = value;RaisePropertyChanged(); } }
+        public DateTime CurrentDateMin { get { return min; } set { min = value; RaisePropertyChanged(); } }
         public DateTime CurrentDateMax { get { return max; } set { max = value; RaisePropertyChanged(); } }
         #endregion DataSorting
         #region StringSorting
-        private string lastName;
-        private string firstName;
-        private string keyNumber;
+        private string _filter = string.Empty;
 
-        public string LastName { get => lastName; set { lastName = value; RaisePropertyChanged(); } }
-        public string FirstName { get => firstName; set { firstName = value; RaisePropertyChanged(); } }
-        public string KeyNumber { get => keyNumber; set { keyNumber = value; RaisePropertyChanged(); } }
+        public string FilterString { get => _filter; set { _filter = value; RaisePropertyChanged(); HistoryCollection.Refresh(); } }
         #endregion StringSorting
         private readonly ObservableCollection<DetailsView> _HistoryDetailsViewModels;
         public ICollectionView HistoryCollection { get; }
@@ -43,27 +39,42 @@ namespace Guard_Client.ViewModels
             service = userAndKeyHandler;
             _HistoryDetailsViewModels = new ObservableCollection<DetailsView>();
             HistoryCollection = CollectionViewSource.GetDefaultView(_HistoryDetailsViewModels);
-            
+            HistoryCollection.Filter = FilterUser;
+            HistoryCollection.SortDescriptions.Add(new SortDescription(nameof(DetailsView.DateTaking), ListSortDirection.Descending));
         }
-        private void UpdateCollection()
-        {
-            var res = Task.Run(async () => await GetData()).Result;
-            DetailsView details = new DetailsView();
-                foreach(DetailsView item in res.MapToDetailsView())
-                {
-                    _HistoryDetailsViewModels.Add(item);
-                }
 
+
+        #region Filters
+        private bool FilterUser(object obj)
+        {
+            if (obj is DetailsView detailsView)
+            {
+                return detailsView.LastName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
+                    detailsView.KeyNumber.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
+                    detailsView.FirstName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase);
+            }
+            return false;
         }
+        #endregion Filters
         private async Task<IEnumerable<BookingAction>> GetData()
         {
             return (IEnumerable<BookingAction>)await service.GetAll<BookingAction>();
         }
-        public ICommand UpdateCollectionCommand => new DelegateCommand(()=>
+        public ICommand UpdateCollectionCommand => new DelegateCommand(() =>
         {
             UpdateCollection();
         });
 
-        
+
+        private void UpdateCollection()
+        {
+            var res = Task.Run(async () => await GetData()).Result;
+            DetailsView details = new DetailsView();
+            foreach (DetailsView item in res.MapToDetailsView())
+            {
+                _HistoryDetailsViewModels.Add(item);
+            }
+
+        }
     }
 }

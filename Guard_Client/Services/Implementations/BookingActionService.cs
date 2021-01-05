@@ -40,15 +40,14 @@ namespace Guard_Client.Services.Implementations
         /// <returns></returns>
         public async Task StartSession(User user, KeyObject keyObject)
         {
-            var res = new BookingAction().AddStartSessionBookingAction(user, keyObject, Guid.NewGuid());
-            await Task.Run(async () => await Add(res));
             keyObject.IsBooked = true;
             keyObject.User = user;
             keyObject.UserId = user.Id;
-            var changeKey = keyObject;
-            await Task.Run(() => _service.KeyObjects.Update(changeKey));
+            var res = new BookingAction().AddStartSessionBookingAction(user, keyObject, Guid.NewGuid());
+            _service.KeyObjects.Update(keyObject);
             await _service.SaveChangesAsync();
-
+            await Add(res);
+           
         }
         /// <summary>
         /// ___Add object with dateFinish for recording interaction with key in timeline
@@ -109,9 +108,7 @@ namespace Guard_Client.Services.Implementations
 
         private bool IsExist(BookingAction bookingAction)
         {
-            if (_service.BookingActions.Any(x => x.Id == bookingAction.Id))
-                return true;
-            return false;
+            return _service.BookingActions.Any(x => x.Id == bookingAction.Id);
         }
 
        

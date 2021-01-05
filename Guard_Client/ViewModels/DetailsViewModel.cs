@@ -11,7 +11,7 @@ using Guard_Client.Exceptions;
 
 namespace Guard_Client.ViewModels
 {
-    public class DetailsViewModel : BindableBase
+    public class DetailsViewModel : BindableBase, IDisposable
     {
         private UserAndKeyHandler _userAndKeyHandler;
 
@@ -75,6 +75,14 @@ namespace Guard_Client.ViewModels
         {
             BookedKeyCollections.Remove(view);
             CurrentKey = null;
+        }
+
+        public void Dispose()
+        {
+            _BookedKeyCollections.Clear();
+            _userAndKeyHandler = null;
+            CurrentKey = null;
+            SelectedKey = null;
         }
     }
 }
