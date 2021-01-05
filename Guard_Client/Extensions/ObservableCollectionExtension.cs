@@ -15,7 +15,7 @@ namespace Guard_Client.Extensions
     {
         public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<KeyObject> keyObjects)
         {
-            var mappedItem = new DetailsView();
+            DetailsView mappedItem;
             var collection = new ObservableCollection<DetailsView>();
             foreach(var item in keyObjects)
             {
@@ -28,13 +28,29 @@ namespace Guard_Client.Extensions
         }
         public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<User> keyObjects)
         {
-            var mappedItem = new DetailsView();
+            DetailsView mappedItem;
             var collection = new ObservableCollection<DetailsView>();
             foreach (var item in keyObjects)
             {
                 mappedItem = new DetailsView();
                 mappedItem.LastName = item.LastName;
                 // mappedItem.DateTaking = item.
+                collection.Add(mappedItem);
+            }
+            return collection;
+        }
+        public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<BookingAction> @object)
+        {
+            var mappedItem = new DetailsView();
+            var collection = new ObservableCollection<DetailsView>();
+            foreach (var item in @object)
+            {
+                mappedItem = new DetailsView();
+                mappedItem.FirstName = item.User.FirstName;
+                mappedItem.LastName = item.User.LastName;
+                mappedItem.KeyNumber = item.KeyObject.AudNum;
+                mappedItem.DateTaking = item.BookingBegine;
+                mappedItem.DateBringin = item.BookingFinish;
                 collection.Add(mappedItem);
             }
             return collection;

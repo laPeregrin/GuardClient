@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="Guard_Client.Views.UsersControls.HistoryViewUserController"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Guard_Client.Views.UsersControls"
+             mc:Ignorable="d" 
+             DataContext="{Binding HistoryViewModel,Source={StaticResource VMLocator}}"
+             d:DesignHeight="450" d:DesignWidth="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border Style="{StaticResource NatBorderButton}">
+            <StackPanel>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+                        <TextBox Grid.Column="0" Text="{Binding LastName}"   MinWidth="70" MinHeight="20" Width="150" FontSize="30" Margin="20"/>
+                        <TextBox Grid.Column="1" Text="{Binding KeyNumber}"  MinWidth="70" MinHeight="20" Width="150" FontSize="30" Margin="20"/>
+
+                    </StackPanel>
+                    <DatePicker Margin="30 0 10 30" Text="От" SelectedDate="{Binding CurrentDateMin}"  Grid.Row="0" Grid.Column="2" MinWidth="70" MinHeight="20" Width="150" />
+                    <DatePicker Margin="10 0 10 30" Text="До" SelectedDate="{Binding CurrentDateMax}"  Grid.Row="0" Grid.Column="3" MinWidth="70" MinHeight="20"/>
+                    <Button Grid.Row="1" Grid.Column="3" Content="Вывести" Style="{StaticResource NatButton}" MinHeight="20" MaxHeight="30" FontSize="25"/>
+                    <Button HorizontalAlignment="Right" Grid.Row="1" Grid.Column="4" Command="{Binding UpdateCollectionCommand}" Content="Получить список"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <ListView Grid.Row="2" Margin="0 10 0 0"
+            BorderThickness="2"
+                  Background="{StaticResource BrushPrimary3}"
+                  HorizontalContentAlignment="Stretch"
+                  HorizontalAlignment="Stretch"
+                  Foreground="{StaticResource BrushPrimary7}"
+                  FontSize="20"
+                  Padding="10"
+            ItemsSource="{Binding HistoryCollection}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumnHeader Background="{StaticResource BrushPrimary7}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Content="Имя" Width="100" />
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Padding="10" Text="{Binding FirstName}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumnHeader Content="Фамилия" Width="100"   Background="{StaticResource BrushPrimary7}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"  />
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  Padding="10"  Text="{Binding LastName}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumnHeader Content="Ключ"   Background="{StaticResource BrushPrimary7}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"  Width="80"/>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  Padding="10" Text="{Binding KeyNumber}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumnHeader Content="Взяли"  Background="{StaticResource BrushPrimary7}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"  Width="100"/>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  Padding="5" Text="{Binding DateTaking, StringFormat={}{0:MM:HH:mm}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn>
+                        <GridViewColumnHeader Content="Вернули" Background="{StaticResource BrushPrimary7}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"  Width="100"/>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock  Padding="5" Text="{Binding DateBringin, StringFormat={}{0:MM:HH:mm}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+                
+            </ListView.View>
+         
+        </ListView>
+    </Grid>
+</UserControl>

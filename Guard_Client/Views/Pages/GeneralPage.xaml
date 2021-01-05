@@ -40,6 +40,8 @@
                         <ListBox Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
                              ItemsSource="{Binding users}"
+                                TextSearch.Text="{Binding LastName}"
+                                 IsTextSearchEnabled="True"
                              SelectedItem="{Binding CurrentUser}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -112,15 +114,32 @@
                         <Setter Property="Foreground" Value="{StaticResource BrushPrimary1}"/>
                         <Setter Property="FontSize" Value="25"/>
                         <Setter Property="Padding" Value="5"/>
-                        <Setter Property="IsDefault" Value="True"/>
                         <Style.Triggers>
+                            <EventTrigger RoutedEvent="MouseLeftButtonUp">
+                                <EventTrigger.Actions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0:0:1"/>
+                                            
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger.Actions>
+                            </EventTrigger>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+                            </Trigger>
                             <DataTrigger Binding="{Binding CurrentUser}" Value="{x:Null}">
                                 <Setter Property="IsEnabled" Value="False"/>
                             </DataTrigger>
                             <DataTrigger Binding="{Binding CurrentUser}" Value="{x:Null}">
                                 <Setter Property="IsEnabled" Value="True"/>
                             </DataTrigger>
-
+                            <DataTrigger Binding="{Binding CurrentKey}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding CurrentKey}" Value="{x:Null}">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </Button.Style>

@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 W:\programs\repos\GuardClient\Guard_Client\App.xaml
-61570332792
+7-552922046
 
-24-1958996906
+261300810743
 221631369457
-MainWindow.xaml;Styles\NavigationBar.xaml;Views\Pages\CurrentPage.xaml;Views\Pages\Details.xaml;Views\Pages\GeneralPage.xaml;Views\Pages\History.xaml;
+MainWindow.xaml;Styles\NavigationBar.xaml;Views\Pages\CurrentPage.xaml;Views\Pages\Details.xaml;Views\Pages\GeneralPage.xaml;Views\Pages\History.xaml;Views\UsersControls\HistoryViewUserController.xaml;
 
 False
 

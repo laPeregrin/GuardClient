@@ -26,7 +26,7 @@ namespace Guard_Client
         {
             var services = new ServiceCollection();
 
-            services.AddSingleton<DbTestContext>();
+            services.AddTransient<DbTestContext>();
             services.AddSingleton<PageService>();
 
 
@@ -58,6 +58,7 @@ namespace Guard_Client
             services.AddTransient<MainViewModel>();
             services.AddTransient<DetailsViewModel>();
             services.AddTransient<GeneralViewModel>();
+            services.AddScoped<HistoryViewModel>();
 
             services.AddSingleton<IPageFactory, PageFactory>();
 
@@ -72,5 +73,6 @@ namespace Guard_Client
         public MainViewModel MainViewModel => _provider.GetRequiredService<MainViewModel>();
         public DetailsViewModel DetailsViewModel => _provider.GetRequiredService<DetailsViewModel>();
         public GeneralViewModel GeneralViewModel => _provider.GetRequiredService<GeneralViewModel>();
+        public HistoryViewModel HistoryViewModel => _provider.GetRequiredService<HistoryViewModel>();
     }
 }

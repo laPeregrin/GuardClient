@@ -37,7 +37,7 @@ namespace Guard_Client.BLL
             }
             else if (typeof(T) == typeof(BookingAction))
             {
-                return await _bookingAction.GetAll();
+                return await _bookingAction.GetAllFullValue();
             }
             throw new ArgumentException();
         }

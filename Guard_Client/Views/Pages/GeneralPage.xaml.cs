@@ -23,6 +23,6 @@ namespace Guard_Client.Views.Pages
         {
             InitializeComponent();
         }
-
+      
     }
 }

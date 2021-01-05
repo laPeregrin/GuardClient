@@ -4,16 +4,22 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Guard_Client.Views.Pages"
+      xmlns:control="clr-namespace:Guard_Client.Views.UsersControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="History">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="Here was table with last booking keys and can sorted this by data" FontSize="30" Foreground="{StaticResource BrushPrimary1}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="800"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="История" FontSize="30" Foreground="{StaticResource BrushPrimary1}"/>
+        <control:HistoryViewUserController Grid.Row="1" Grid.Column="1" Margin="30"/>
+
     </Grid>
 </Page>

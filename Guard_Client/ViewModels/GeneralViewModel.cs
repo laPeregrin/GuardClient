@@ -36,7 +36,6 @@ namespace Guard_Client.ViewModels
             var KeyUser = await _bigService.GetAll(false);
             keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView());
             RaisePropertyChanged(nameof(keys));
-            //RaisePropertyChanged(nameof(Auditory));
         }
 
         private string lastName; //bind in textBox for searching in list of users
@@ -47,14 +46,9 @@ namespace Guard_Client.ViewModels
             get => lastName;
             set
             {
-                try
-                {
-                    lastName = value;
-                    CurrentUser = users.FirstOrDefault(x => x.LastName.StartsWith(LastName));
-                    RaisePropertyChanged();
-                }
-                catch (NullReferenceException e) { }
-                catch (ArgumentException e) { }
+                lastName = value;
+                CurrentUser = users.FirstOrDefault(x => x.LastName.StartsWith(LastName));
+                RaisePropertyChanged();
             }
         }
         public string Auditory
@@ -62,15 +56,9 @@ namespace Guard_Client.ViewModels
             get => auditory;
             set
             {
-                try
-                {
-                    auditory = value;
-                    CurrentKey = keys.FirstOrDefault(x => x.KeyNumber.StartsWith(Auditory));
-                    RaisePropertyChanged();
-                }
-                catch (NullReferenceException e) { }
-                catch (ArgumentException e) { }
-
+                auditory = value;
+                CurrentKey = keys.FirstOrDefault(x => x.KeyNumber.StartsWith(Auditory));
+                RaisePropertyChanged();
             }
         }
 
@@ -82,7 +70,7 @@ namespace Guard_Client.ViewModels
         public ObservableCollection<DetailsView> users { get; set; }
         public ObservableCollection<DetailsView> keys { get; set; }
 
-        public ICommand AddBooking => new AsyncCommand(async() =>
+        public ICommand AddBooking => new AsyncCommand(async () =>
         {
             try
             {
@@ -112,11 +100,12 @@ namespace Guard_Client.ViewModels
         });
 
 
-        #region MoveToSelectedItemScrollEvent
+        #region ManipulationCollectionViaMethod
         private void UpdateCollection(DetailsView details)
         {
             keys.Remove(details);
         }
+       
         #endregion
     }
 }

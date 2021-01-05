@@ -72,6 +72,7 @@ namespace Guard_Client.Services.Implementations
             return await _service.BookingActions.AsNoTracking().ToListAsync();
         }
 
+
         public async Task<IEnumerable<BookingAction>> GetAll(Expression<Func<BookingAction, bool>> expression)
         {
             return await _service.Set<BookingAction>().Where(expression).AsNoTracking().ToListAsync();
@@ -99,6 +100,12 @@ namespace Guard_Client.Services.Implementations
             await _service.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<BookingAction>> GetAllFullValue()
+        {
+            return await _service.BookingActions
+                .Include(x => x.KeyObject)
+                .Include(x => x.User).ToListAsync();
+        }
 
         private bool IsExist(BookingAction bookingAction)
         {
@@ -106,5 +113,7 @@ namespace Guard_Client.Services.Implementations
                 return true;
             return false;
         }
+
+       
     }
 }
