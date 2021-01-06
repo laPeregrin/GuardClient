@@ -21,8 +21,8 @@ namespace Guard_Client.ViewModels
 
 
         #region DataSorting
-        private DateTime min;
-        private DateTime max;
+        private DateTime min = DateTime.Now;
+        private DateTime max = DateTime.Now;
         public DateTime CurrentDateMin { get { return min; } set { min = value; RaisePropertyChanged(); } }
         public DateTime CurrentDateMax { get { return max; } set { max = value; RaisePropertyChanged(); } }
         #endregion DataSorting
@@ -37,8 +37,11 @@ namespace Guard_Client.ViewModels
         public HistoryViewModel(UserAndKeyHandler userAndKeyHandler)
         {
             service = userAndKeyHandler;
+
             _HistoryDetailsViewModels = new ObservableCollection<DetailsView>();
+
             HistoryCollection = CollectionViewSource.GetDefaultView(_HistoryDetailsViewModels);
+
             HistoryCollection.Filter = FilterUser;
             HistoryCollection.SortDescriptions.Add(new SortDescription(nameof(DetailsView.DateTaking), ListSortDirection.Descending));
         }
@@ -51,7 +54,8 @@ namespace Guard_Client.ViewModels
             {
                 return detailsView.LastName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
                     detailsView.KeyNumber.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
-                    detailsView.FirstName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase);
+                    detailsView.FirstName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
+                    detailsView.DateTaking.ToString().Contains(CurrentDateMin.ToString());
             }
             return false;
         }
@@ -68,6 +72,7 @@ namespace Guard_Client.ViewModels
 
         private void UpdateCollection()
         {
+            _HistoryDetailsViewModels.Clear();
             var res = Task.Run(async () => await GetData()).Result;
             DetailsView details = new DetailsView();
             foreach (DetailsView item in res.MapToDetailsView())

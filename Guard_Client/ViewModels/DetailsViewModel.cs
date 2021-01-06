@@ -55,9 +55,9 @@ namespace Guard_Client.ViewModels
                 await _userAndKeyHandler.FinishBooking(CurrentKey.KeyNumber);
                 UpdateList(SelectedKey);
             }
-            catch (KeyIsNotBooking e)
+            catch (KeyIsNotBooking)
             { MessageBox.Show("Этот ключ сейчас без владельца", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning); }
-            catch (Exception e)
+            catch (Exception)
             { MessageBox.Show("Возможно вы не получили полную информацию о текущем состоянии ключа", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
 
         });

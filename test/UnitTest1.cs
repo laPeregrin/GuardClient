@@ -67,7 +67,7 @@ namespace test
         {
             //Arrange
             var user = userService.GetBy(new Guid("01d66862-ab84-4beb-98e8-78059307f19c")).Result;
-            var key = keyObjectService.GetByAuditoryName("132").Result;
+            var key = await keyObjectService.GetByAuditoryName("132");
             //Action
             await bookingActionService.StartSession(user, key);
             var res = bookingActionService.GetAll().Result;

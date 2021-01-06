@@ -24,7 +24,6 @@ namespace Guard_Client.ViewModels
         {
             _bigService = bigService;
 
-
             var CollUser = (IEnumerable<User>)Task.Run(async () => await _bigService.GetAll<User>()).Result;
             users = new ObservableCollection<DetailsView>(CollUser.MapToDetailsView());
             var KeyUser = Task.Run(async () => await _bigService.GetAll(false)).Result;
@@ -78,16 +77,16 @@ namespace Guard_Client.ViewModels
                 UpdateCollection(CurrentKey);
             }
 
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 MessageBox.Show("Ключ уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
-            catch (KeyIsBookingAlreadyException e)
+            catch (KeyIsBookingAlreadyException)
             {
                 MessageBox.Show("Ключ уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("Обязательно выбирайте нужное в обеих списках", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }

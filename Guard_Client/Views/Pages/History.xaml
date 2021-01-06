@@ -12,14 +12,16 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="700" MinHeight="500"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="800"/>
+            <ColumnDefinition Width="2000"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="История" FontSize="30" Foreground="{StaticResource BrushPrimary1}"/>
-        <control:HistoryViewUserController Grid.Row="1" Grid.Column="1" Margin="30"/>
+        
+        <TextBlock Margin="10" Grid.Row="0" Grid.Column="1" Text="История" FontSize="30" Foreground="{StaticResource BrushPrimary1}"/>
+        
+         <control:HistoryViewUserController Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="90 0 0 30"/>
 
     </Grid>
 </Page>

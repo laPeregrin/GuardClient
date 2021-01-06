@@ -11,7 +11,7 @@ namespace Guard_Client.Exceptions
 
         public string Message { get; set; }
 
-        public KeyIsNotBooking(string message)
+        public KeyIsNotBooking(string message) : base(message)
         {
             Message = message;
         }

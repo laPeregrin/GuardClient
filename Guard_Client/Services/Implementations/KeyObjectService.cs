@@ -13,16 +13,17 @@ namespace Guard_Client.Services.Implementations
     public class KeyObjectService : DataService<KeyObject>
     {
         private readonly DbTestContext _context;
-        public KeyObjectService(DbTestContext context) : base(context) {
+        public KeyObjectService(DbTestContext context) : base(context)
+        {
             _context = context;
         }
 
-        public Task<KeyObject> GetByAuditoryName(string auditory)
+        public async Task<KeyObject> GetByAuditoryName(string auditory)
         {
             if (_context.KeyObjects.Any(x => x.AudNum == auditory))
             {
                 var key = _context.KeyObjects.FirstOrDefault(x => x.AudNum == auditory);
-                return Task.Run(()=> { return key; });
+                return key;
             }
             return null;
 
