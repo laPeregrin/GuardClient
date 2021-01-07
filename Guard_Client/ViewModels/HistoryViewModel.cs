@@ -21,9 +21,9 @@ namespace Guard_Client.ViewModels
 
 
         #region DataSorting
-        private DateTime min = DateTime.Now;
+        private string min;
         private DateTime max = DateTime.Now;
-        public DateTime CurrentDateMin { get { return min; } set { min = value; RaisePropertyChanged(); } }
+        public string CurrentDateMin { get { return min; } set { min = value; RaisePropertyChanged(); } }
         public DateTime CurrentDateMax { get { return max; } set { max = value; RaisePropertyChanged(); } }
         #endregion DataSorting
         #region StringSorting
@@ -55,7 +55,7 @@ namespace Guard_Client.ViewModels
                 return detailsView.LastName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
                     detailsView.KeyNumber.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
                     detailsView.FirstName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
-                    detailsView.DateTaking.ToString().Contains(CurrentDateMin.ToString());
+                    detailsView.DateTaking.ToString("g").StartsWith(CurrentDateMin.ToString());
             }
             return false;
         }

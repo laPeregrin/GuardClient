@@ -26,7 +26,7 @@ namespace Guard_Client
         {
             var services = new ServiceCollection();
 
-            services.AddTransient<DbTestContext>();
+            services.AddDbContext<DbTestContext>();
             services.AddSingleton<PageService>();
 
 

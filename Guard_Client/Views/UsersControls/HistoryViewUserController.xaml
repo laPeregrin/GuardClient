@@ -30,7 +30,7 @@
                 <TextBox Grid.Column="0" Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"   MinWidth="70" MinHeight="20" Width="150" FontSize="20" MaxHeight="40" Margin="25 "/>
 
                 <StackPanel Grid.Row="0" Grid.Column="1" Margin="40 20 0 0">
-                    <DatePicker  Text="От" SelectedDate="{Binding CurrentDateMin}"  Grid.Row="0" Grid.Column="2" MinWidth="70" MinHeight="20" Width="150" Margin="10"/>
+                    <TextBox  Text="{Binding CurrentDateMin, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="2" MinWidth="70" MinHeight="20" Width="150" Margin="10"/>
                     <DatePicker  Text="До" SelectedDate="{Binding CurrentDateMax}"  Grid.Row="0" Grid.Column="3" MinWidth="70" MinHeight="20" Margin="10"/>
                 </StackPanel>
                 <Button Grid.Row="0" Grid.Column="2" Content="Вывести" Style="{StaticResource NatButton}" MinHeight="20" MaxHeight="30" FontSize="25"/>
@@ -83,7 +83,7 @@
                         <GridViewColumnHeader Content="Взяли(Месяц, Часы, Минуты)" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Right"  Width="300" HorizontalAlignment="Left"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="250" HorizontalAlignment="Center"   Text="{Binding DateTaking, StringFormat={}{0:MM:dd:HH:mm}}" />
+                                <TextBlock Width="250" HorizontalAlignment="Center"   Text="{Binding DateTaking, StringFormat={}{0:g}}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

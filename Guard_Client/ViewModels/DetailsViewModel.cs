@@ -11,7 +11,7 @@ using Guard_Client.Exceptions;
 
 namespace Guard_Client.ViewModels
 {
-    public class DetailsViewModel : BindableBase, IDisposable
+    public class DetailsViewModel : BindableBase
     {
         private UserAndKeyHandler _userAndKeyHandler;
 
@@ -37,7 +37,22 @@ namespace Guard_Client.ViewModels
             }).GetAwaiter().GetResult();
         }
 
-        public ICommand UpdateCurrentUser => new AsyncCommand(async () =>
+        public ICommand AddMoreKey => new AsyncCommand(async () =>
+        {
+            try
+            {
+                await _userAndKeyHandler.AddBooking(CurrentKey.LastName, CurrentKey.KeyNumber);
+            }
+            catch (KeyIsBookingAlreadyException)
+            {
+                MessageBox.Show($"Ключ занят преподавателем", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception)
+            { MessageBox.Show("Возможно вы не получили полную информацию о текущем состоянии ключа", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
+
+
+        });
+        public ICommand GetInfoBySelectedItemInList => new AsyncCommand(async () =>
         {
             if (SelectedKey != null)
             {
@@ -71,18 +86,12 @@ namespace Guard_Client.ViewModels
             var items = await _userAndKeyHandler.GetAll(true);
             BookedKeyCollections = items.MapToDetailsView();
         }
+
         private void UpdateList(DetailsView view)
         {
             BookedKeyCollections.Remove(view);
             CurrentKey = null;
         }
 
-        public void Dispose()
-        {
-            _BookedKeyCollections.Clear();
-            _userAndKeyHandler = null;
-            CurrentKey = null;
-            SelectedKey = null;
-        }
     }
 }

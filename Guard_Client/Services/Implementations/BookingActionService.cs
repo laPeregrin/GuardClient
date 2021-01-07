@@ -40,13 +40,22 @@ namespace Guard_Client.Services.Implementations
         /// <returns></returns>
         public async Task StartSession(User user, KeyObject keyObject)
         {
-            keyObject.IsBooked = true;
-            keyObject.User = user;
-            keyObject.UserId = user.Id;
-            var res = new BookingAction().AddStartSessionBookingAction(user, keyObject, Guid.NewGuid());
-            _service.KeyObjects.Update(keyObject);
-            await _service.SaveChangesAsync();
-            await Add(res);
+            try
+            {
+                keyObject.IsBooked = true;
+                keyObject.User = user;
+                keyObject.UserId = user.Id;
+                var res = new BookingAction().AddStartSessionBookingAction(user, keyObject, Guid.NewGuid());
+                await Add(res);
+                _service.KeyObjects.Update(keyObject);
+                await _service.SaveChangesAsync();
+            }
+            catch(Exception)
+            {
+                GC.Collect(1);
+                throw;
+            }
+           
            
         }
         /// <summary>
@@ -66,6 +75,12 @@ namespace Guard_Client.Services.Implementations
             await _service.SaveChangesAsync();
         }
 
+
+        /// <summary>
+        /// Method for getting collections
+        /// all or some rule
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<BookingAction>> GetAll()
         {
             return await _service.BookingActions.AsNoTracking().ToListAsync();
@@ -76,7 +91,12 @@ namespace Guard_Client.Services.Implementations
         {
             return await _service.Set<BookingAction>().Where(expression).AsNoTracking().ToListAsync();
         }
-
+        public async Task<IEnumerable<BookingAction>> GetAllFullValue()
+        {
+            return await _service.BookingActions
+                .Include(x => x.KeyObject)
+                .Include(x => x.User).ToListAsync();
+        }
         public async Task<BookingAction> GetByRule(Expression<Func<BookingAction, bool>> expression)
         {
             return await _service.Set<BookingAction>().FirstOrDefaultAsync(expression);
@@ -99,12 +119,7 @@ namespace Guard_Client.Services.Implementations
             await _service.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<BookingAction>> GetAllFullValue()
-        {
-            return await _service.BookingActions
-                .Include(x => x.KeyObject)
-                .Include(x => x.User).ToListAsync();
-        }
+       
 
         private bool IsExist(BookingAction bookingAction)
         {

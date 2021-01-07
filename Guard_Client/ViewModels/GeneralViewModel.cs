@@ -86,8 +86,9 @@ namespace Guard_Client.ViewModels
             {
                 MessageBox.Show("Ключ уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                
                 MessageBox.Show("Обязательно выбирайте нужное в обеих списках", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 

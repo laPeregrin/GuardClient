@@ -45,7 +45,7 @@
                     <RowDefinition Height="Auto"/>
 
                 </Grid.RowDefinitions>
-                <Button Margin="10 0 0 0" Style="{StaticResource NatButton}" Command="{Binding UpdateCurrentUser}" Content="Получить полную информацию"  Grid.Row="0"/>
+                <Button Margin="10 0 0 0" Style="{StaticResource NatButton}" Command="{Binding GetInfoBySelectedItemInList}" Content="Получить полную информацию"  Grid.Row="0"/>
                 <Border Margin="15" Grid.Row="1" Style="{StaticResource NatBorderButton}">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -74,7 +74,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Command="{Binding ReturnKey}" Grid.Column="0" Margin="10 0 0 0" Padding="10" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Left" Content="Вернул ключ"/>
                 <Border Grid.Column="1" Width="40"/>
-                <Button Grid.Column="2" Margin="0 0 20 0" Padding="20" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Right" Content="Выдать ещё ключ"/>
+                <Button Command="{Binding AddMoreKey}" Grid.Column="2" Margin="0 0 20 0" Padding="10" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Right" Content="Выдать ещё ключ"/>
             </Grid>
         </StackPanel>
     </Grid>
