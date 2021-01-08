@@ -1,5 +1,6 @@
 using DTOs.Models;
 using Guard_Client.BLL;
+using Guard_Client.Exceptions;
 using Guard_Client.Services.Implementations;
 using NUnit.Framework;
 using System;
@@ -12,6 +13,7 @@ namespace test
 {
     public class Tests
     {
+        private PermissionService _permService;
         private DbTestContext _service;
         private UserService userService;
         private KeyObjectService keyObjectService;
@@ -24,7 +26,8 @@ namespace test
             userService = new UserService(_service);
             keyObjectService = new KeyObjectService(_service);
             bookingActionService = new BookingActionService(_service);
-            _userHandler = new UserAndKeyHandler(keyObjectService, userService, bookingActionService);
+            _permService = new PermissionService(_service);
+            _userHandler = new UserAndKeyHandler(keyObjectService, userService, bookingActionService, _permService);
         }
 
 
@@ -63,17 +66,17 @@ namespace test
             Assert.AreEqual(id, exp.Id, "cant add key");
         }
         [Test]
-        public async Task AddBookingSession_AddUserAndKey_ReturnSessionWithoutFinishTime()
+        public async Task AddBookingSession_AddUserAndKey_ReturnNoAccessException()
         {
-            //Arrange
-            var user = userService.GetBy(new Guid("01d66862-ab84-4beb-98e8-78059307f19c")).Result;
-            var key = await keyObjectService.GetByAuditoryName("132");
             //Action
-            await bookingActionService.StartSession(user, key);
-            var res = bookingActionService.GetAll().Result;
-            bool succes = res.Count() != 0;
-            //Assert
-            Assert.IsTrue(succes);
+            try
+            {
+              await _userHandler.AddBooking("Сасім", "132-1");
+            }
+            catch(NotHaveAccessException e)
+            {
+                Assert.AreEqual("Сасім", e.UserName);
+            }
         }
         [Test]
         public async Task GetAllWithNoTracking_ReturnKeyWithBookingTrue()
@@ -164,6 +167,30 @@ namespace test
             var user = users.First();
             //Assert
             Assert.AreEqual(typeof(BookingAction), user.GetType());
+        }
+        [Test]
+        public async Task AddPermission_usersAndKey__()
+        {
+            //Arrange
+            var user = await userService.GetByLastName("Рач");
+            var user1 = await userService.GetByLastName("Хорошенюк");
+            var key = await keyObjectService.GetByAuditoryName("132-1");
+            var perm = new Permission(key, new User[] { user, user1 });
+            //Action
+            await _permService.Add(perm);
+            var @explicit = await _permService.GetByKey(key);
+
+            //Assert
+            Assert.AreEqual(perm.UsersWithPermissions.Count(), @explicit.UsersWithPermissions.Count());
+        }
+        [Test]
+        public void GetByKeyPermission_usersAndKey__()
+        {
+            var key = new KeyObject();
+            key.Id = Guid.NewGuid();
+            var result = _permService.GetByKey(key);
+
+            Assert.IsNull(result);
         }
     }
 }

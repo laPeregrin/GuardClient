@@ -16,13 +16,15 @@ namespace Guard_Client.BLL
     {
         private readonly KeyObjectService _keyService;
         private readonly UserService _userService;
+        private readonly PermissionService _permissionService;
         private readonly IBookingActionService _bookingAction;
 
-        public UserAndKeyHandler(KeyObjectService keyService, UserService userService, IBookingActionService bookingActionService)
+        public UserAndKeyHandler(KeyObjectService keyService, UserService userService, IBookingActionService bookingActionService, PermissionService permissionService)
         {
             _keyService = keyService;
             _userService = userService;
             _bookingAction = bookingActionService;
+            _permissionService = permissionService;
         }
 
         public async Task<IEnumerable<DomainObject>> GetAll<T>() where T : DomainObject
@@ -69,10 +71,19 @@ namespace Guard_Client.BLL
         {
             if (lastName == null || auditoryNumber == null)
                 throw new ArgumentException();
+
             var user = await _userService.GetByLastName(lastName);
             var key = await _keyService.GetByAuditoryName(auditoryNumber);
             if (key.IsBooked == true)
                 throw new KeyIsBookingAlreadyException(key.AudNum);
+            var permission = await _permissionService.GetByKey(key);
+            if (permission != null)
+            {
+                if (_permissionService.IsHaveAcces(permission, user))
+                    await _bookingAction.StartSession(user, key);
+                else
+                    throw new NotHaveAccessException(user.LastName);
+            }
             await _bookingAction.StartSession(user, key);
         }
 

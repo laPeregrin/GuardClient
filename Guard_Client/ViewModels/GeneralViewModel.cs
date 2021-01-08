@@ -77,6 +77,10 @@ namespace Guard_Client.ViewModels
                 UpdateCollection(CurrentKey);
             }
 
+            catch(NotHaveAccessException e)
+            {
+                MessageBox.Show($"Викладач {e.UserName} не має доступу до цього ключа", "Відмовлено у доступі", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             catch (ArgumentException)
             {
                 MessageBox.Show("Ключ уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);

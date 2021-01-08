@@ -14,6 +14,7 @@ namespace testDAL
         public DbSet<User> Users { get; set; }
         public DbSet<KeyObject> KeyObjects { get; set; }
         public DbSet<BookingAction> BookingActions { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
 
         public DbTestContext() : base() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -27,6 +28,9 @@ namespace testDAL
             modelBuilder.Entity<User>().HasKey(x => x.Id);
             modelBuilder.Entity<KeyObject>().HasKey(x => x.Id);
             modelBuilder.ApplyConfiguration(new BookingActonEfConfig());
+            modelBuilder.Entity<Permission>().HasKey(x => x.Id);
+            modelBuilder.Entity<Permission>().HasKey(x => x.KeyId);
+            modelBuilder.Entity<Permission>().HasOne(x => x.Key);
         }
         private const string constr = "Data Source = (localdb)\\MSSQLLocalDB; Database = KrokUser; Persist Security Info = false; User ID = 'sa'; Password = 'Ghbdtn010102'; MultipleActiveResultSets = True; Trusted_Connection = False;";
     }

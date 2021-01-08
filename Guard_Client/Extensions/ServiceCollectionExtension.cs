@@ -18,6 +18,7 @@ namespace Guard_Client.Extensions
             services.AddSingleton<UserService>();
             services.AddSingleton<KeyObjectService>();
             services.AddSingleton<IBookingActionService, BookingActionService>();
+            services.AddSingleton<PermissionService>();
 
             services.AddSingleton<UserAndKeyHandler>();
             return services;

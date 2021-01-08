@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using testDAL;
 
 namespace testDAL.Migrations
 {
     [DbContext(typeof(DbTestContext))]
-    partial class DbTestContextModelSnapshot : ModelSnapshot
+    [Migration("20210108121738__addPermissionTo")]
+    partial class _addPermissionTo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +60,9 @@ namespace testDAL.Migrations
                     b.Property<bool>("IsBooked")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Permission")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -66,19 +71,6 @@ namespace testDAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("KeyObjects");
-                });
-
-            modelBuilder.Entity("DTOs.Models.Permission", b =>
-                {
-                    b.Property<Guid?>("KeyId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("KeyId");
-
-                    b.ToTable("Permissions");
                 });
 
             modelBuilder.Entity("DTOs.Models.User", b =>
@@ -96,12 +88,10 @@ namespace testDAL.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PermissionKeyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Permission")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PermissionKeyId");
 
                     b.ToTable("Users");
                 });
@@ -126,22 +116,6 @@ namespace testDAL.Migrations
                     b.HasOne("DTOs.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("DTOs.Models.Permission", b =>
-                {
-                    b.HasOne("DTOs.Models.KeyObject", "Key")
-                        .WithOne("Permission")
-                        .HasForeignKey("DTOs.Models.Permission", "KeyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("DTOs.Models.User", b =>
-                {
-                    b.HasOne("DTOs.Models.Permission", "Permission")
-                        .WithMany("UsersWithPermissions")
-                        .HasForeignKey("PermissionKeyId");
                 });
 #pragma warning restore 612, 618
         }

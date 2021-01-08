@@ -52,7 +52,7 @@ namespace Guard_Client.Services.Implementations
             }
             catch(Exception)
             {
-                GC.Collect(1);
+                GC.Collect();
                 throw;
             }
            

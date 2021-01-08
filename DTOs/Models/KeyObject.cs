@@ -13,5 +13,6 @@ namespace DTOs.Models
 
         public User? User { get; set; }
         public Guid? UserId { get; set; }
+        public Permission? Permission { get; set; } = null;
     }
 }

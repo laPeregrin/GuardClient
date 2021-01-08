@@ -54,8 +54,7 @@ namespace Guard_Client.ViewModels
             {
                 return detailsView.LastName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
                     detailsView.KeyNumber.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
-                    detailsView.FirstName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase) ||
-                    detailsView.DateTaking.ToString("g").StartsWith(CurrentDateMin.ToString());
+                    detailsView.FirstName.Contains(FilterString, StringComparison.InvariantCultureIgnoreCase);
             }
             return false;
         }
