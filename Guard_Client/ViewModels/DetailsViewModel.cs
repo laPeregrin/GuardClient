@@ -43,12 +43,12 @@ namespace Guard_Client.ViewModels
             {
                 await _userAndKeyHandler.AddBooking(CurrentKey.LastName, CurrentKey.KeyNumber);
             }
-            catch (KeyIsBookingAlreadyException)
+            catch (KeyIsBookingAlreadyException e)
             {
-                MessageBox.Show($"Ключ занят преподавателем", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"Ключ на данний момент зайнятий викладачем {e.Username}", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception)
-            { MessageBox.Show("Возможно вы не получили полную информацию о текущем состоянии ключа", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
+            { MessageBox.Show("Можливо ви не обрали викладача або ключа, перевірте чи корректно ви обрали інформацію в обох списках", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error); }
 
 
         });
@@ -60,7 +60,7 @@ namespace Guard_Client.ViewModels
             }
             else
             {
-                MessageBox.Show("Для начала выберете ключ из списка");
+                MessageBox.Show("Для початку виберіть ключ із списку", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         });
         public ICommand ReturnKey => new AsyncCommand(async () =>
@@ -71,9 +71,9 @@ namespace Guard_Client.ViewModels
                 UpdateList(SelectedKey);
             }
             catch (KeyIsNotBooking)
-            { MessageBox.Show("Этот ключ сейчас без владельца", "Внимание!", MessageBoxButton.OK, MessageBoxImage.Warning); }
+            { MessageBox.Show("Цим ключем ніхто не володіє на данний момент", "Увага!", MessageBoxButton.OK, MessageBoxImage.Warning); }
             catch (Exception)
-            { MessageBox.Show("Возможно вы не получили полную информацию о текущем состоянии ключа", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error); }
+            { MessageBox.Show("Для повернення обранного ключа варто отримати про нього повну інформацію", "Увага!", MessageBoxButton.OK, MessageBoxImage.Information); }
 
         });
         public ICommand UpdateAll => new AsyncCommand(async () =>

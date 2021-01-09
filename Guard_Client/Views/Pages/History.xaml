@@ -6,20 +6,20 @@
       xmlns:local="clr-namespace:Guard_Client.Views.Pages"
       xmlns:control="clr-namespace:Guard_Client.Views.UsersControls"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1100"
       Title="History">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="700" MinHeight="500"/>
+            <RowDefinition Height="auto" MinHeight="600"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="2000"/>
+            <ColumnDefinition Width="auto" MaxWidth="1500"/>
         </Grid.ColumnDefinitions>
         
-        <TextBlock Margin="10" Grid.Row="0" Grid.Column="1" Text="История" FontSize="30" Foreground="{StaticResource BrushPrimary1}"/>
+        <TextBlock Margin="10" Grid.Row="0" Grid.Column="1" Text="Історія" FontSize="30" Foreground="{StaticResource BrushPrimary1}"/>
         
          <control:HistoryViewUserController Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="90 0 0 30"/>
 

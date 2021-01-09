@@ -26,30 +26,29 @@
 
                 <Border Grid.Row="0" Style="{StaticResource NatBorderButton}" Margin="2 10 5 5">
                     <Grid>
-                        <Rectangle  Width="155" Fill="#FF333C27"/>
+                        <Rectangle  Width="255" Fill="#FF333C27"/>
 
-                        <Button HorizontalAlignment="Stretch" Grid.Row="0" Command="{Binding MoveToGeneralPage}" Style="{StaticResource NatButton}" Content="Главная"/>
+                        <Button HorizontalAlignment="Stretch" Grid.Row="0" Command="{Binding MoveToGeneralPage}" Style="{StaticResource NatButton}" Content="Надати ключ"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="1" Style="{StaticResource NatBorderButton}">
                     <Grid>
-                        <Rectangle  Width="155" Fill="#FF333C27"/>
-
-                        <Button HorizontalAlignment="Stretch" Grid.Row="1" Command="{Binding MoveToHistoryPage}"  Style="{StaticResource NatButton}" Content="История"/>
+                        <Rectangle  Width="255" Fill="#FF333C27"/>
+                        <Button HorizontalAlignment="Stretch" Grid.Row="3"  Command="{Binding MoveToDetailsPage}" Style="{StaticResource NatButton}" Content="Повернути ключ"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="2" Style="{StaticResource NatBorderButton}">
                     <Grid>
-                        <Rectangle  Width="155" Fill="#FF333C27"/>
+                        <Rectangle  Width="255" Fill="#FF333C27"/>
 
-                        <Button HorizontalAlignment="Stretch" Grid.Row="2" Command="{Binding MoveToCurrentPage}" Style="{StaticResource NatButton}" Content="Текущее"/>
+                        <Button HorizontalAlignment="Stretch" Grid.Row="2" Command="{Binding MoveToCurrentPage}" Style="{StaticResource NatButton}" Content="Ключ-карта"/>
                     </Grid>
                 </Border>
                 <Border Grid.Row="3" Style="{StaticResource NatBorderButton}" >
                     <Grid>
-                        <Rectangle  Width="155" Fill="#FF333C27"/>
+                        <Rectangle  Width="255" Fill="#FF333C27"/>
 
-                        <Button HorizontalAlignment="Stretch" Grid.Row="3"  Command="{Binding MoveToDetailsPage}" Style="{StaticResource NatButton}" Content="Детали"/>
+                        <Button HorizontalAlignment="Stretch" Grid.Row="1" Command="{Binding MoveToHistoryPage}"  Style="{StaticResource NatButton}" Content="Історія"/>
                     </Grid>
                 </Border>
             </Grid>

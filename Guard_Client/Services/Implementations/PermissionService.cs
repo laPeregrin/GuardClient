@@ -20,7 +20,10 @@ namespace Guard_Client.Services.Implementations
         public async Task<Permission> GetByKey(KeyObject key)
         {
           var permission = await _service.Permissions.Where(x => x.KeyId == key.Id).Include(x => x.UsersWithPermissions).ToArrayAsync();
+            if(permission.Count()>0)
             return permission[0];
+
+            return null;
         }
         public bool IsHaveAcces(Permission perm, User user)
         {

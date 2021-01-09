@@ -6,43 +6,44 @@
              xmlns:local="clr-namespace:Guard_Client.Views.UsersControls"
              mc:Ignorable="d" 
              DataContext="{Binding HistoryViewModel,Source={StaticResource VMLocator}}"
-             d:DesignHeight="450" d:DesignWidth="1000">
+             d:DesignHeight="550" d:DesignWidth="1100">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="500" MaxHeight="800" MinHeight="400" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2000"/>
+            <ColumnDefinition Width="780"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
 
-                <TextBox Grid.Column="0" Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"   MinWidth="70" MinHeight="20" Width="150" FontSize="20" MaxHeight="40" Margin="25 "/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" >
+            <StackPanel>
+                <TextBlock Text="Пошук по імені," Height="Auto" HorizontalAlignment="Center" Foreground="{StaticResource BrushPrimary1}" FontSize="15"/>
+                <TextBlock Text="прізвищу,номеру ключа" Height="Auto" HorizontalAlignment="Center" Foreground="{StaticResource BrushPrimary1}" FontSize="15"/>
+            </StackPanel>
+            <TextBox FontSize="15"   Margin="20" Text="{Binding FilterString, UpdateSourceTrigger=PropertyChanged}"  />
+            <StackPanel>
+                <TextBlock Text="Пошук по датам" Height="Auto" HorizontalAlignment="Center" Foreground="{StaticResource BrushPrimary1}" FontSize="15"/>
+            </StackPanel>
+            <TextBox FontSize="15"   Margin="20" Text="{Binding FilterDate, UpdateSourceTrigger=PropertyChanged}"  />
+            <Grid Margin="20" HorizontalAlignment="Left">
+                <Button  Command="{Binding UpdateByDate}"    HorizontalAlignment="Left" Content="Отфільтрувати" Style="{StaticResource NatButton}" FontSize="15" Width="200" Height="30"/>
 
-                <StackPanel Grid.Row="0" Grid.Column="1" Margin="40 20 0 0">
-                    <TextBox  Text="{Binding CurrentDateMin, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="2" MinWidth="70" MinHeight="20" Width="150" Margin="10"/>
-                    <DatePicker  Text="До" SelectedDate="{Binding CurrentDateMax}"  Grid.Row="0" Grid.Column="3" MinWidth="70" MinHeight="20" Margin="10"/>
-                </StackPanel>
-                <Button Grid.Row="0" Grid.Column="2" Content="Вывести" Style="{StaticResource NatButton}" MinHeight="20" MaxHeight="30" FontSize="25"/>
-                <Button Margin="30 0 0 0" Width="120" MinHeight="20" MaxHeight="30" FontSize="13"  HorizontalAlignment="Right" Grid.Row="0" Grid.Column="3" Command="{Binding UpdateCollectionCommand}" Content="Получить список"/>
             </Grid>
+            <Grid  HorizontalAlignment="Left" Margin="20">
+                <Button Margin="20" Command="{Binding UpdateCollectionCommand}" Content="Отримати список(за день)" Style="{StaticResource NatButton}" FontSize="15" Width="200" Height="30"/>
+            </Grid>
+
         </StackPanel>
 
+
         <ListView 
-            Grid.Column="1"
+            Grid.Column="0"
             Grid.Row="1"
             FontSize="20"
-            Width="1100"
+            Width="750"
+            MinHeight="500"
             HorizontalContentAlignment="Stretch"
             HorizontalAlignment="Left"
                   Background="{StaticResource BrushPrimary3}"
@@ -51,25 +52,25 @@
             <ListView.View>
 
                 <GridView AllowsColumnReorder="True">
-                    
+
                     <GridViewColumn>
-                        <GridViewColumnHeader Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Left" Content="Имя" Width="140" HorizontalAlignment="Left"/>
+                        <GridViewColumnHeader Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Left" Content="Ім'я" Width="140" HorizontalAlignment="Left"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding FirstName}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn>
-                        <GridViewColumnHeader Content="Фамилия" Width="140"   Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+                        <GridViewColumnHeader Content="Фамілія" Width="140"   Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock   Text="{Binding LastName}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn>
                         <GridViewColumnHeader Content="Ключ" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Width="140"/>
                         <GridViewColumn.CellTemplate>
@@ -78,25 +79,25 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn>
-                        <GridViewColumnHeader Content="Взяли(Месяц, Часы, Минуты)" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Right"  Width="300" HorizontalAlignment="Left"/>
+                        <GridViewColumnHeader Content="Взяли" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center"  Width="150" HorizontalAlignment="Left"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="250" HorizontalAlignment="Center"   Text="{Binding DateTaking, StringFormat={}{0:g}}" />
+                                <TextBlock Width="150" HorizontalAlignment="Center"   Text="{Binding DateTaking, StringFormat={}{0:dd/MM/HH:mm}}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                     <GridViewColumn>
-                        <GridViewColumnHeader Content="Вернули(Месяц, Часы, Минуты)" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Right"  Width="300" HorizontalAlignment="Left"/>
+                        <GridViewColumnHeader Content="Повернули" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center"  Width="150" HorizontalAlignment="Left"/>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Width="250" HorizontalAlignment="Center"   Text="{Binding DateBringin, StringFormat={}{0:MM:dd:HH:mm}}" />
+                                <TextBlock Width="150" HorizontalAlignment="Center"   Text="{Binding DateBringin, StringFormat={}{0:dd/MM/HH:mm}}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    
+
                 </GridView>
 
             </ListView.View>

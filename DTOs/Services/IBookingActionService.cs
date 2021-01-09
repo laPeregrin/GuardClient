@@ -13,6 +13,7 @@ namespace DTOs.Services
         Task StartSession(User user, KeyObject keyObject);
         Task EndSession(BookingAction bookingAction);
         Task<BookingAction> GetByRule(Expression<Func<BookingAction, bool>> expression);
+        Task<IEnumerable<BookingAction>> GetAllByRule(Expression<Func<BookingAction, bool>> expression);
         Task<IEnumerable<BookingAction>> GetAllFullValue();
     }
 }

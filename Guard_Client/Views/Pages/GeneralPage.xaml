@@ -16,7 +16,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock VerticalAlignment="Center" Grid.Row="0" Text="Пришел преподаватель без ключ-карты? Не беда!" FontSize="30" HorizontalAlignment="Center" Foreground="{StaticResource BrushPrimary1}"/>
+        <TextBlock VerticalAlignment="Center" Grid.Row="0" Text="Видача ключів без пропуску" FontSize="30" HorizontalAlignment="Center" Foreground="{StaticResource BrushPrimary1}"/>
         <Grid Grid.Row="1" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -33,7 +33,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Padding="10" Text="Преподаватели" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                <TextBlock Padding="10" Text="Викладачі" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
                 <TextBox  Grid.Row="1" Grid.Column="0" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" Foreground="{StaticResource BrushPrimary1}" HorizontalAlignment="Stretch" FontSize="25" Padding="10"/>
                 <Border Grid.Row="2" Style="{StaticResource NatBorderButton}">
                     <ScrollViewer MinHeight="150" MaxHeight="500">
@@ -64,13 +64,14 @@
             <Border Style="{StaticResource NatBorderButton}"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" MinWidth="200">
                 <StackPanel>
 
-                    <Button Content="Обновить списки" Command="{Binding UpdateKeys}" Style="{StaticResource NatButton}" FontSize="15" Padding="10"/>
+                    <Button Content="Оновити списоки" Command="{Binding UpdateKeys}" Style="{StaticResource NatButton}" FontSize="15" Padding="10"/>
 
 
-                    <TextBlock Text="Найдите в списке ваш вариант," FontSize="15" />
-                    <TextBlock Text="выберете его и " FontSize="15"/>
-                    <TextBlock Text="нажмите |Выдать преподавателю ключ" FontSize="15"/>
-                    <TextBlock Text="поля с текстом для поиска" FontSize="15"/>
+                    <TextBlock Text="Знайдіть у списку потрібного" FontSize="15" />
+                    <TextBlock Text="викладача та ключ " FontSize="15"/>
+                    <TextBlock Text="оберіть їй у списку " FontSize="15"/>
+                    <TextBlock Text="та натисніть| видати ключ викладачу " FontSize="15"/>
+                    <TextBlock Text="поля с текстом для пошуку" FontSize="15"/>
                 </StackPanel>
             </Border>
             <Grid  Grid.Column="2" HorizontalAlignment="Right">
@@ -79,7 +80,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Padding="10" Text="Свободные ключи" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                <TextBlock Grid.Row="0" Padding="10" Text="Вільні ключи" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
                 <TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Auditory, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" Foreground="{StaticResource BrushPrimary1}" HorizontalAlignment="Stretch" FontSize="25" Padding="10"/>
                 <Border Grid.Row="2" Style="{StaticResource NatBorderButton}">
                     <ScrollViewer Grid.Row="2" MinHeight="150" MaxHeight="500">
@@ -106,7 +107,7 @@
             </Grid>
         </Grid>
         <StackPanel Grid.Row="2" Margin="0 20 0 0">
-            <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0"  Content="Выдать преподавателю ключ" Command="{Binding AddBooking}">
+            <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0"  Content="видати ключ викладачу" Command="{Binding AddBooking}" FontFamily="Sitka Small">
                 <Button.Style>
 
                     <Style TargetType="Button">

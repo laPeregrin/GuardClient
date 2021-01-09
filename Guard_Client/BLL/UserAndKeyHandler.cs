@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -27,6 +28,11 @@ namespace Guard_Client.BLL
             _permissionService = permissionService;
         }
 
+        /// <summary>
+        /// Get all dexterity
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public async Task<IEnumerable<DomainObject>> GetAll<T>() where T : DomainObject
         {
             if (typeof(T) == typeof(User))
@@ -43,10 +49,29 @@ namespace Guard_Client.BLL
             }
             throw new ArgumentException();
         }
+        /// <summary>
+        /// get keys via filtering(show just booked or beside)
+        /// </summary>
+        /// <param name="visible"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<KeyObject>> GetAll(bool visible)
         {
             return await _keyService.GetAll(x => x.IsBooked == visible);
         }
+        /// <summary>
+        /// Attention asNoTracking!!!
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<BookingAction>> GetAllByRule(Expression<Func<BookingAction, bool>> expression)
+        {
+            return  await _bookingAction.GetAllByRule(expression);
+        }
+        /// <summary>
+        /// Get info about not finished bookings
+        /// </summary>
+        /// <param name="numberOfAuditoryOfKeys"></param>
+        /// <returns></returns>
         public async Task<DetailsView> GetCurrentInfoByKeyAuditory(string numberOfAuditoryOfKeys)
         {
             DetailsView model = null;
@@ -75,14 +100,16 @@ namespace Guard_Client.BLL
             var user = await _userService.GetByLastName(lastName);
             var key = await _keyService.GetByAuditoryName(auditoryNumber);
             if (key.IsBooked == true)
-                throw new KeyIsBookingAlreadyException(key.AudNum);
+                throw new KeyIsBookingAlreadyException(user.LastName);
             var permission = await _permissionService.GetByKey(key);
             if (permission != null)
             {
                 if (_permissionService.IsHaveAcces(permission, user))
+                {
                     await _bookingAction.StartSession(user, key);
-                else
-                    throw new NotHaveAccessException(user.LastName);
+                    return;
+                }
+                throw new NotHaveAccessException(user.LastName);
             }
             await _bookingAction.StartSession(user, key);
         }

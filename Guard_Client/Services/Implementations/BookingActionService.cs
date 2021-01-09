@@ -91,12 +91,21 @@ namespace Guard_Client.Services.Implementations
         {
             return await _service.Set<BookingAction>().Where(expression).AsNoTracking().ToListAsync();
         }
+        public async Task<IEnumerable<BookingAction>> GetAllByRule(Expression<Func<BookingAction, bool>> expression)
+        {
+            return await _service.BookingActions.Where(expression).Include(x=>x.KeyObject).Include(x=>x.User).AsNoTracking().ToArrayAsync();
+        }
+        /// <summary>
+        /// Get all with including dtos object
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<BookingAction>> GetAllFullValue()
         {
             return await _service.BookingActions
                 .Include(x => x.KeyObject)
                 .Include(x => x.User).ToListAsync();
         }
+        //Get single element by expression
         public async Task<BookingAction> GetByRule(Expression<Func<BookingAction, bool>> expression)
         {
             return await _service.Set<BookingAction>().FirstOrDefaultAsync(expression);

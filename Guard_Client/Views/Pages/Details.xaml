@@ -18,11 +18,11 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Все занятые ключи" Foreground="{StaticResource BrushPrimary1}" FontSize="35"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Усі зайняті ключі" Foreground="{StaticResource BrushPrimary1}" FontSize="35"/>
         <ScrollViewer Grid.Row="1" Grid.Column="0">
             <StackPanel>
-                <Button Command="{Binding UpdateAll}" Content="Обновить"/>
-                <ListBox Height="400" Background="{x:Null}" ItemsSource="{Binding BookedKeyCollections}" SelectedItem="{Binding SelectedKey}">
+                <Button Command="{Binding UpdateAll}" Content="Оновити список"/>
+                <ListBox Height="600" Background="{x:Null}" ItemsSource="{Binding BookedKeyCollections}" SelectedItem="{Binding SelectedKey}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <UniformGrid Width="300" Columns="1">
@@ -45,9 +45,9 @@
                     <RowDefinition Height="Auto"/>
 
                 </Grid.RowDefinitions>
-                <Button Margin="10 0 0 0" Style="{StaticResource NatButton}" Command="{Binding GetInfoBySelectedItemInList}" Content="Получить полную информацию"  Grid.Row="0"/>
+                <Button Margin="10 0 0 0" Style="{StaticResource NatButton}" Command="{Binding GetInfoBySelectedItemInList}" Content="Отримати інформацію про ключ" FontSize="25"  Grid.Row="0"/>
                 <Border Margin="15" Grid.Row="1" Style="{StaticResource NatBorderButton}">
-                    <Grid>
+                    <Grid Background="{StaticResource BrushPrimary1}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -58,11 +58,10 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Grid.Row="0" Margin="20 10 20 0" Text="{Binding CurrentKey.KeyNumber, StringFormat= ключ от аудитории № {0}}" FontSize="25"  />
-                        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding CurrentKey.LastName, StringFormat=ключ у преподавателя {0}(а)}" FontSize="25" />
-                        <TextBlock Grid.Column="0" Grid.Row="2" Text="{Binding CurrentKey.FirstName}" FontSize="25" />
-                        <TextBlock Grid.Column="0" Grid.Row="3" Margin="20 10 20 0" Text="{Binding CurrentKey.DateTaking, StringFormat={}{0:hh:mm}}" FontSize="30" />
-                    </Grid>
+                        <TextBlock Padding="5" Grid.Column="0" Grid.Row="0" Margin="20 0 20 0"  Text="{Binding CurrentKey.KeyNumber, StringFormat= ключ від аудиторії № {0}}" FontSize="25" FontFamily="Courier New"  />
+                        <TextBlock Padding="5" Grid.Column="0" Grid.Row="1" Margin="20 0 20 0"  Text="{Binding CurrentKey.LastName, StringFormat=На данний момент ключ знаходиться у викладача {0}}" FontSize="25" FontFamily="Courier New" />
+                        <TextBlock Padding="5" Grid.Column="0" Grid.Row="3" Margin="20 0 20 0"  Text="{Binding CurrentKey.DateTaking, StringFormat={}{0:HH:mm}}" FontSize="30" FontFamily="Courier New" />
+                    </Grid>        
                 </Border>
                
             </Grid>
@@ -72,9 +71,9 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Button Command="{Binding ReturnKey}" Grid.Column="0" Margin="10 0 0 0" Padding="10" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Left" Content="Вернул ключ"/>
+                <Button Command="{Binding ReturnKey}" Grid.Column="0" Margin="10 0 0 0" Padding="10" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Left" Content="Повернув ключ"/>
                 <Border Grid.Column="1" Width="40"/>
-                <Button Command="{Binding AddMoreKey}" Grid.Column="2" Margin="0 0 20 0" Padding="10" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Right" Content="Выдать ещё ключ"/>
+                <!--<Button Command="{Binding AddMoreKey}" Grid.Column="2" Margin="0 0 20 0" Padding="10" FontSize="25" Style="{StaticResource NatButton}" HorizontalAlignment="Right" Content="Выдать ещё ключ"/>-->
             </Grid>
         </StackPanel>
     </Grid>

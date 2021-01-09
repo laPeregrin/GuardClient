@@ -83,12 +83,12 @@ namespace Guard_Client.ViewModels
             }
             catch (ArgumentException)
             {
-                MessageBox.Show("Ключ уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Помилка маршрутизації інформації", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
-            catch (KeyIsBookingAlreadyException)
+            catch (KeyIsBookingAlreadyException e)
             {
-                MessageBox.Show("Ключ уже занят", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show($"Ключ зараз у {e.Username}", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             catch (Exception e)
             {

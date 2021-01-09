@@ -4,9 +4,9 @@ using Guard_Client.Exceptions;
 using Guard_Client.Services.Implementations;
 using NUnit.Framework;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using testDAL;
 
 namespace test
@@ -191,6 +191,18 @@ namespace test
             var result = _permService.GetByKey(key);
 
             Assert.IsNull(result);
+        }
+        [Test]
+        public void DateTimeTest()
+        {
+            //Arrange 
+            var date = DateTime.Now;
+            var date1 = DateTime.UtcNow;
+            var date2 = DateTime.Today;
+            var date3 = date2.ToString("MM dd, yyyy");
+            CultureInfo cultureInfo = new CultureInfo("uk-UA");
+            DateTime tempDate = Convert.ToDateTime("1/1/2021 20:10:15", cultureInfo);
+            var res = DateTime.Now.ToString(cultureInfo);
         }
     }
 }
