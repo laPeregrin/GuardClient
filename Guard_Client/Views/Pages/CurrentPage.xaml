@@ -23,14 +23,52 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
+            <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource NatBorderButton}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="LastName" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                    <TextBlock Grid.Row="1"  Text="FirstName" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                    <TextBlock Margin="20" Grid.Row="2" Text="Special Permission" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                </Grid>
+            </Border>
+            <ScrollViewer Grid.Row="1" Grid.Column="2">
+                <ListBox Margin="20" ItemsSource="" SelectedItem="">
+                    <ListBox  
+                             Background="{StaticResource BrushPrimary4}" 
+                             Foreground="{StaticResource BrushPrimary3}"
+                             ItemsSource="{Binding keys, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             SelectedItem="{Binding CurrentKey}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <UniformGrid Width="300" Columns="1">
+                                    <UniformGrid.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Margin" Value="1"/>
+                                        </Style>
+                                    </UniformGrid.Resources>
+                                    <TextBlock Text="{Binding KeyNumber}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
+                                </UniformGrid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ListBox>
+            </ScrollViewer>
         </Grid>
     </Grid>
     
