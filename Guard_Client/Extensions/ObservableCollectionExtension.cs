@@ -41,9 +41,9 @@ namespace Guard_Client.Extensions
         }
         public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<BookingAction> @object)
         {
-            var mappedItem = new DetailsView();
+            DetailsView mappedItem = new DetailsView();
             var collection = new ObservableCollection<DetailsView>();
-            foreach (var item in @object)
+            foreach (var item in @object.ToArray())
             {
                 mappedItem = new DetailsView();
                 mappedItem.FirstName = item.User.FirstName;

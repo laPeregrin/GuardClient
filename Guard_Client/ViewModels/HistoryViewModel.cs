@@ -14,6 +14,7 @@ using DTOs.Models;
 using System.Windows.Input;
 using System.Globalization;
 using System.Windows;
+using Guard_Client.Services;
 
 namespace Guard_Client.ViewModels
 {
@@ -100,20 +101,19 @@ namespace Guard_Client.ViewModels
                 DateTime importantDate = DateTime.Parse(FilterDate, cultureInfo);
                 var collection = await service.GetAllByRule(x => x.BookingFinish.Value.Hour == importantDate.Hour
                 && x.BookingFinish.Value.Minute == importantDate.Minute);
-                if (collection.Any())
+                if (!collection.Any())
                 {
                     collection = await service.GetAllByRule(x => x.BookingFinish.Value.Hour == importantDate.Hour);
-                    if (collection.Any())
+                    if (!collection.Any())
                     {
                         collection = await service.GetAllByRule(x => x.BookingFinish.Value.Day == importantDate.Day);
                     }
                 }
-
                 UpdateCollection(collection);
             }
             catch (Exception e) 
             {
-                MessageBox.Show("Некоректна інформація в полі для дат", "Увага!", MessageBoxButton.OK, MessageBoxImage.Information);
+                NotificationService.ShowNotification("Некоректна інформація в полі для дат", "Увага!");
             }
         }
         private async Task<IEnumerable<BookingAction>> GetData()

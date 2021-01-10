@@ -1492,6 +1492,19 @@
           "bin/placeholder/DTOs.dll": {}
         }
       },
+      "ErrorFriendlyUserNotification/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/ErrorFriendlyUserNotification.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ErrorFriendlyUserNotification.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "testDAL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -5718,6 +5731,11 @@
       "path": "../DTOs/DTOs.csproj",
       "msbuildProject": "../DTOs/DTOs.csproj"
     },
+    "ErrorFriendlyUserNotification/1.0.0": {
+      "type": "project",
+      "path": "../../ErrorFriendlyUserNotification/ErrorFriendlyUserNotification/ErrorFriendlyUserNotification.csproj",
+      "msbuildProject": "../../ErrorFriendlyUserNotification/ErrorFriendlyUserNotification/ErrorFriendlyUserNotification.csproj"
+    },
     "testDAL/1.0.0": {
       "type": "project",
       "path": "../testDAL/testDAL.csproj",
@@ -5728,6 +5746,7 @@
     ".NETCoreApp,Version=v3.1": [
       "DTOs >= 1.0.0",
       "DevExpressMvvm >= 20.2.3",
+      "ErrorFriendlyUserNotification >= 1.0.0",
       "Microsoft.Extensions.DependencyInjection >= 5.0.1",
       "testDAL >= 1.0.0"
     ]
@@ -5764,6 +5783,9 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
+            "W:\\programs\\repos\\ErrorFriendlyUserNotification\\ErrorFriendlyUserNotification\\ErrorFriendlyUserNotification.csproj": {
+              "projectPath": "W:\\programs\\repos\\ErrorFriendlyUserNotification\\ErrorFriendlyUserNotification\\ErrorFriendlyUserNotification.csproj"
+            },
             "W:\\programs\\repos\\GuardClient\\DTOs\\DTOs.csproj": {
               "projectPath": "W:\\programs\\repos\\GuardClient\\DTOs\\DTOs.csproj"
             },

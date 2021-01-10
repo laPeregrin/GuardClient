@@ -73,3 +73,6 @@ W:\programs\repos\GuardClient\Guard_Client\obj\Debug\netcoreapp3.1\Guard_Client.
 W:\programs\repos\GuardClient\Guard_Client\obj\Debug\netcoreapp3.1\Guard_Client.genruntimeconfig.cache
 W:\programs\repos\GuardClient\Guard_Client\obj\Debug\netcoreapp3.1\Views\UsersControls\HistoryViewUserController.g.cs
 W:\programs\repos\GuardClient\Guard_Client\obj\Debug\netcoreapp3.1\Views\UsersControls\HistoryViewUserController.baml
+W:\programs\repos\GuardClient\Guard_Client\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.exe
+W:\programs\repos\GuardClient\Guard_Client\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.dll
+W:\programs\repos\GuardClient\Guard_Client\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.pdb

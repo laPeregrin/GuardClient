@@ -35,7 +35,6 @@ namespace Guard_Client.ViewModels
         #region Commands
         public ICommand MoveToGeneralPage => new AsyncCommand(async () =>
         {
-            //var factory = Task.Run(()=> _serviceProvider.GetRequiredService<PageFactory>()).Result;
             PageSource = await _pageFactory.GetPage(PageType.General);
         });
         public ICommand MoveToCurrentPage => new AsyncCommand(async () =>

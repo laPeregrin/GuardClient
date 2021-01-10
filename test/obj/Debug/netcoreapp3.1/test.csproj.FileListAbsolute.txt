@@ -138,3 +138,6 @@ W:\programs\repos\GuardClient\test\obj\Debug\netcoreapp3.1\test.csproj.CopyCompl
 W:\programs\repos\GuardClient\test\obj\Debug\netcoreapp3.1\test.dll
 W:\programs\repos\GuardClient\test\obj\Debug\netcoreapp3.1\test.pdb
 W:\programs\repos\GuardClient\test\obj\Debug\netcoreapp3.1\test.genruntimeconfig.cache
+W:\programs\repos\GuardClient\test\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.exe
+W:\programs\repos\GuardClient\test\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.dll
+W:\programs\repos\GuardClient\test\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.pdb

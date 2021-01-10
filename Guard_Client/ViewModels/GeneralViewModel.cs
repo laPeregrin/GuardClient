@@ -13,6 +13,7 @@ using System.Windows.Input;
 using Guard_Client.Extensions;
 using System.Windows.Controls;
 using Guard_Client.Exceptions;
+using Guard_Client.Services;
 
 namespace Guard_Client.ViewModels
 {
@@ -77,23 +78,23 @@ namespace Guard_Client.ViewModels
                 UpdateCollection(CurrentKey);
             }
 
-            catch(NotHaveAccessException e)
+            catch (NotHaveAccessException e)
             {
-                MessageBox.Show($"Викладач {e.UserName} не має доступу до цього ключа", "Відмовлено у доступі", MessageBoxButton.OK, MessageBoxImage.Warning);
+                NotificationService.ShowNotification( $"Викладач {e.UserName} не має доступу до цього ключа", "Помилка");
             }
             catch (ArgumentException)
             {
-                MessageBox.Show("Помилка маршрутизації інформації", "Помилка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                NotificationService.ShowNotification("Помилка маршрутизації інформації", "Помилка");
             }
 
             catch (KeyIsBookingAlreadyException e)
             {
-                MessageBox.Show($"Ключ зараз у {e.Username}", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                NotificationService.ShowNotification($"Ключ зараз у {e.Username}", "Попередження");
             }
             catch (Exception e)
             {
-                
-                MessageBox.Show("Обязательно выбирайте нужное в обеих списках", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                NotificationService.ShowNotification("Обов'язково обирайте в обох списках", "Помилка");
             }
 
         });
@@ -104,7 +105,7 @@ namespace Guard_Client.ViewModels
         });
 
 
-        #region ManipulationCollectionViaMethod
+        #region underFace
         private void UpdateCollection(DetailsView details)
         {
             keys.Remove(details);

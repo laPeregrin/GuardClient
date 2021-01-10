@@ -1,13 +1,15 @@
-﻿using DevExpress.Mvvm;
+﻿
+
+using DevExpress.Mvvm;
+using Guard_Client.BLL;
+using Guard_Client.DomainModels;
+using Guard_Client.Exceptions;
+using Guard_Client.Extensions;
+using Guard_Client.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Guard_Client.Extensions;
-using Guard_Client.DomainModels;
-using Guard_Client.BLL;
 using System.Windows.Input;
-using System.Windows;
-using Guard_Client.Exceptions;
 
 namespace Guard_Client.ViewModels
 {
@@ -45,10 +47,10 @@ namespace Guard_Client.ViewModels
             }
             catch (KeyIsBookingAlreadyException e)
             {
-                MessageBox.Show($"Ключ на данний момент зайнятий викладачем {e.Username}", "Увага", MessageBoxButton.OK, MessageBoxImage.Warning);
+                NotificationService.ShowNotification($"Ключ на данний момент зайнятий викладачем {e.Username}", "Увага");
             }
             catch (Exception)
-            { MessageBox.Show("Можливо ви не обрали викладача або ключа, перевірте чи корректно ви обрали інформацію в обох списках", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Error); }
+            { NotificationService.ShowNotification("Можливо ви не обрали викладача або ключа", "Помилка!"); }
 
 
         });
@@ -60,7 +62,7 @@ namespace Guard_Client.ViewModels
             }
             else
             {
-                MessageBox.Show("Для початку виберіть ключ із списку", "Помилка!", MessageBoxButton.OK, MessageBoxImage.Information);
+                NotificationService.ShowNotification("Для початку виберіть ключ із списку", "Помилка!");
             }
         });
         public ICommand ReturnKey => new AsyncCommand(async () =>
@@ -71,9 +73,10 @@ namespace Guard_Client.ViewModels
                 UpdateList(SelectedKey);
             }
             catch (KeyIsNotBooking)
-            { MessageBox.Show("Цим ключем ніхто не володіє на данний момент", "Увага!", MessageBoxButton.OK, MessageBoxImage.Warning); }
-            catch (Exception)
-            { MessageBox.Show("Для повернення обранного ключа варто отримати про нього повну інформацію", "Увага!", MessageBoxButton.OK, MessageBoxImage.Information); }
+            { NotificationService.ShowNotification("Цим ключем ніхто не володіє на данний момент", "Увага!"); }
+            catch (NullReferenceException)
+            { NotificationService.ShowNotification("Варто отримати про нього повну інформацію", "Увага!"); }
+            catch (Exception e) { }
 
         });
         public ICommand UpdateAll => new AsyncCommand(async () =>

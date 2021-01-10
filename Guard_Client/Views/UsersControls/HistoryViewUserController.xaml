@@ -38,9 +38,8 @@
         </StackPanel>
 
 
-        <ListView 
-            Grid.Column="0"
-            Grid.Row="1"
+        <ScrollViewer   Grid.Column="0" Grid.Row="1" MaxHeight="800">
+            <ListView 
             FontSize="20"
             Width="750"
             MinHeight="500"
@@ -49,60 +48,59 @@
                   Background="{StaticResource BrushPrimary3}"
                   Foreground="{StaticResource BrushPrimary7}"
             ItemsSource="{Binding HistoryCollection}">
-            <ListView.View>
+                <ListView.View>
 
-                <GridView AllowsColumnReorder="True">
+                    <GridView AllowsColumnReorder="True">
 
-                    <GridViewColumn>
-                        <GridViewColumnHeader Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Left" Content="Ім'я" Width="140" HorizontalAlignment="Left"/>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding FirstName}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Left" Content="Ім'я" Width="140" HorizontalAlignment="Left"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FirstName}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn>
-                        <GridViewColumnHeader Content="Фамілія" Width="140"   Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock   Text="{Binding LastName}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader Content="Фамілія" Width="140"   Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock   Text="{Binding LastName}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn>
-                        <GridViewColumnHeader Content="Ключ" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Width="140"/>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock   Text="{Binding KeyNumber}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader Content="Ключ" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Width="140"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock   Text="{Binding KeyNumber}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn>
-                        <GridViewColumnHeader Content="Взяли" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center"  Width="150" HorizontalAlignment="Left"/>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Width="150" HorizontalAlignment="Center"   Text="{Binding DateTaking, StringFormat={}{0:dd/MM/HH:mm}}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader Content="Взяли" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center"  Width="150" HorizontalAlignment="Left"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Width="150" HorizontalAlignment="Center"   Text="{Binding DateTaking, StringFormat={}{0:dd/MM/HH:mm}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                    <GridViewColumn>
-                        <GridViewColumnHeader Content="Повернули" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center"  Width="150" HorizontalAlignment="Left"/>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Width="150" HorizontalAlignment="Center"   Text="{Binding DateBringin, StringFormat={}{0:dd/MM/HH:mm}}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+                        <GridViewColumn>
+                            <GridViewColumnHeader Content="Повернули" Background="{StaticResource BrushPrimary7}" HorizontalContentAlignment="Center"  Width="150" HorizontalAlignment="Left"/>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Width="150" HorizontalAlignment="Center"   Text="{Binding DateBringin, StringFormat={}{0:dd/MM/HH:mm}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
-                </GridView>
-
-            </ListView.View>
-
-        </ListView>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
 
     </Grid>
 </UserControl>

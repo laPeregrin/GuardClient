@@ -55,8 +55,6 @@ namespace Guard_Client.Services.Implementations
                 GC.Collect();
                 throw;
             }
-           
-           
         }
         /// <summary>
         /// ___Add object with dateFinish for recording interaction with key in timeline
@@ -70,8 +68,7 @@ namespace Guard_Client.Services.Implementations
             bookingAction.KeyObject.IsBooked = false;
             bookingAction.KeyObject.User = null;
             bookingAction.KeyObject.UserId = null;
-            var changeKey = bookingAction.KeyObject;
-            await Task.Run(() => _service.KeyObjects.Update(changeKey));
+            await Task.Run(() => _service.KeyObjects.Update(bookingAction.KeyObject));
             await _service.SaveChangesAsync();
         }
 
@@ -93,7 +90,7 @@ namespace Guard_Client.Services.Implementations
         }
         public async Task<IEnumerable<BookingAction>> GetAllByRule(Expression<Func<BookingAction, bool>> expression)
         {
-            return await _service.BookingActions.Where(expression).Include(x=>x.KeyObject).Include(x=>x.User).AsNoTracking().ToArrayAsync();
+            return await _service.BookingActions.Where(expression).Include(x => x.KeyObject).Include(x => x.User).AsNoTracking().ToArrayAsync();
         }
         /// <summary>
         /// Get all with including dtos object

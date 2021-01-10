@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ErrorFriendlyUserNotification\ErrorFriendlyUserNotification\ErrorFriendlyUserNotification.csproj" />
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\testDAL\testDAL.csproj" />
   </ItemGroup>

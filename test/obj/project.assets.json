@@ -2008,12 +2008,26 @@
           "bin/placeholder/DTOs.dll": {}
         }
       },
+      "ErrorFriendlyUserNotification/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/ErrorFriendlyUserNotification.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ErrorFriendlyUserNotification.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Guard_Client/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "DTOs": "1.0.0",
           "DevExpressMvvm": "20.2.3",
+          "ErrorFriendlyUserNotification": "1.0.0",
           "Microsoft.Extensions.DependencyInjection": "5.0.1",
           "testDAL": "1.0.0"
         },
@@ -7153,6 +7167,11 @@
       "type": "project",
       "path": "../DTOs/DTOs.csproj",
       "msbuildProject": "../DTOs/DTOs.csproj"
+    },
+    "ErrorFriendlyUserNotification/1.0.0": {
+      "type": "project",
+      "path": "../../ErrorFriendlyUserNotification/ErrorFriendlyUserNotification/ErrorFriendlyUserNotification.csproj",
+      "msbuildProject": "../../ErrorFriendlyUserNotification/ErrorFriendlyUserNotification/ErrorFriendlyUserNotification.csproj"
     },
     "Guard_Client/1.0.0": {
       "type": "project",
