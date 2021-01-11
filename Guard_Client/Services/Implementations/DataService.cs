@@ -20,14 +20,29 @@ namespace Guard_Client.Services.Implementations
             _service = service;
         }
 
-        public async Task Add(T obj)
+        public virtual async Task Add(T obj)
         {
-            if(!_service.Users.Any(x=>x.Id == obj.Id))
+            if (!_service.Users.Any(x => x.Id == obj.Id))
             {
                 await _service.Set<T>().AddAsync(obj);
                 await _service.SaveChangesAsync();
             }
-            
+
+        }
+
+        public Task<bool> Delete(T obj)
+        {
+            try
+            {
+                _service.Set<T>().Remove(obj);
+                _service.SaveChanges();
+                return Task.Run(() => true);
+            }
+            catch (Exception e)
+            {
+                return Task.Run(() => false);
+            }
+
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -40,14 +55,15 @@ namespace Guard_Client.Services.Implementations
             return await _service.Set<T>().Where(expression).AsNoTracking().ToListAsync();
         }
 
-        public async Task<T> GetBy(Guid id)
+        public virtual async Task<T> GetBy(Guid id)
         {
             return await _service.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task Update(T obj)
+        public async Task Update(T obj)
         {
-            throw new NotImplementedException();
+            _service.Set<T>().Update(obj);
+            await _service.SaveChangesAsync();
         }
     }
 }

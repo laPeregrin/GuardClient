@@ -26,6 +26,11 @@ namespace Guard_Client.Services.Implementations
             return await _service.Permissions.Include(x => x.UsersWithPermissions).Include(x=>x.Key).ToListAsync();
         }
 
+        public async override Task<Permission> GetBy(Guid id)
+        {
+            return await _service.Permissions.Include(x => x.UsersWithPermissions).FirstAsync(x => x.Id == id);
+        }
+
         public async Task<Permission> GetByKey(KeyObject key)
         {
           var permission = await _service.Permissions.Where(x => x.KeyId == key.Id).Include(x => x.UsersWithPermissions).ToArrayAsync();

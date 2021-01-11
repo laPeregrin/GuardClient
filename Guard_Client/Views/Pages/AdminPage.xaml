@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Guard_Client.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="500" d:DesignWidth="1200"
       Title="AdminPage"
  DataContext="{Binding AdminViewModel, Source={StaticResource VMLocator}}"
         >
     <Grid Background="{StaticResource BrushPrimary8}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="90"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -23,9 +23,28 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="4" Content="Отримати всі списки" Command="{Binding GetAllLists}" Style="{StaticResource NatButton}"/>
-
-        <ScrollViewer Margin="10 0 10 0" Grid.Row="1" Grid.Column="0" MinHeight="150" MaxHeight="700">
+        <Button FontSize="22" Margin="20" Grid.Column="4" Content="Отримати списки" Command="{Binding GetAllLists}" Style="{StaticResource NatButton}"/>
+        <TextBlock Text="Користувачі" Grid.Column="0" HorizontalAlignment="Center" FontSize="25" Foreground="{StaticResource BrushPrimary5}" VerticalAlignment="Center"/>
+        <TextBlock Text="Ключі" Grid.Column="1" HorizontalAlignment="Center" FontSize="25" Foreground="{StaticResource BrushPrimary5}" VerticalAlignment="Center"/>
+        <Grid Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Margin="0 20 0 0" Text="Викладачі з обранним "  HorizontalAlignment="Center" FontSize="23" Foreground="{StaticResource BrushPrimary5}" VerticalAlignment="Bottom"/>
+            <TextBlock Grid.Row="1" Text=" спеціальним доступом"  HorizontalAlignment="Center" FontSize="23" Foreground="{StaticResource BrushPrimary5}" VerticalAlignment="Bottom"/>
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Ключі зі" Grid.Row="0" HorizontalAlignment="Center" FontSize="25" Foreground="{StaticResource BrushPrimary5}" VerticalAlignment="Bottom"/>
+            <TextBlock Text="спеціальним " Grid.Row="1" HorizontalAlignment="Center" FontSize="25" Foreground="{StaticResource BrushPrimary5}" VerticalAlignment="Bottom"/>
+            <TextBlock Text=" доступом" Grid.Row="2" HorizontalAlignment="Center" FontSize="25" Foreground="{StaticResource BrushPrimary5}" VerticalAlignment="Bottom"/>
+        </Grid>
+        <ScrollViewer Margin="10 10 10 0" Grid.Row="1" Grid.Column="0" MinHeight="150" MaxHeight="700">
             <ListBox Width="200" Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
                              ItemsSource="{Binding Users}"
@@ -44,7 +63,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
-        <ScrollViewer Margin="10 0 10 0" Grid.Column="1" Grid.Row="1" MinHeight="150" MaxHeight="700">
+        <ScrollViewer Margin="10 10 10 0" Grid.Column="1" Grid.Row="1" MinHeight="150" MaxHeight="700">
             <ListBox Width="200" 
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
@@ -64,8 +83,8 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </ScrollViewer>
-        <ScrollViewer Margin="10 0 10 0" Grid.Column="2" Grid.Row="1" MinHeight="150" MaxHeight="700">
-            <ListBox Width="100" 
+        <ScrollViewer Margin="10 10 10 0" Grid.Column="2" Grid.Row="1" MinHeight="150" MaxHeight="700">
+            <ListBox Width="200" 
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
                              ItemsSource="{Binding Permissions}"
@@ -83,6 +102,79 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+
         </ScrollViewer>
+        <ScrollViewer Margin="10 10 10 0" Grid.Column="3" Grid.Row="1" MinHeight="150" MaxHeight="700">
+            <ListBox Width="200" 
+                             Background="{StaticResource BrushPrimary4}" 
+                             Foreground="{StaticResource BrushPrimary3}"
+                             ItemsSource="{Binding UserPermissions}"
+                             SelectedItem="{Binding SelecteduserInPermission}"
+                     >
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <UniformGrid Width="300" Columns="1">
+                            <UniformGrid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Margin" Value="1"/>
+                                </Style>
+                            </UniformGrid.Resources>
+                            <TextBlock Text="{Binding LastName}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
+                        </UniformGrid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
+        <Grid VerticalAlignment="Center" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button Width="300" HorizontalAlignment="Left"  FontSize="20" Padding="5" Content="Забрати доступу до цього ключа" Style="{StaticResource NatButton}"/>
+            <Button Width="300" HorizontalAlignment="Left"  Grid.Row="1" Margin="0 10 0 0" FontSize="20" Padding="5" Content="Надати доступ до цього ключа" Style="{StaticResource NatButton}"/>
+        </Grid>
+
+
+        <Grid Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button Margin="10 20 0 0" Width="200" HorizontalAlignment="Left" Grid.Row="0"  FontSize="16" Padding="5" Content="Видалити дозвіл для ключа" Style="{StaticResource NatButton}"/>
+            <Button Margin="10 20 0 0" Width="200" HorizontalAlignment="Left"  Grid.Row="1"  FontSize="16" Padding="5" Content="Додати новий дозвіл" Style="{StaticResource NatButton}"/>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Button Command="{Binding UpdateKey}" Margin="10 20 0 0" Width="140" HorizontalAlignment="Left" Grid.Row="0"  FontSize="16" Padding="5" Content="Оновити ключа" Style="{StaticResource NatButton}"/>
+            <TextBox Text="{Binding NewKeyNumber}" Height="30" Grid.Row="1" Width="40" Margin="0 20 0 0" Background="{StaticResource BrushPrimary1}" Foreground="{StaticResource BrushPrimary2}" FontSize="14"/>
+            <Button Command="{Binding AddNewKey}" Margin="10 20 0 0" Width="150" HorizontalAlignment="Left"  Grid.Row="2"  FontSize="16" Padding="5" Content="Додати новий ключ" Style="{StaticResource NatButton}"/>
+        </Grid>
+
+
+
+        <Grid Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Button Command="{Binding UpdateSelectedUser}" Margin="10 20 0 0" Width="160" HorizontalAlignment="Left" Grid.Row="0"  FontSize="16" Padding="5" Content="Оновити викладача" Style="{StaticResource NatButton}"/>
+            <TextBox Text="{Binding FirstName}"  Height="30" Grid.Row="1" Width="150" Margin="0 20 0 0" Background="{StaticResource BrushPrimary1}" Foreground="{StaticResource BrushPrimary2}" FontSize="14"/>
+            <TextBox Text="{Binding MiddleName}" Height="30" Grid.Row="2" Width="150" Margin="0 20 0 0" Background="{StaticResource BrushPrimary1}" Foreground="{StaticResource BrushPrimary2}" FontSize="14"/>
+            <TextBox Text="{Binding LastName}"   Height="30" Grid.Row="3" Width="150" Margin="0 20 0 0" Background="{StaticResource BrushPrimary1}" Foreground="{StaticResource BrushPrimary2}" FontSize="14"/>
+
+            <Button Command="{Binding AddNewUser}" Margin="10 20 0 0" Width="160" HorizontalAlignment="Left"  Grid.Row="4"  FontSize="16" Padding="5" Content="Додати викладача" Style="{StaticResource NatButton}"/>
+        </Grid>
+
     </Grid>
 </Page>

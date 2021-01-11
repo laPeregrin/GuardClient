@@ -27,7 +27,7 @@
     <SolidColorBrush x:Key="BrushPrimary7" Color="{StaticResource ColorPrimary7}"/>
     <SolidColorBrush x:Key="BrushPrimary8" Color="{StaticResource ColorPrimary06}"/>
 
-    <Style x:Key="NatButton" TargetType="Button">
+    <Style x:Key="NaviButton" TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource BrushPrimary1}"/>
         
         <Setter Property="FontSize" Value="30"/>
@@ -78,7 +78,43 @@
         </Setter>
        
     </Style>
-    
+    <Style x:Key="NatButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary1}"/>
+
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontFamily" Value="TimesNewRoman"/>
+        <Setter Property="Padding" Value="13"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
+                        <TextBlock Text="{TemplateBinding Content}" 
+                                       Padding="{TemplateBinding Padding}"
+                                       Background="{StaticResource BrushPrimary5}" 
+                                       Foreground="{StaticResource BrushPrimary3}"
+                                  FontFamily="Franklin Gothic Medium"
+                                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                           VerticalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="False">
+                            <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
+                        </Trigger>
+
+                       
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
     <!--BORDER STYLE-->
     <Style x:Key="NatBorderButton" TargetType="Border">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>

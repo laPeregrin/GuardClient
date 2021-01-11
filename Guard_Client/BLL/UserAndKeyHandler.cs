@@ -20,7 +20,15 @@ namespace Guard_Client.BLL
         private readonly UserService _userService;
         private readonly PermissionService _permissionService;
         private readonly IBookingActionService _bookingAction;
+        #region propForAdminPannel
+        public KeyObjectService KeyService => _keyService;
 
+        public UserService UserService => _userService;
+
+        public PermissionService PermissionService => _permissionService;
+
+        public IBookingActionService BookingAction => _bookingAction;
+        #endregion propForAdminPannel
         public UserAndKeyHandler(KeyObjectService keyService, UserService userService, IBookingActionService bookingActionService, PermissionService permissionService)
         {
             _keyService = keyService;
@@ -128,10 +136,10 @@ namespace Guard_Client.BLL
                 return container;
         }
 
-        //public Task GetUsersByPermissionId(Guid id)
-        //{
-
-        //}
+        public async Task<IEnumerable<User>> GetUsersByPermissionId(Guid id)
+        {
+            return (await _permissionService.GetBy(id)).UsersWithPermissions;
+        }
 
         public async Task AddBooking(string lastName, string auditoryNumber)
         {

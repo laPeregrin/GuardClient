@@ -210,5 +210,11 @@ namespace test
            var res = await _userHandler.GetAllPermissionByUserLastName("Рач");
             Assert.IsTrue(res.Any());
         }
+        [Test]
+        public async Task GetUsersByPermissionId_id_returnStringWithKey()
+        {
+           var res = await _userHandler.GetUsersByPermissionId(new Guid("480be0b1-03ac-49cf-9b77-f3431ddc7d5c"));
+            Assert.IsTrue(res.Any());
+        }
     }
 }

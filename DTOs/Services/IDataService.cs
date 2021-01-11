@@ -16,5 +16,6 @@ namespace DTOs.Services
         Task<T> GetBy(Guid id);
         Task<IEnumerable<T>> GetAll();
         Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> expression);
+        Task<bool> Delete(T obj);
     }
 }

@@ -132,6 +132,9 @@ namespace Guard_Client.Services.Implementations
             return _service.BookingActions.Any(x => x.Id == bookingAction.Id);
         }
 
-       
+        public Task<bool> Delete(BookingAction obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

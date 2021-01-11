@@ -1,5 +1,7 @@
 ﻿using DTOs.Models;
 using DTOs.Services;
+using Guard_Client.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +24,27 @@ namespace Guard_Client.Services.Implementations
         {
             if (_context.KeyObjects.Any(x => x.AudNum == auditory))
             {
-                var key = _context.KeyObjects.FirstOrDefault(x => x.AudNum == auditory);
+                var key = await _context.KeyObjects.FirstAsync(x => x.AudNum == auditory);
                 return key;
             }
             return null;
 
+        }
+
+        public override async Task Add(KeyObject obj)
+        {
+            var key = await GetBy(obj.Id);
+            await base.Add(key);
+        }
+        public async Task Add(string auditory)
+        {
+            var key = await GetByAuditoryName(auditory);
+            if (key != null)
+                throw new KeyAlreadyExist(key.AudNum);
+            key = new KeyObject();
+            key.Id = Guid.NewGuid();
+            key.AudNum = auditory;
+            await base.Add(key);
         }
     }
 }
