@@ -99,12 +99,6 @@ namespace Guard_Client.ViewModels
 
         });
 
-        public ICommand UpdateKeys => new AsyncCommand(async () =>
-        {
-            await UpdateCollection();
-        });
-
-
         #region underFace
         private void UpdateCollection(DetailsView details)
         {

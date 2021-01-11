@@ -19,7 +19,7 @@ namespace Guard_Client.ViewModels
 
 
         private ObservableCollection<DetailsView> _BookedKeyCollections;
-        public ObservableCollection<DetailsView> BookedKeyCollections { get { return _BookedKeyCollections; } set { _BookedKeyCollections = value; RaisePropertyChanged(); } }
+        public ObservableCollection<DetailsView> BookedKeyCollections { get { return _BookedKeyCollections; } set { _BookedKeyCollections = value; } }
 
 
         private DetailsView selectedKey;

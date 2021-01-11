@@ -21,6 +21,7 @@ namespace Guard_Client.ViewModels
         private readonly IPageFactory _pageFactory;
         private readonly IServiceProvider _serviceProvider;
 
+
         private Page _source;
         public Page PageSource { get { return _source; } set { _source = value; RaisePropertiesChanged(); } }
         public MainViewModel(PageService pageService, IPageFactory pageFactory, IServiceProvider serviceProvider)
@@ -34,9 +35,6 @@ namespace Guard_Client.ViewModels
 
 
         #region Commands
-
-        public ICommand MessageBoxShortCut => new AsyncCommand(async () =>
-        { MessageBox.Show("NIGAAA"); });
 
         public ICommand MoveToGeneralPage => new AsyncCommand(async () =>
         {
@@ -53,6 +51,10 @@ namespace Guard_Client.ViewModels
         public ICommand MoveToDetailsPage => new AsyncCommand(async () =>
         {
             PageSource = await _pageFactory.GetPage(PageType.Details);
+        });
+        public ICommand MoveToAdminPage => new AsyncCommand(async () =>
+        {
+            PageSource = await _pageFactory.GetPage(PageType.AdminPage);
         });
         #endregion Commands
     }

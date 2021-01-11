@@ -29,9 +29,9 @@
             </Grid.ColumnDefinitions>
             <Grid Margin="80 0 0 0" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Padding="10" Text="Викладачі" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
                 <TextBox  Grid.Row="1" Grid.Column="0" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" Foreground="{StaticResource BrushPrimary1}" HorizontalAlignment="Stretch" FontSize="25" Padding="10"/>
@@ -40,8 +40,6 @@
                         <ListBox Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
                              ItemsSource="{Binding users}"
-                                TextSearch.Text="{Binding LastName}"
-                                 IsTextSearchEnabled="True"
                              SelectedItem="{Binding CurrentUser}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -63,10 +61,6 @@
 
             <Border Style="{StaticResource NatBorderButton}"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" MinWidth="200">
                 <StackPanel>
-
-                    <Button Content="Оновити списоки" Command="{Binding UpdateKeys}" Style="{StaticResource NatButton}" FontSize="15" Padding="10"/>
-
-
                     <TextBlock Text="Знайдіть у списку потрібного" FontSize="15" />
                     <TextBlock Text="викладача та ключ " FontSize="15"/>
                     <TextBlock Text="оберіть їй у списку " FontSize="15"/>
@@ -82,12 +76,12 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Padding="10" Text="Вільні ключи" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
                 <TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Auditory, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" Foreground="{StaticResource BrushPrimary1}" HorizontalAlignment="Stretch" FontSize="25" Padding="10"/>
-                <Border Grid.Row="2" Style="{StaticResource NatBorderButton}">
-                    <ScrollViewer Grid.Row="2" MinHeight="150" MaxHeight="500">
-                        <ListBox  
+                <Border Grid.Row="2" Width="120" Style="{StaticResource NatBorderButton}">
+                    <ScrollViewer  MinHeight="150" MaxHeight="500">
+                        <ListBox   Width="100"
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
-                             ItemsSource="{Binding keys, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             ItemsSource="{Binding keys}"
                              SelectedItem="{Binding CurrentKey}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>

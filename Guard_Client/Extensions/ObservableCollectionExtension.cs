@@ -55,5 +55,18 @@ namespace Guard_Client.Extensions
             }
             return collection;
         }
+        public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<Permission> @object)
+        {
+            DetailsView mappedItem = new DetailsView();
+            var collection = new ObservableCollection<DetailsView>();
+            foreach (var item in @object.ToArray())
+            {
+                mappedItem = new DetailsView();
+                mappedItem.KeyNumber = item.Key.AudNum;
+
+                collection.Add(mappedItem);
+            }
+            return collection;
+        }
     }
 }

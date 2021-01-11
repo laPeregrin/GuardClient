@@ -76,3 +76,5 @@ W:\programs\repos\GuardClient\Guard_Client\obj\Debug\netcoreapp3.1\Views\UsersCo
 W:\programs\repos\GuardClient\Guard_Client\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.exe
 W:\programs\repos\GuardClient\Guard_Client\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.dll
 W:\programs\repos\GuardClient\Guard_Client\bin\Debug\netcoreapp3.1\ErrorFriendlyUserNotification.pdb
+W:\programs\repos\GuardClient\Guard_Client\obj\Debug\netcoreapp3.1\Views\Pages\AdminPage.g.cs
+W:\programs\repos\GuardClient\Guard_Client\obj\Debug\netcoreapp3.1\Views\Pages\AdminPage.baml

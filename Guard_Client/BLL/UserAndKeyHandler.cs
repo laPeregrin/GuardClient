@@ -48,6 +48,10 @@ namespace Guard_Client.BLL
             {
                 return await _bookingAction.GetAllFullValue();
             }
+            else if (typeof(T) == typeof(Permission))
+            {
+                return await _permissionService.GetAllWithUserCollectionAndKey();
+            }
             throw new ArgumentException();
         }
         /// <summary>
@@ -122,8 +126,12 @@ namespace Guard_Client.BLL
                 taskList.Clear();
             }
                 return container;
-
         }
+
+        //public Task GetUsersByPermissionId(Guid id)
+        //{
+
+        //}
 
         public async Task AddBooking(string lastName, string auditoryNumber)
         {

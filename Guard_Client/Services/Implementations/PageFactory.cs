@@ -14,7 +14,8 @@ namespace Guard_Client.Services.Implementations
         General,
         Details,
         CurrentPage,
-        History
+        History,
+        AdminPage
     }
     public class PageFactory : IPageFactory
     {
@@ -22,16 +23,19 @@ namespace Guard_Client.Services.Implementations
         private readonly CreatePage<Details> _getDetailsPage;
         private readonly CreatePage<CurrentPage> _getCurrentPage;
         private readonly CreatePage<History> _getHistoryPage;
+        private readonly CreatePage<AdminPage> _getAdminPage;
 
         public PageFactory(CreatePage<GeneralPage> getGeneralePage,
             CreatePage<Details> getDetailsPage,
             CreatePage<CurrentPage> getCurrentPage,
-            CreatePage<History> getHistoryPage)
+            CreatePage<History> getHistoryPage, 
+            CreatePage<AdminPage> getAdminPage)
         {
             _getGeneralePage = getGeneralePage;
             _getDetailsPage = getDetailsPage;
             _getCurrentPage = getCurrentPage;
             _getHistoryPage = getHistoryPage;
+            _getAdminPage = getAdminPage;
         }
 
 
@@ -47,6 +51,8 @@ namespace Guard_Client.Services.Implementations
                     return _getDetailsPage();
                 case PageType.History:
                     return _getHistoryPage();
+                case PageType.AdminPage:
+                    return _getAdminPage();
                 default:
                     return _getGeneralePage();
             }

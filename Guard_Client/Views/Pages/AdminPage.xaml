@@ -1,0 +1,88 @@
+﻿<Page x:Class="Guard_Client.Views.Pages.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Guard_Client.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AdminPage"
+ DataContext="{Binding AdminViewModel, Source={StaticResource VMLocator}}"
+        >
+    <Grid Background="{StaticResource BrushPrimary8}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="4" Content="Отримати всі списки" Command="{Binding GetAllLists}" Style="{StaticResource NatButton}"/>
+
+        <ScrollViewer Margin="10 0 10 0" Grid.Row="1" Grid.Column="0" MinHeight="150" MaxHeight="700">
+            <ListBox Width="200" Background="{StaticResource BrushPrimary4}" 
+                             Foreground="{StaticResource BrushPrimary3}"
+                             ItemsSource="{Binding Users}"
+                             SelectedItem="{Binding SelectedUser}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <UniformGrid Width="300" Columns="1">
+                            <UniformGrid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Margin" Value="1"/>
+                                </Style>
+                            </UniformGrid.Resources>
+                            <TextBlock Text="{Binding LastName}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
+                        </UniformGrid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+        <ScrollViewer Margin="10 0 10 0" Grid.Column="1" Grid.Row="1" MinHeight="150" MaxHeight="700">
+            <ListBox Width="200" 
+                             Background="{StaticResource BrushPrimary4}" 
+                             Foreground="{StaticResource BrushPrimary3}"
+                             ItemsSource="{Binding Keys}"
+                             SelectedItem="{Binding SelectedKey}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <UniformGrid Width="300" Columns="1">
+                            <UniformGrid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Margin" Value="1"/>
+                                </Style>
+                            </UniformGrid.Resources>
+                            <TextBlock Text="{Binding KeyNumber}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
+                        </UniformGrid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+        <ScrollViewer Margin="10 0 10 0" Grid.Column="2" Grid.Row="1" MinHeight="150" MaxHeight="700">
+            <ListBox Width="100" 
+                             Background="{StaticResource BrushPrimary4}" 
+                             Foreground="{StaticResource BrushPrimary3}"
+                             ItemsSource="{Binding Permissions}"
+                             SelectedItem="{Binding SelectedPermission}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <UniformGrid Width="300" Columns="1">
+                            <UniformGrid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Margin" Value="1"/>
+                                </Style>
+                            </UniformGrid.Resources>
+                            <TextBlock Text="{Binding KeyNumber}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
+                        </UniformGrid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+    </Grid>
+</Page>

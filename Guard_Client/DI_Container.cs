@@ -49,18 +49,26 @@ namespace Guard_Client
             {
                 return () => services.GetRequiredService<History>();
             });
+            services.AddTransient<CreatePage<AdminPage>>(services =>
+            {
+                return () => services.GetRequiredService<AdminPage>();
+            });
 
             services.AddTransient<CurrentPage>();
             services.AddTransient<Details>();
             services.AddTransient<GeneralPage>();
-            services.AddTransient<History>();
+            services.AddSingleton<History>();
+            services.AddSingleton<AdminPage>();
 
             services.AddTransient<MainViewModel>();
             services.AddTransient<DetailsViewModel>();
             services.AddTransient<GeneralViewModel>();
-            services.AddScoped<HistoryViewModel>();
+            services.AddTransient<AdminViewModel>();
+            services.AddTransient<HistoryViewModel>();
 
             services.AddSingleton<IPageFactory, PageFactory>();
+
+            
 
             _provider = services.BuildServiceProvider();
 
@@ -74,5 +82,6 @@ namespace Guard_Client
         public DetailsViewModel DetailsViewModel => _provider.GetRequiredService<DetailsViewModel>();
         public GeneralViewModel GeneralViewModel => _provider.GetRequiredService<GeneralViewModel>();
         public HistoryViewModel HistoryViewModel => _provider.GetRequiredService<HistoryViewModel>();
+        public AdminViewModel AdminViewModel => _provider.GetRequiredService<AdminViewModel>();
     }
 }
