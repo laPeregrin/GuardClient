@@ -57,4 +57,7 @@
         
         
     </Grid>
+    <Window.InputBindings>
+        <KeyBinding Key="R" Modifiers="Ctrl" Command="{Binding MessageBoxShortCut}"/>
+    </Window.InputBindings>
 </Window>

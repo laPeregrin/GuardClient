@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -33,6 +34,10 @@ namespace Guard_Client.ViewModels
 
 
         #region Commands
+
+        public ICommand MessageBoxShortCut => new AsyncCommand(async () =>
+        { MessageBox.Show("NIGAAA"); });
+
         public ICommand MoveToGeneralPage => new AsyncCommand(async () =>
         {
             PageSource = await _pageFactory.GetPage(PageType.General);

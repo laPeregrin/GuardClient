@@ -4,6 +4,7 @@ using Guard_Client.DomainModels;
 using Guard_Client.Exceptions;
 using Guard_Client.Services.Implementations;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace Guard_Client.BLL
         }
 
         /// <summary>
-        /// Get all dexterity
+        /// Get all( dexterity method)
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -65,7 +66,7 @@ namespace Guard_Client.BLL
         /// <returns></returns>
         public async Task<IEnumerable<BookingAction>> GetAllByRule(Expression<Func<BookingAction, bool>> expression)
         {
-            return  await _bookingAction.GetAllByRule(expression);
+            return await _bookingAction.GetAllByRule(expression);
         }
         /// <summary>
         /// Get info about not finished bookings
@@ -90,6 +91,38 @@ namespace Guard_Client.BLL
                 return model;
             }
             return model;
+        }
+        /// <summary>
+        /// GetAll permission via multyThreading
+        /// </summary>
+        public async Task<List<string>> GetAllPermissionByUserLastName(string lastName)
+        {
+            var container = new List<string> { };
+            var taskList = new ConcurrentQueue<Task>();
+
+            var user = await _userService.GetByLastName(lastName);
+            var permissions =  await _permissionService.GetAllWithUserCollectionAndKey();
+            foreach (var permission in permissions)
+            {
+                taskList.Enqueue(Task.Run(() =>
+                {
+                    foreach (var userIter in permission.UsersWithPermissions)
+                    {
+                        if (user.Id == userIter.Id)
+                        {
+                            container.Add(permission.Key.AudNum);
+                            break;
+                        }
+                    }
+                }));
+            }
+            if (taskList.Any())
+            {
+              await Task.WhenAll(taskList);
+                taskList.Clear();
+            }
+                return container;
+
         }
 
         public async Task AddBooking(string lastName, string auditoryNumber)

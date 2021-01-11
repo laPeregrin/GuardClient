@@ -48,7 +48,7 @@
                 </Grid>
             </Border>
             <ScrollViewer Grid.Row="1" Grid.Column="2">
-                <ListBox Margin="20" ItemsSource="" SelectedItem="">
+                <!--<ListBox Margin="20" ItemsSource="" SelectedItem="">
                     <ListBox  
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
@@ -67,7 +67,7 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </ListBox>
+                </ListBox>-->
             </ScrollViewer>
         </Grid>
     </Grid>

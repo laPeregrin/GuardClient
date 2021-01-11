@@ -204,5 +204,11 @@ namespace test
             DateTime tempDate = Convert.ToDateTime("1/1/2021 20:10:15", cultureInfo);
             var res = DateTime.Now.ToString(cultureInfo);
         }
+        [Test]
+        public async Task GetPermissionForSomeUser_user_returnStringWithKey()
+        {
+           var res = await _userHandler.GetAllPermissionByUserLastName("Рач");
+            Assert.IsTrue(res.Any());
+        }
     }
 }

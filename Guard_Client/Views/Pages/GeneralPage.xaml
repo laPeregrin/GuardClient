@@ -36,7 +36,7 @@
                 <TextBlock Padding="10" Text="Викладачі" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
                 <TextBox  Grid.Row="1" Grid.Column="0" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" Foreground="{StaticResource BrushPrimary1}" HorizontalAlignment="Stretch" FontSize="25" Padding="10"/>
                 <Border Grid.Row="2" Style="{StaticResource NatBorderButton}">
-                    <ScrollViewer MinHeight="150" MaxHeight="500">
+                    <ScrollViewer MinHeight="150" MaxHeight="700">
                         <ListBox Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
                              ItemsSource="{Binding users}"

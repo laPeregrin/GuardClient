@@ -17,6 +17,15 @@ namespace Guard_Client.Services.Implementations
             _service = service;
         }
 
+        public async Task<IEnumerable<Permission>> GetAllWithUserCollection()
+        {
+            return await _service.Permissions.Include(x => x.UsersWithPermissions).ToListAsync();
+        }
+        public async Task<IEnumerable<Permission>> GetAllWithUserCollectionAndKey()
+        {
+            return await _service.Permissions.Include(x => x.UsersWithPermissions).Include(x=>x.Key).ToListAsync();
+        }
+
         public async Task<Permission> GetByKey(KeyObject key)
         {
           var permission = await _service.Permissions.Where(x => x.KeyId == key.Id).Include(x => x.UsersWithPermissions).ToArrayAsync();
