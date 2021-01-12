@@ -141,8 +141,8 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Button Margin="10 20 0 0" Width="200" HorizontalAlignment="Left" Grid.Row="0"  FontSize="16" Padding="5" Content="Видалити дозвіл для ключа" Style="{StaticResource NatButton}"/>
-            <Button Margin="10 20 0 0" Width="200" HorizontalAlignment="Left"  Grid.Row="1"  FontSize="16" Padding="5" Content="Додати новий дозвіл" Style="{StaticResource NatButton}"/>
+            <Button Command="{Binding DeleteSelectedPermission}" Margin="10 20 0 0" Width="200" HorizontalAlignment="Left" Grid.Row="0"  FontSize="16" Padding="5" Content="Видалити дозвіл для ключа" Style="{StaticResource NatButton}"/>
+            <Button Command="{Binding AddNewPermission}" Margin="10 20 0 0" Width="200" HorizontalAlignment="Left"  Grid.Row="1"  FontSize="16" Padding="5" Content="Додати новий дозвіл" Style="{StaticResource NatButton}"/>
         </Grid>
 
         <Grid Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left">

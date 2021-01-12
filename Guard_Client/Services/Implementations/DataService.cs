@@ -22,7 +22,7 @@ namespace Guard_Client.Services.Implementations
 
         public virtual async Task Add(T obj)
         {
-            if (!_service.Users.Any(x => x.Id == obj.Id))
+            if (!_service.Set<T>().Any(x => x.Id == obj.Id))
             {
                 await _service.Set<T>().AddAsync(obj);
                 await _service.SaveChangesAsync();

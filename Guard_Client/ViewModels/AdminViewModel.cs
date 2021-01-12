@@ -63,17 +63,92 @@ namespace Guard_Client.ViewModels
         {
             get
             {
-                if (SelectedPermission != null)
+                try
                 {
-                    userpermissions = Task.Run(async () => await service.GetUsersByPermissionId(new Guid(SelectedPermission.FirstName))).Result.MapToDetailsView();
+                    if (SelectedPermission != null)
+                    {
+                        userpermissions = Task.Run(async () => await GetUsersListByPermissionId(SelectedPermission.FirstName)).Result;
+                    }
+                    return userpermissions;
                 }
-                return userpermissions;
+                catch (Exception e)
+                {
+                    return userpermissions;
+                };
             }
             set { userpermissions = value; RaisePropertyChanged(); }
         }
         #endregion PUBLIC LISTBOX DATA
 
+        #region Commands
+        /// <summary>
+        /// Remove selected Permission
+        /// </summary>
+        public ICommand DeleteSelectedPermission => new AsyncCommand(async () =>
+        {
+            if (SelectedPermission == null)
+            {
+                NotificationService.ShowNotification("Щоб видалити спеціальний дозвіл, треба його обрати", "Помилка");
+                return;
+            }
+            try
+            {
+                var key = await service.KeyService.GetByAuditoryName(SelectedPermission.KeyNumber);
+                var permission = await service.PermissionService.GetByKey(key);
+                if (permission == null)
+                {
+                    NotificationService.ShowNotification("Обранного доступу не існує в базі, оновіть списки", "Помилка");
+                    return;
+                }
 
+                await service.PermissionService.Delete(permission);
+            }
+            catch (Exception e)
+            {
+                NotificationService.ShowNotification("Помилка обробки інформації", "Помилка");
+            }
+
+
+        });
+
+        /// <summary>
+        /// Add new PErmission via selected Key
+        /// </summary>
+        public ICommand AddNewPermission => new AsyncCommand(async () =>
+        {
+            if (SelectedKey == null)
+            {
+                NotificationService.ShowNotification("Щоб зробити ключу спеціальний дозвіл, треба його обрати", "Помилка");
+                return;
+            }
+            try
+            {
+                var key = await service.KeyService.GetByAuditoryName(SelectedKey.KeyNumber);
+                if (key == null)
+                {
+                    NotificationService.ShowNotification("Обранного ключа не існує в базі або він зараз у викладача, оновіть списки", "Помилка");
+                    return;
+                }
+
+                var userCollection = new List<User>();
+                var NewPermission = new Permission(key, userCollection);//addig empty and than can add selected user in AddUserToPermissionCommand
+                NewPermission.Id = Guid.NewGuid();
+                await service.PermissionService.Add(NewPermission);
+            }
+            catch (KeyAlreadyExist e)
+            {
+                NotificationService.ShowNotification("Для обранного ключа вже існує спеціальний доступ, оберіть його так змінюйте список Викладачів", "Помилка");
+            }
+            catch (Exception e)
+            {
+                NotificationService.ShowNotification("Помилка обробки інформації", "Помилка");
+            }
+        });
+
+
+        /// <summary>
+        /// Add new key via input data (NewKeyNumber)
+        /// </summary>
         public ICommand AddNewKey => new AsyncCommand(async () =>
         {
             if (NewKeyNumber == null)
@@ -81,7 +156,7 @@ namespace Guard_Client.ViewModels
                 NotificationService.ShowNotification("напишіть новий номер для нового ключа", "Помилка");
                 return;
             }
-                
+
             try
             {
                 await service.KeyService.Add(NewKeyNumber);
@@ -95,9 +170,13 @@ namespace Guard_Client.ViewModels
                 NotificationService.ShowNotification("при оновленні ключа виникла помилка!", "Помилка");
             }
         });
+
+        /// <summary>
+        /// Update selected key
+        /// </summary>
         public ICommand UpdateKey => new AsyncCommand(async () =>
         {
-        if(SelectedKey == null)
+            if (SelectedKey == null)
             {
                 NotificationService.ShowNotification("оберіть ключ із списку!", "Помилка");
                 return;
@@ -116,11 +195,11 @@ namespace Guard_Client.ViewModels
                 key.AudNum = NewKeyNumber;
                 await service.KeyService.Update(key);
             }
-            catch(KeyAlreadyExist e)
+            catch (KeyAlreadyExist e)
             {
                 NotificationService.ShowNotification($"ключ з таким номером вже існує! {e.KeyNumber}", "Помилка");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 NotificationService.ShowNotification("при оновленні ключа виникла помилка!", "Помилка");
             }
@@ -138,7 +217,7 @@ namespace Guard_Client.ViewModels
                 NotificationService.ShowNotification("у викладача не може не бути якогось ініціалу!", "Помилка");
                 return;
             }
-               
+
             var user = new User() { FirstName = FirstName, MiddleName = MiddleName, LastName = LastName, Id = Guid.NewGuid() };
             try
             {
@@ -190,6 +269,12 @@ namespace Guard_Client.ViewModels
             Permissions = ((IEnumerable<Permission>)await service.GetAll<Permission>()).MapToDetailsView();
         });
 
-
+        #endregion Commands
+        private Task<ObservableCollection<DetailsView>> GetUsersListByPermissionId(string id)
+        {
+            var collUsers = Task.Run(async () => await service.GetUsersByPermissionId(new Guid(id)));
+            var res = collUsers.ContinueWith(x => { return collUsers.Result.MapToDetailsView(); });
+            return res;
+        }
     }
 }

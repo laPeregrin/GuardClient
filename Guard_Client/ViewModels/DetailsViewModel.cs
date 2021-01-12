@@ -32,11 +32,8 @@ namespace Guard_Client.ViewModels
         {
             _userAndKeyHandler = handler;
 
-            Task.Run(async () =>
-            {
-                await UpdateGenerealCollection();
+            UpdateGenerealCollection();
 
-            }).GetAwaiter().GetResult();
         }
 
         public ICommand AddMoreKey => new AsyncCommand(async () =>
@@ -84,10 +81,11 @@ namespace Guard_Client.ViewModels
                 await UpdateGenerealCollection();
             });
 
-        public async Task UpdateGenerealCollection()
+        public Task UpdateGenerealCollection()
         {
-            var items = await _userAndKeyHandler.GetAll(true);
-            BookedKeyCollections = items.MapToDetailsView();
+            var items = Task.Run(async () => await _userAndKeyHandler.GetAll(true));
+            BookedKeyCollections = items.Result.MapToDetailsView();
+            return Task.CompletedTask;
         }
 
         private void UpdateList(DetailsView view)
