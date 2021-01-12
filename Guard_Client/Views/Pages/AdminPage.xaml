@@ -104,35 +104,43 @@
             </ListBox>
 
         </ScrollViewer>
-        <ScrollViewer Margin="10 10 10 0" Grid.Column="3" Grid.Row="1" MinHeight="150" MaxHeight="700">
-            <ListBox Width="200" 
+
+        <Grid Margin="10 10 10 0" Grid.Column="3" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Button Height="30" FontSize="25" Content="Отримати список" Grid.Row="0" Style="{StaticResource NatButton}" Command="{Binding RefreshTableWithSelectedPermissionUser}"  />
+            <ScrollViewer Grid.Row="1"  MinHeight="150" MaxHeight="700">
+                <ListBox  Width="200" 
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
                              ItemsSource="{Binding UserPermissions}"
                              SelectedItem="{Binding SelecteduserInPermission}"
                      >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <UniformGrid Width="300" Columns="1">
-                            <UniformGrid.Resources>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Margin" Value="1"/>
-                                </Style>
-                            </UniformGrid.Resources>
-                            <TextBlock Text="{Binding LastName}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
-                        </UniformGrid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </ScrollViewer>
-
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <UniformGrid Width="300" Columns="1">
+                                <UniformGrid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="1"/>
+                                    </Style>
+                                </UniformGrid.Resources>
+                                <TextBlock Text="{Binding LastName}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
+                            </UniformGrid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
         <Grid VerticalAlignment="Center" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Button Width="300" HorizontalAlignment="Left"  FontSize="20" Padding="5" Content="Забрати доступу до цього ключа" Style="{StaticResource NatButton}"/>
-            <Button Width="300" HorizontalAlignment="Left"  Grid.Row="1" Margin="0 10 0 0" FontSize="20" Padding="5" Content="Надати доступ до цього ключа" Style="{StaticResource NatButton}"/>
+            <Button Command="{Binding RemoveSelectedPermissionCollectionItem}" Width="300" HorizontalAlignment="Left"  FontSize="20" Padding="5" Content="Забрати доступу до цього ключа" Style="{StaticResource NatButton}"/>
+            <Button Command="{Binding AddToSelectedPermissionCollectionItem}" Width="300" HorizontalAlignment="Left"  Grid.Row="1" Margin="0 10 0 0" FontSize="20" Padding="5" Content="Надати доступ до цього ключа" Style="{StaticResource NatButton}"/>
         </Grid>
 
 

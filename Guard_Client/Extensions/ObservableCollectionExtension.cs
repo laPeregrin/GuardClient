@@ -15,6 +15,8 @@ namespace Guard_Client.Extensions
     {
         public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<KeyObject> keyObjects)
         {
+            if (keyObjects == null)
+                return null;
             DetailsView mappedItem;
             var collection = new ObservableCollection<DetailsView>();
             foreach(var item in keyObjects)
@@ -28,6 +30,8 @@ namespace Guard_Client.Extensions
         }
         public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<User> keyObjects)
         {
+            if (keyObjects == null)
+                return null;
             DetailsView mappedItem;
             var collection = new ObservableCollection<DetailsView>();
             foreach (var item in keyObjects)
@@ -41,6 +45,8 @@ namespace Guard_Client.Extensions
         }
         public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<BookingAction> @object)
         {
+            if (@object == null)
+                return null;
             DetailsView mappedItem;
             var collection = new ObservableCollection<DetailsView>();
             foreach (var item in @object.ToArray())
@@ -57,6 +63,8 @@ namespace Guard_Client.Extensions
         }
         public static ObservableCollection<DetailsView> MapToDetailsView(this IEnumerable<Permission> @object)
         {
+            if (@object == null)
+                return null;
             DetailsView mappedItem;
             var collection = new ObservableCollection<DetailsView>();
             foreach (var item in @object.ToArray())

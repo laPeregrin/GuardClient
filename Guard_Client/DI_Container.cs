@@ -58,7 +58,7 @@ namespace Guard_Client
             services.AddTransient<Details>();
             services.AddTransient<GeneralPage>();
             services.AddSingleton<History>();
-            services.AddSingleton<AdminPage>();
+            services.AddTransient<AdminPage>();
 
             services.AddTransient<MainViewModel>();
             services.AddTransient<DetailsViewModel>();

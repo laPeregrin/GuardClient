@@ -29,7 +29,7 @@ namespace Guard_Client.ViewModels
 
         private DetailsView _selectedUser;
         private DetailsView _selectedKey;
-        private DetailsView _selectedPermission;
+        private DetailsView _selectedPermission = new DetailsView();
         private DetailsView _selectedUserInUsersPermission;
 
         private string newKeyNumber;
@@ -44,10 +44,10 @@ namespace Guard_Client.ViewModels
         public string FirstName { get => _FirstName; set { _FirstName = value; RaisePropertyChanged(); } }
         public string NewKeyNumber { get { return newKeyNumber; } set { newKeyNumber = value; RaisePropertyChanged(); } }
         #endregion PUBLIC INPUT PROP FOR MVVM
-        public DetailsView SelectedUser { get => _selectedUser; set { _selectedUser = value; RaisePropertyChanged(); } }
-        public DetailsView SelectedKey { get => _selectedKey; set { _selectedKey = value; RaisePropertyChanged(); } }
-        public DetailsView SelectedPermission { get => _selectedPermission; set { _selectedPermission = value; RaisePropertyChanged(); RaisePropertiesChanged(nameof(UserPermissions)); } }
-        public DetailsView SelecteduserInPermission { get => _selectedUserInUsersPermission; set { _selectedUserInUsersPermission = value; RaisePropertyChanged(); } }
+        public DetailsView SelectedUser { get { return _selectedUser; } set { _selectedUser = value; RaisePropertyChanged(); } }
+        public DetailsView SelectedKey { get { return _selectedKey; } set { _selectedKey = value; RaisePropertyChanged(); } }
+        public DetailsView SelectedPermission { get { return _selectedPermission; } set { _selectedPermission = value; RaisePropertyChanged(); } }
+        public DetailsView SelecteduserInPermission { get { return _selectedUserInUsersPermission; } set { _selectedUserInUsersPermission = value; RaisePropertyChanged(); } }
 
 
 
@@ -59,28 +59,108 @@ namespace Guard_Client.ViewModels
         public ObservableCollection<DetailsView> Users { get => users; set { users = value; RaisePropertyChanged(); } }                    //UserCollectionForView
         public ObservableCollection<DetailsView> Keys { get => keys; set { keys = value; RaisePropertyChanged(); } }                       //KeysCollectionForView
         public ObservableCollection<DetailsView> Permissions { get => permissions; set { permissions = value; RaisePropertyChanged(); } }  //PermissionsCollectionForView
-        public ObservableCollection<DetailsView> UserPermissions                                                                           //SelectedPermissionUserCollection
-        {
-            get
-            {
-                try
-                {
-                    if (SelectedPermission != null)
-                    {
-                        userpermissions = Task.Run(async () => await GetUsersListByPermissionId(SelectedPermission.FirstName)).Result;
-                    }
-                    return userpermissions;
-                }
-                catch (Exception e)
-                {
-                    return userpermissions;
-                };
-            }
-            set { userpermissions = value; RaisePropertyChanged(); }
-        }
+        public ObservableCollection<DetailsView> UserPermissions { get { return userpermissions; } set { userpermissions = value; RaisePropertyChanged(); } }
         #endregion PUBLIC LISTBOX DATA
 
         #region Commands
+
+        public ICommand RefreshTableWithSelectedPermissionUser => new AsyncCommand(async () =>
+        {
+            if(SelectedPermission == null)
+            {
+                NotificationService.ShowNotification("Щоб додати дозвіл треба обрати його", "Помилка");
+                return;
+            }
+            try
+            {
+                UserPermissions = await GetUsersListByPermissionId(SelectedPermission.FirstName);
+            }
+            catch(Exception e)
+            {
+                NotificationService.ShowNotification("Помилка обробки інформації", "Помилка");
+            }
+        });
+
+        /// <summary>
+        /// Remove selected item with lastname in selectedUserPermission
+        /// </summary>
+        public ICommand RemoveSelectedPermissionCollectionItem => new AsyncCommand(async () =>
+        {
+            if (SelectedPermission == null)
+            {
+                NotificationService.ShowNotification("Щоб видалити викладача,треба ОБРАТИ ДОЗВІЛ", "Помилка");
+                return;
+            }
+            if (SelecteduserInPermission == null)
+            {
+                NotificationService.ShowNotification("Щоб видалити дозвіл викладача,треба ОБРАТИ ВИКЛАДАЧА", "Помилка");
+                return;
+            }
+            try
+            {
+                var permission = await service.PermissionService.GetBy(new Guid(SelectedPermission.FirstName));
+                var user = await service.UserService.GetByLastName(SelecteduserInPermission.LastName);
+                bool IsALready = permission.UsersWithPermissions.Any(x => x.LastName == user.LastName);
+                if (IsALready)
+                {
+                    var collection = permission.UsersWithPermissions.ToList();
+                    collection.Remove(user);
+                    permission.UsersWithPermissions = collection;
+                    await service.PermissionService.Update(permission);
+                    var item = new DetailsView() { LastName = user.LastName };
+                    UserPermissions.Remove(item);
+                    RaisePropertyChanged(nameof(UserPermissions));
+                }
+            }
+            catch (Exception e)
+            {
+                NotificationService.ShowNotification("Помилка обробки інформації", "Помилка");
+            }
+        });
+
+
+        /// <summary>
+        /// Add to selected permission
+        /// </summary>
+        public ICommand AddToSelectedPermissionCollectionItem => new AsyncCommand(async () =>
+        {
+            if (SelectedPermission == null)
+            {
+                NotificationService.ShowNotification("Щоб додати дозвіл викладачу, треба ОБРАТИ ДОЗВІЛ", "Помилка");
+                return;
+            }
+            if (SelectedUser == null)
+            {
+                NotificationService.ShowNotification("Щоб додати дозвіл викладачу, треба ОБРАТИ ВИКЛАДАЧА", "Помилка");
+                return;
+            }
+            try
+            {
+                var permission = await service.PermissionService.GetBy(new Guid(SelectedPermission.FirstName));
+                var user = await service.UserService.GetByLastName(SelectedUser.LastName);
+                bool IsALready = permission.UsersWithPermissions.Any(x => x.LastName == user.LastName);
+                if (IsALready)
+                {
+                    NotificationService.ShowNotification("Такий викладач вже існує", "Помилка");
+                    return;
+                }
+                else
+                {
+                    var collection = permission.UsersWithPermissions.ToList();
+                    collection.Add(user);
+                    permission.UsersWithPermissions = collection;
+                    await service.PermissionService.Update(permission);
+                    var item = new DetailsView() { LastName = user.LastName };
+                    UserPermissions.Remove(item);
+                    RaisePropertyChanged(nameof(UserPermissions));
+                }
+            }
+            catch (Exception e)
+            {
+                NotificationService.ShowNotification("Помилка обробки інформації", "Помилка");
+            }
+        });
+
         /// <summary>
         /// Remove selected Permission
         /// </summary>
