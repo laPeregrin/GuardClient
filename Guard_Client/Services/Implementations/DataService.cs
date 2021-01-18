@@ -27,7 +27,6 @@ namespace Guard_Client.Services.Implementations
                 await _service.Set<T>().AddAsync(obj);
                 await _service.SaveChangesAsync();
             }
-
         }
 
         public Task<bool> Delete(T obj)

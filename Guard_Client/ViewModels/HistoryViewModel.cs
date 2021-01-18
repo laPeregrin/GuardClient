@@ -100,13 +100,17 @@ namespace Guard_Client.ViewModels
             {
                 DateTime importantDate = DateTime.Parse(FilterDate, cultureInfo);
                 var collection = await service.GetAllByRule(x => x.BookingFinish.Value.Hour == importantDate.Hour
-                && x.BookingFinish.Value.Minute == importantDate.Minute);
+                && x.BookingFinish.Value.Minute == importantDate.Minute &&x.BookingFinish.Value.Month == importantDate.Month
+                && x.BookingFinish.Value.Year == importantDate.Year);
                 if (!collection.Any())
                 {
-                    collection = await service.GetAllByRule(x => x.BookingFinish.Value.Hour == importantDate.Hour);
+                    collection = await service.GetAllByRule(x => x.BookingFinish.Value.Hour == importantDate.Hour &&
+                    x.BookingFinish.Value.Month == importantDate.Month && 
+                    x.BookingFinish.Value.Year == importantDate.Year);
                     if (!collection.Any())
                     {
-                        collection = await service.GetAllByRule(x => x.BookingFinish.Value.Day == importantDate.Day);
+                        collection = await service.GetAllByRule(x => x.BookingFinish.Value.Day == importantDate.Day &&
+                        x.BookingFinish.Value.Month == importantDate.Month);
                     }
                 }
                 UpdateCollection(collection);

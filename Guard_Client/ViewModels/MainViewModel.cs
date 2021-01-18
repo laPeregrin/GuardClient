@@ -19,14 +19,12 @@ namespace Guard_Client.ViewModels
     {
         private readonly PageService _pageService;
         private readonly IPageFactory _pageFactory;
-        private readonly IServiceProvider _serviceProvider;
 
 
         private Page _source;
         public Page PageSource { get { return _source; } set { _source = value; RaisePropertiesChanged(); } }
-        public MainViewModel(PageService pageService, IPageFactory pageFactory, IServiceProvider serviceProvider)
+        public MainViewModel(PageService pageService, IPageFactory pageFactory)
         {
-            _serviceProvider = serviceProvider;
             _pageFactory = pageFactory;
             _pageService = pageService;
             _pageService.PageChanged += (page) => PageSource = page;

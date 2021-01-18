@@ -340,6 +340,27 @@ namespace Guard_Client.ViewModels
             };
         });
 
+        /// <summary>
+        /// Delete user
+        /// </summary>
+        public ICommand RemoveSelectedUser => new AsyncCommand(async()=>
+        {
+            if (SelectedUser == null)
+            {
+                NotificationService.ShowNotification("оберіть викладача із списку", "Помилка");
+
+                return;
+            }
+            try
+            {
+                var user = await service.UserService.GetByLastName(SelectedUser.LastName);
+                await service.UserService.Delete(user);
+            }
+            catch
+            {
+                NotificationService.ShowNotification("помилка видалення, можливо викладач вже видаленний, новіть списки", "Помилка");
+            }
+        });
 
         public ICommand GetAllLists => new AsyncCommand(async () =>
         {
