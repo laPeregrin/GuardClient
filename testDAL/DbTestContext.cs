@@ -32,7 +32,8 @@ namespace testDAL
             modelBuilder.Entity<Permission>().HasKey(x => x.KeyId);
             modelBuilder.Entity<Permission>().HasOne(x => x.Key);
         }
-        private const string constr = "Data Source = (localdb)\\MSSQLLocalDB; Database = KrokUser; Persist Security Info = false; User ID = 'sa'; Password = 'Ghbdtn010102'; MultipleActiveResultSets = True; Trusted_Connection = False;";
+        private const string constr = "Data Source = 84.38.189.95,31892; Database = KrokUser; Persist Security Info = false; User ID = 'sa'; Password = 'Ghbdtn010102'; MultipleActiveResultSets = True; Trusted_Connection = False;";
+        //private const string constr = "Data Source = (localdb)\\MSSQLLocalDB; Database = KrokUser; Persist Security Info = false; User ID = 'sa'; Password = 'Ghbdtn010102'; MultipleActiveResultSets = True; Trusted_Connection = False;";
     }
 
     public class BookingActonEfConfig : IEntityTypeConfiguration<BookingAction>
