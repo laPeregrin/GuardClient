@@ -217,12 +217,6 @@ namespace test
             Assert.IsTrue(res.Any());
         }
 
-        [Test]
-        public async Task GetPermissionsByLastName_lastName_return()
-        {
-            var lastName = "Рач";
-            var strings = await _userHandler.GetAllPermissionByUserLastName(lastName);
-            Assert.IsTrue(strings.Count > 0);
-        }
+        
     }
 }

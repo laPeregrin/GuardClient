@@ -37,7 +37,8 @@
                 <TextBox  Grid.Row="1" Grid.Column="0" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" Foreground="{StaticResource BrushPrimary1}" HorizontalAlignment="Stretch" FontSize="25" Padding="10"/>
                 <Border Grid.Row="2" Style="{StaticResource NatBorderButton}">
                     <ScrollViewer MinHeight="150" MaxHeight="700">
-                        <ListBox Background="{StaticResource BrushPrimary4}" 
+                        <ListBox MinHeight="150"
+                            Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
                              ItemsSource="{Binding users}"
                              SelectedItem="{Binding CurrentUser}">
@@ -78,7 +79,7 @@
                 <TextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Auditory, UpdateSourceTrigger=PropertyChanged}" Background="{x:Null}" Foreground="{StaticResource BrushPrimary1}" HorizontalAlignment="Stretch" FontSize="25" Padding="10"/>
                 <Border Grid.Row="2" Width="120" Style="{StaticResource NatBorderButton}">
                     <ScrollViewer  MinHeight="150" MaxHeight="500">
-                        <ListBox   Width="100"
+                        <ListBox   Width="100" MinHeight="150"
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
                              ItemsSource="{Binding keys}"
@@ -115,7 +116,7 @@
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <ObjectAnimationUsingKeyFrames Duration="0:0:1"/>
-                                            
+
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger.Actions>

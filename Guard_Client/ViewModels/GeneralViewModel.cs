@@ -26,10 +26,12 @@ namespace Guard_Client.ViewModels
             _bigService = bigService;
 
             var CollUser = (IEnumerable<User>)Task.Run(async () => await _bigService.GetAll<User>()).Result;
-            users = new ObservableCollection<DetailsView>(CollUser.MapToDetailsView());
+            
+            users = new ObservableCollection<DetailsView>(CollUser.MapToDetailsView().OrderBy(x => x.LastName));
+            
             var KeyUser = Task.Run(async () => await _bigService.GetAll(false)).Result;
 
-            keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView());
+            keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView().OrderBy(x=>x.KeyNumber));
         }
         public async Task UpdateCollection()
         {
@@ -48,6 +50,7 @@ namespace Guard_Client.ViewModels
             {
                 lastName = value;
                 CurrentUser = users.FirstOrDefault(x => x.LastName.StartsWith(LastName));
+                
                 RaisePropertyChanged();
             }
         }
@@ -104,7 +107,6 @@ namespace Guard_Client.ViewModels
         {
             keys.Remove(details);
         }
-       
         #endregion
     }
 }

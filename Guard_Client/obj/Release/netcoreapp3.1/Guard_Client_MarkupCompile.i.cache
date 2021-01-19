@@ -16,5 +16,5 @@ W:\programs\repos\GuardClient\Guard_Client\App.xaml
 222239618042
 MainWindow.xaml;Styles\NavigationBar.xaml;Views\Pages\AdminPage.xaml;Views\Pages\CurrentPage.xaml;Views\Pages\Details.xaml;Views\Pages\GeneralPage.xaml;Views\Pages\History.xaml;Views\UsersControls\HistoryViewUserController.xaml;
 
-True
+False
 

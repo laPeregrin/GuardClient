@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="icons8-улей-шершней-30.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DevExpressMvvm" Version="20.2.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
@@ -15,6 +19,12 @@
     <ProjectReference Include="..\..\ErrorFriendlyUserNotification\ErrorFriendlyUserNotification\ErrorFriendlyUserNotification.csproj" />
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
     <ProjectReference Include="..\testDAL\testDAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="icons8-улей-шершней-30.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

@@ -107,9 +107,9 @@ namespace Guard_Client.BLL
         /// <summary>
         /// GetAll permission via multyThreading
         /// </summary>
-        public async Task<List<string>> GetAllPermissionByUserLastName(string lastName)
+        public async Task<IEnumerable<string>> GetAllPermissionByUserLastName(string lastName)
         {
-            var container = new List<string> { };
+            var container = new ConcurrentQueue<string> { };
             var taskList = new ConcurrentQueue<Task>();
 
             var user = await _userService.GetByLastName(lastName);
@@ -122,7 +122,7 @@ namespace Guard_Client.BLL
                     {
                         if (user.Id == userIter.Id)
                         {
-                            container.Add(permission.Key.AudNum);
+                            container.Enqueue(permission.Key.AudNum);
                             break;
                         }
                     }
@@ -180,8 +180,5 @@ namespace Guard_Client.BLL
             }
 
         }
-
-
-
     }
 }
