@@ -14,5 +14,6 @@ namespace Guard_Client.Services
             var window = new ErrorFriendlyUserNotification.MainWindow(errorBox);
             window.Show();
         }
+
     }
 }

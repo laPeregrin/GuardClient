@@ -54,7 +54,8 @@ namespace Guard_Client.Views.UsersControls {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Guard_Client;component/views/userscontrols/historyviewusercontroller.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Guard_Client;V1.0.0.0;component/views/userscontrols/historyviewusercontroller.xa" +
+                    "ml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\UsersControls\HistoryViewUserController.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

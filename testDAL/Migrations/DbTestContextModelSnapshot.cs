@@ -15,9 +15,9 @@ namespace testDAL.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("DTOs.Models.BookingAction", b =>
                 {
@@ -70,13 +70,18 @@ namespace testDAL.Migrations
 
             modelBuilder.Entity("DTOs.Models.Permission", b =>
                 {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("KeyId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("Id");
 
-                    b.HasKey("KeyId");
+                    b.HasIndex("KeyId")
+                        .IsUnique()
+                        .HasFilter("[KeyId] IS NOT NULL");
 
                     b.ToTable("Permissions");
                 });
@@ -96,14 +101,24 @@ namespace testDAL.Migrations
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("PermissionKeyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PermissionKeyId");
-
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("PermissionUser", b =>
+                {
+                    b.Property<Guid>("PermissionsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UsersWithPermissionsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("PermissionsId", "UsersWithPermissionsId");
+
+                    b.HasIndex("UsersWithPermissionsId");
+
+                    b.ToTable("PermissionUser");
                 });
 
             modelBuilder.Entity("DTOs.Models.BookingAction", b =>
@@ -119,6 +134,10 @@ namespace testDAL.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("KeyObject");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DTOs.Models.KeyObject", b =>
@@ -126,22 +145,37 @@ namespace testDAL.Migrations
                     b.HasOne("DTOs.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DTOs.Models.Permission", b =>
                 {
                     b.HasOne("DTOs.Models.KeyObject", "Key")
                         .WithOne("Permission")
-                        .HasForeignKey("DTOs.Models.Permission", "KeyId")
+                        .HasForeignKey("DTOs.Models.Permission", "KeyId");
+
+                    b.Navigation("Key");
+                });
+
+            modelBuilder.Entity("PermissionUser", b =>
+                {
+                    b.HasOne("DTOs.Models.Permission", null)
+                        .WithMany()
+                        .HasForeignKey("PermissionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DTOs.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersWithPermissionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DTOs.Models.User", b =>
+            modelBuilder.Entity("DTOs.Models.KeyObject", b =>
                 {
-                    b.HasOne("DTOs.Models.Permission", "Permission")
-                        .WithMany("UsersWithPermissions")
-                        .HasForeignKey("PermissionKeyId");
+                    b.Navigation("Permission");
                 });
 #pragma warning restore 612, 618
         }
