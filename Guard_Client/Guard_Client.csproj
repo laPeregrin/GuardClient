@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="DevExpressMvvm" Version="20.2.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="System.IO.Ports" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

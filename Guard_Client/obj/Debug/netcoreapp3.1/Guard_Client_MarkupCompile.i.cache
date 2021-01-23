@@ -12,9 +12,9 @@ TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
 W:\programs\repos\GuardClient\Guard_Client\App.xaml
 8-1506911227
 
-3582428566
-222756450284
+36-978845854
+223338047243
 MainWindow.xaml;Styles\NavigationBar.xaml;Views\Pages\AdminPage.xaml;Views\Pages\CurrentPage.xaml;Views\Pages\Details.xaml;Views\Pages\GeneralPage.xaml;Views\Pages\History.xaml;Views\UsersControls\HistoryViewUserController.xaml;
 
-True
+False
 
