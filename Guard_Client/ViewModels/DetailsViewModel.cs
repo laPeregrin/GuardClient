@@ -60,6 +60,7 @@ namespace Guard_Client.ViewModels
             else
             {
                 NotificationService.ShowNotification("Для початку виберіть ключ із списку", "Помилка!");
+                await Task.Delay(3000);
             }
         });
         public ICommand ReturnKey => new AsyncCommand(async () =>
@@ -70,9 +71,9 @@ namespace Guard_Client.ViewModels
                 UpdateList(SelectedKey);
             }
             catch (KeyIsNotBooking)
-            { NotificationService.ShowNotification("Цим ключем ніхто не володіє на данний момент", "Увага!"); }
+            { NotificationService.ShowNotification("Цим ключем ніхто не володіє на данний момент", "Увага!"); await Task.Delay(3000); }
             catch (NullReferenceException)
-            { NotificationService.ShowNotification("Варто отримати про нього повну інформацію", "Увага!"); }
+            { NotificationService.ShowNotification("Варто отримати про нього повну інформацію", "Увага!"); await Task.Delay(3000); }
             catch (Exception e) { }
 
         });

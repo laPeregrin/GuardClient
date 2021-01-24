@@ -29,33 +29,34 @@
 
     <Style x:Key="NaviButton" TargetType="Button">
         <Setter Property="Foreground" Value="{StaticResource BrushPrimary1}"/>
-        
+
         <Setter Property="FontSize" Value="30"/>
-        <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontFamily" Value="TimesNewRoman"/>
         <Setter Property="Padding" Value="13"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
                         <TextBlock Text="{TemplateBinding Content}" 
                                        Padding="{TemplateBinding Padding}"
-                                       Background="{StaticResource BrushPrimary5}" 
                                        Foreground="{StaticResource BrushPrimary3}"
                                   FontFamily="Franklin Gothic Medium"
                                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                            VerticalAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+
+
+                        <Trigger Property ="IsMouseOver" Value="True">
+                            <Setter Property= "Foreground" Value="{StaticResource BrushPrimary4}"/>
                         </Trigger>
-                        <Trigger Property="IsFocused" Value="False">
-                            <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
+                        <Trigger Property ="IsMouseOver" Value="False">
+                            <Setter Property= "Foreground" Value="{StaticResource BrushPrimary5}"/>
                         </Trigger>
-                        
+
                         <EventTrigger RoutedEvent="PreviewMouseDown">
                             <BeginStoryboard>
                                 <Storyboard>
@@ -86,30 +87,58 @@
         <Setter Property="FontFamily" Value="TimesNewRoman"/>
         <Setter Property="Padding" Value="13"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
+        <Setter Property="Foreground" Value="{StaticResource BrushPrimary8}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
                         <TextBlock Text="{TemplateBinding Content}" 
                                        Padding="{TemplateBinding Padding}"
-                                       Background="{StaticResource BrushPrimary5}" 
                                        Foreground="{StaticResource BrushPrimary3}"
                                   FontFamily="Franklin Gothic Medium"
                                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                            VerticalAlignment="Center"/>
                     </Grid>
                     <ControlTemplate.Triggers>
+
+
+                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Padding"
+                                                        Duration="0:0:0.100" To="0"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimation Storyboard.TargetProperty="Padding"
+                                                        Duration="0:0:0.100" To="13"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+
                         <Trigger Property="IsFocused" Value="True">
-                            <Setter Property="Background" Value="{StaticResource BrushPrimary8}"/>
+                            <Setter Property="Background" Value="{StaticResource BrushPrimary7}"/>
                         </Trigger>
                         <Trigger Property="IsFocused" Value="False">
                             <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
                         </Trigger>
 
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource BrushPrimary8}"/>
+                            <Setter Property="Background" Value="{StaticResource BrushPrimary7}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
                         </Trigger>
 
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" Value="DarkGray"/>
+                            <Setter Property="Foreground" Value="{StaticResource BrushPrimary3}"/>
+                        </Trigger>
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

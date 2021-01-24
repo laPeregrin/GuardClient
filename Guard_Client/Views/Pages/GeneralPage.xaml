@@ -104,42 +104,83 @@
         <StackPanel Grid.Row="2" Margin="0 20 0 0">
             <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0"  Content="видати ключ викладачу" Command="{Binding AddBooking}" FontFamily="Sitka Small">
                 <Button.Style>
-
                     <Style TargetType="Button">
-                        <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
                         <Setter Property="Foreground" Value="{StaticResource BrushPrimary1}"/>
-                        <Setter Property="FontSize" Value="25"/>
-                        <Setter Property="Padding" Value="5"/>
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="MouseLeftButtonUp">
-                                <EventTrigger.Actions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Duration="0:0:1"/>
 
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger.Actions>
-                            </EventTrigger>
-                            <Trigger Property="IsMouseOver" Value="False">
-                                <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
-                            </Trigger>
-                            <DataTrigger Binding="{Binding CurrentUser}" Value="{x:Null}">
-                                <Setter Property="IsEnabled" Value="False"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentUser}" Value="{x:Null}">
-                                <Setter Property="IsEnabled" Value="True"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentKey}" Value="{x:Null}">
-                                <Setter Property="IsEnabled" Value="False"/>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding CurrentKey}" Value="{x:Null}">
-                                <Setter Property="IsEnabled" Value="False"/>
-                            </DataTrigger>
-                        </Style.Triggers>
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="TimesNewRoman"/>
+                        <Setter Property="Padding" Value="13"/>
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
+                        <Setter Property="Foreground" Value="{StaticResource BrushPrimary8}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
+                                        <TextBlock Text="{TemplateBinding Content}" 
+                                       Padding="{TemplateBinding Padding}"
+                                       Foreground="{StaticResource BrushPrimary3}"
+                                  FontFamily="Franklin Gothic Medium"
+                                           HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                           VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+
+
+                                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="Padding"
+                                                        Duration="0:0:0.100" To="0"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="PreviewMouseUp">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation Storyboard.TargetProperty="Padding"
+                                                        Duration="0:0:0.100" To="13"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <DataTrigger Binding="{Binding CurrentUser}" Value="{x:Null}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding CurrentKey}" Value="{x:Null}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                        </DataTrigger>
+
+                                        <Trigger Property="IsFocused" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource BrushPrimary7}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsFocused" Value="False">
+                                            <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
+                                        </Trigger>
+
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{StaticResource BrushPrimary7}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="False">
+                                            <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
+                                        </Trigger>
+
+                                        <Trigger Property="IsEnabled" Value="false">
+                                            <Setter Property="Background" Value="DarkGray"/>
+                                            <Setter Property="Foreground" Value="{StaticResource BrushPrimary3}"/>
+                                        </Trigger>
+
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
                     </Style>
                 </Button.Style>
             </Button>
         </StackPanel>
     </Grid>
 </Page>
+
