@@ -33,26 +33,9 @@ namespace Guard_Client
 
             services.AddServiceHandler();
 
-            services.AddTransient<CreatePage<CurrentPage>>(services =>
-                {
-                    return () => services.GetRequiredService<CurrentPage>();
-                });
-            services.AddTransient<CreatePage<Details>>(services =>
-            {
-                return () => services.GetRequiredService<Details>();
-            });
-            services.AddTransient<CreatePage<GeneralPage>>(services =>
-            {
-                return () => services.GetRequiredService<GeneralPage>();
-            });
-            services.AddTransient<CreatePage<History>>(services =>
-            {
-                return () => services.GetRequiredService<History>();
-            });
-            services.AddTransient<CreatePage<AdminPage>>(services =>
-            {
-                return () => services.GetRequiredService<AdminPage>();
-            });
+
+            services.AddDelegatePages();
+         
 
             services.AddTransient<CurrentPage>();
             services.AddTransient<Details>();
