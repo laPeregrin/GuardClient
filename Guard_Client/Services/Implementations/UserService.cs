@@ -20,7 +20,26 @@ namespace Guard_Client.Services.Implementations
         }
         public async Task<User> GetByLastName(string lastName)
         {
-            return await _context.Users.FirstOrDefaultAsync(x=>x.LastName == lastName);
+            return await _context.Users.FirstOrDefaultAsync(x => x.LastName == lastName);
+        }
+        public async Task<User> GetByCardId(string cardId)
+        {
+            return await _context.Users.Include(x => x.Image).FirstOrDefaultAsync(x => x.CardId == cardId);
+        }
+        public override Task Add(User obj)
+        {
+            if (obj.Image != null)
+                _context.Images.Add(obj.Image);
+            return base.Add(obj);
+        }
+        public async Task UpdateWithImage(User pbj)
+        {
+            if (pbj.Image != null)
+            {
+                _context.Images.Add(pbj.Image);
+                await _context.SaveChangesAsync();
+            }
+            await base.Add(pbj);
         }
     }
 }

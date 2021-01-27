@@ -16,6 +16,7 @@ namespace testDAL
         public DbSet<KeyObject> KeyObjects { get; set; }
         public DbSet<BookingAction> BookingActions { get; set; }
         public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         public DbTestContext() : base() { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -48,6 +49,7 @@ namespace testDAL
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(x => x.Id);
+            builder.HasOne(x => x.Image);
             builder.HasMany(x => x.Permissions).WithMany(x=>x.UsersWithPermissions);
         }
     }

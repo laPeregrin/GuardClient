@@ -5,6 +5,7 @@ using Guard_Client.Services.Implementations;
 using NUnit.Framework;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using testDAL;
@@ -217,6 +218,18 @@ namespace test
             Assert.IsTrue(res.Any());
         }
 
-        
+        [Test]
+        public void TestText()
+        {
+            FileStream fs = new FileStream("Guard_Client//bin//Images//тест.txt", FileMode.Open);
+            using(StreamWriter wr = new StreamWriter(fs))
+            {
+                wr.Write("TEST PATH");
+            }
+            using (StreamReader wr = new StreamReader(fs))
+            {
+               var res = wr.ReadToEnd();
+            }
+        }
     }
 }

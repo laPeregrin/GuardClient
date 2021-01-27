@@ -10,8 +10,8 @@ using testDAL;
 namespace testDAL.Migrations
 {
     [DbContext(typeof(DbTestContext))]
-    [Migration("20210123214536_UserHasManePermission")]
-    partial class UserHasManePermission
+    [Migration("20210127212516_UserCardIdAndImage")]
+    partial class UserCardIdAndImage
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,26 @@ namespace testDAL.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("BookingActions");
+                });
+
+            modelBuilder.Entity("DTOs.Models.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("DTOs.Models.KeyObject", b =>
@@ -93,6 +113,9 @@ namespace testDAL.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CardId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -142,6 +165,17 @@ namespace testDAL.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("DTOs.Models.Image", b =>
+                {
+                    b.HasOne("DTOs.Models.User", "User")
+                        .WithOne("Image")
+                        .HasForeignKey("DTOs.Models.Image", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("DTOs.Models.KeyObject", b =>
                 {
                     b.HasOne("DTOs.Models.User", "User")
@@ -178,6 +212,11 @@ namespace testDAL.Migrations
             modelBuilder.Entity("DTOs.Models.KeyObject", b =>
                 {
                     b.Navigation("Permission");
+                });
+
+            modelBuilder.Entity("DTOs.Models.User", b =>
+                {
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

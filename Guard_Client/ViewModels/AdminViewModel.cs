@@ -15,6 +15,7 @@ using Guard_Client.Services.Implementations;
 using testDAL;
 using Guard_Client.Services;
 using Guard_Client.Exceptions;
+using Microsoft.Win32;
 
 namespace Guard_Client.ViewModels
 {
@@ -151,7 +152,6 @@ namespace Guard_Client.ViewModels
                     permission.UsersWithPermissions = collection;
                     await service.PermissionService.Update(permission);
                     var item = new DetailsView() { LastName = user.LastName };
-                    UserPermissions.Remove(item);
                     RaisePropertyChanged(nameof(UserPermissions));
                 }
             }
@@ -297,20 +297,20 @@ namespace Guard_Client.ViewModels
                 NotificationService.ShowNotification("у викладача не може не бути якогось ініціалу!", "Помилка");
                 return;
             }
-
-            var user = new User() { FirstName = FirstName, MiddleName = MiddleName, LastName = LastName, Id = Guid.NewGuid() };
+            var image = new Image(GetPathForImage());
+            var user = new User() { FirstName = FirstName, MiddleName = MiddleName, LastName = LastName, Id = Guid.NewGuid(), Image = image };
             try
             {
                 await service.UserService.Add(user);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 NotificationService.ShowNotification("при додаванні викладача виникла помилка!", "Помилка");
             };
         });
 
         /// <summary>
-        /// Command for removing Selected user
+        /// Command for Updating Selected user
         /// </summary>
         public ICommand UpdateSelectedUser => new AsyncCommand(async () =>
         {
@@ -328,13 +328,15 @@ namespace Guard_Client.ViewModels
             }
             try
             {
+                var image = new Image(GetPathForImage());
                 var user = await service.UserService.GetByLastName(SelectedUser.LastName);
                 user.FirstName = FirstName;
                 user.MiddleName = MiddleName;
                 user.LastName = LastName;
-                await service.UserService.Update(user);
+                user.Image = image;
+                await service.UserService.UpdateWithImage(user);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 NotificationService.ShowNotification("при оновленні викладача виникла помилка!", "Помилка");
             };
@@ -376,6 +378,21 @@ namespace Guard_Client.ViewModels
             var collUsers = Task.Run(async () => await service.GetUsersByPermissionId(new Guid(id)));
             var res = collUsers.ContinueWith(x => { return collUsers.Result.MapToDetailsView(); });
             return res;
+        }
+
+
+        private string GetPathForImage()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Оберіть фото для викладача";
+            if(openFileDialog.ShowDialog().HasValue == true)
+            {
+                var res = openFileDialog.FileName;
+                openFileDialog = null;
+                return res;
+            }
+            openFileDialog = null;
+            return null;
         }
     }
 }
