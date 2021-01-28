@@ -103,7 +103,7 @@
                     <ControlTemplate.Triggers>
 
 
-                        <EventTrigger RoutedEvent="PreviewMouseDown">
+                        <!--<EventTrigger RoutedEvent="PreviewMouseDown">
                             <BeginStoryboard>
                                 <Storyboard>
                                     <ThicknessAnimation Storyboard.TargetProperty="Padding"
@@ -138,7 +138,7 @@
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" Value="DarkGray"/>
                             <Setter Property="Foreground" Value="{StaticResource BrushPrimary3}"/>
-                        </Trigger>
+                        </Trigger>-->
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

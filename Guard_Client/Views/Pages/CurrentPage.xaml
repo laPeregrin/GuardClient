@@ -32,7 +32,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Grid.Column="1" Grid.Row="1" Margin="40" Style="{StaticResource NatBorderButton}">
+            <Border Grid.Column="1" Grid.Row="1" Margin="40 0 0 0" Style="{StaticResource NatBorderButton}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
