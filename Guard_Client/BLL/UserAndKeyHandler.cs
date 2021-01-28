@@ -136,10 +136,24 @@ namespace Guard_Client.BLL
                 return container;
         }
 
+        public async Task<User> GetUserWithImageByCardId(string CardId)
+        {
+            return await _userService.GetByCardId(CardId);
+        }
+
+
+
+
+
         public async Task<IEnumerable<User>> GetUsersByPermissionId(Guid id)
         {
             return (await _permissionService.GetBy(id)).UsersWithPermissions;
         }
+
+
+
+
+
 
         public async Task AddBooking(string lastName, string auditoryNumber)
         {
@@ -163,6 +177,11 @@ namespace Guard_Client.BLL
             await _bookingAction.StartSession(user, key);
         }
 
+
+
+
+
+
         public async Task FinishBooking(string AudName)
         {
             var key = await _keyService.GetByAuditoryName(AudName);
@@ -178,7 +197,6 @@ namespace Guard_Client.BLL
             {
                 throw new KeyIsNotBooking(key.AudNum);
             }
-
         }
     }
 }

@@ -5,8 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Guard_Client.Views.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="CurrentPage">
+      d:DesignHeight="950" d:DesignWidth="1000"
+      Title="CurrentPage"
+      DataContext="{Binding CurrentViewModel, Source={StaticResource VMLocator}}"
+      >
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -30,7 +32,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource NatBorderButton}">
+            <Border Grid.Column="1" Grid.Row="1" Margin="40 0 0 0" Style="{StaticResource NatBorderButton}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -42,13 +44,21 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="LastName" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
-                    <TextBlock Grid.Row="1"  Text="FirstName" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding FName}" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                        <TextBlock Grid.Row="1"  Text="{Binding LName}" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                    </Grid>
+                    <Image Source="{Binding ImageSource}" Grid.Column="1" Grid.Row="1" Width="130" Height="170" Margin="0 0 20 0" />
                     <TextBlock Margin="20" Grid.Row="2" Text="Special Permission" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
                 </Grid>
             </Border>
-            <ScrollViewer Grid.Row="1" Grid.Column="2">
-                <!--<ListBox Margin="20" ItemsSource="" SelectedItem="">
+            <!--<ScrollViewer Grid.Row="1" Grid.Column="2">-->
+                
+            <!--<ListBox Margin="20" ItemsSource="" SelectedItem="">
                     <ListBox  
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
@@ -67,9 +77,10 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </ListBox>-->
-            </ScrollViewer>
+                </ListBox>
+            
+            </ScrollViewer>-->
         </Grid>
     </Grid>
-    
+
 </Page>

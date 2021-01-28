@@ -47,7 +47,8 @@ namespace Guard_Client
             services.AddTransient<DetailsViewModel>();
             services.AddTransient<GeneralViewModel>();
             services.AddTransient<AdminViewModel>();
-            services.AddTransient<HistoryViewModel>();
+            services.AddSingleton<HistoryViewModel>();
+            services.AddTransient<CurrentViewModel>();
 
             services.AddSingleton<IPageFactory, PageFactory>();
 
@@ -55,10 +56,10 @@ namespace Guard_Client
 
             _provider = services.BuildServiceProvider();
 
-            foreach (var item in services)
-            {
-                _provider.GetRequiredService(item.ServiceType);
-            }
+            //foreach (var item in services)
+            //{
+            //    _provider.GetRequiredService(item.ServiceType);
+            //}
         }
 
         public MainViewModel MainViewModel => _provider.GetRequiredService<MainViewModel>();
@@ -66,5 +67,6 @@ namespace Guard_Client
         public GeneralViewModel GeneralViewModel => _provider.GetRequiredService<GeneralViewModel>();
         public HistoryViewModel HistoryViewModel => _provider.GetRequiredService<HistoryViewModel>();
         public AdminViewModel AdminViewModel => _provider.GetRequiredService<AdminViewModel>();
+        public CurrentViewModel CurrentViewModel => _provider.GetRequiredService<CurrentViewModel>();
     }
 }
