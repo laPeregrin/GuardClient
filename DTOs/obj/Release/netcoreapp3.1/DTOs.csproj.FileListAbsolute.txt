@@ -1,9 +1,0 @@
-W:\programs\repos\GuardClient\DTOs\bin\Release\netcoreapp3.1\DTOs.deps.json
-W:\programs\repos\GuardClient\DTOs\bin\Release\netcoreapp3.1\DTOs.dll
-W:\programs\repos\GuardClient\DTOs\bin\Release\netcoreapp3.1\DTOs.pdb
-W:\programs\repos\GuardClient\DTOs\obj\Release\netcoreapp3.1\DTOs.csprojAssemblyReference.cache
-W:\programs\repos\GuardClient\DTOs\obj\Release\netcoreapp3.1\DTOs.AssemblyInfoInputs.cache
-W:\programs\repos\GuardClient\DTOs\obj\Release\netcoreapp3.1\DTOs.AssemblyInfo.cs
-W:\programs\repos\GuardClient\DTOs\obj\Release\netcoreapp3.1\DTOs.csproj.CoreCompileInputs.cache
-W:\programs\repos\GuardClient\DTOs\obj\Release\netcoreapp3.1\DTOs.dll
-W:\programs\repos\GuardClient\DTOs\obj\Release\netcoreapp3.1\DTOs.pdb
