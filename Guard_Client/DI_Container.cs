@@ -35,7 +35,7 @@ namespace Guard_Client
 
 
             services.AddDelegatePages();
-         
+
 
             services.AddTransient<CurrentPage>();
             services.AddTransient<Details>();
@@ -52,14 +52,15 @@ namespace Guard_Client
 
             services.AddSingleton<IPageFactory, PageFactory>();
 
-            
+
 
             _provider = services.BuildServiceProvider();
-
-            //foreach (var item in services)
-            //{
-            //    _provider.GetRequiredService(item.ServiceType);
-            //}
+#if DEBUG
+            foreach (var item in services)
+            {
+                _provider.GetRequiredService(item.ServiceType);
+            }
+#endif
         }
 
         public MainViewModel MainViewModel => _provider.GetRequiredService<MainViewModel>();

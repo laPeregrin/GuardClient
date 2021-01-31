@@ -14,28 +14,25 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="400"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="1" Grid.Column="1" >
+        <Grid Grid.Row="0" Grid.Column="0" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Border Grid.Column="1" Grid.Row="1" Margin="40 0 0 0" Style="{StaticResource NatBorderButton}">
+            <TextBlock Text="Викладач" Grid.Column="0" Grid.Row="0" FontSize="28" Foreground="{StaticResource BrushPrimary1}" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Century"/>
+            <Border Grid.Column="0" Grid.Row="0"  Height="250" Margin="40 40 0 0" Style="{StaticResource NatBorderButton}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
@@ -49,38 +46,68 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="{Binding FName}" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
-                        <TextBlock Grid.Row="1"  Text="{Binding LName}" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                        <TextBlock Text="{Binding FName}" FontSize="30" Foreground="{StaticResource BrushPrimary1}"/>
+                        <TextBlock Grid.Row="1"  Text="{Binding LName}" FontSize="30" Foreground="{StaticResource BrushPrimary1}"/>
                     </Grid>
                     <Image Source="{Binding ImageSource}" Grid.Column="1" Grid.Row="1" Width="130" Height="170" Margin="0 0 20 0" />
-                    <TextBlock Margin="20" Grid.Row="2" Text="Special Permission" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
+                    <TextBlock Text="{Binding Permissions}" Margin="20" Grid.Row="2" FontSize="25" Foreground="{StaticResource BrushPrimary1}"/>
                 </Grid>
             </Border>
-            <!--<ScrollViewer Grid.Row="1" Grid.Column="2">-->
-                
-            <!--<ListBox Margin="20" ItemsSource="" SelectedItem="">
-                    <ListBox  
+
+
+        </Grid>
+        <TextBlock Text="Ключі готові для видачі" Grid.Column="1" Grid.Row="0" FontSize="28" Foreground="{StaticResource BrushPrimary1}" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Century"/>
+        <Grid Grid.Row="0" Grid.Column="1" VerticalAlignment="Top">
+            <ScrollViewer Grid.Row="1" Margin="20 40 0 0" Grid.Column="1">
+
+                <ListBox  Padding="20" 
                              Background="{StaticResource BrushPrimary4}" 
                              Foreground="{StaticResource BrushPrimary3}"
-                             ItemsSource="{Binding keys, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             SelectedItem="{Binding CurrentKey}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <UniformGrid Width="300" Columns="1">
-                                    <UniformGrid.Resources>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="Margin" Value="1"/>
-                                        </Style>
-                                    </UniformGrid.Resources>
-                                    <TextBlock Text="{Binding KeyNumber}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
-                                </UniformGrid>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                             ItemsSource="{Binding KeyCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             SelectedItem="{Binding SelectedKeyInList}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <UniformGrid Width="300" Columns="1">
+                                <UniformGrid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="1"/>
+                                    </Style>
+                                </UniformGrid.Resources>
+                                <TextBlock Text="{Binding KeyNumber}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
+                            </UniformGrid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
-            
-            </ScrollViewer>-->
+            </ScrollViewer>
         </Grid>
+        <TextBlock Text="Ключі заборговані викладачем" Grid.Column="0" Grid.Row="1" FontSize="28" Foreground="{StaticResource BrushPrimary1}" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Century"/>
+        <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Top">
+            <ScrollViewer Grid.Row="1" Width="200" Margin="20 40 0 0" Grid.Column="1">
+
+                <ListBox  Padding="20" Width="200"
+                             Background="{StaticResource BrushPrimary4}" 
+                             Foreground="{StaticResource BrushPrimary3}"
+                             ItemsSource="{Binding BookedKeyCollection, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             SelectedItem="{Binding SelectedKeyInBookedList}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <UniformGrid Width="300" Columns="1">
+                                <UniformGrid.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Margin" Value="1"/>
+                                    </Style>
+                                </UniformGrid.Resources>
+                                <TextBlock Text="{Binding KeyNumber}" Background="{StaticResource BrushPrimary5}" Foreground="{StaticResource BrushPrimary3}" FontSize="25"/>
+                            </UniformGrid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </ScrollViewer>
+        </Grid>
+        <StackPanel  Grid.Column="1" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+            <Button Margin="20" Style="{StaticResource NatButton}" Content="Дати ключ" Command="{Binding AddBooking}"/>
+            <Button Margin="20" Style="{StaticResource NatButton}" Content="Повернути ключ" Command="{Binding FinishBooking}"/>
+        </StackPanel>
     </Grid>
 
 </Page>

@@ -297,8 +297,7 @@ namespace Guard_Client.ViewModels
                 NotificationService.ShowNotification("у викладача не може не бути якогось ініціалу!", "Помилка");
                 return;
             }
-            var image = new Image(GetPathForImage());
-            var user = new User() { FirstName = FirstName, MiddleName = MiddleName, LastName = LastName, Id = Guid.NewGuid(), Image = image };
+            var user = new User() { FirstName = FirstName, MiddleName = MiddleName, LastName = LastName, Id = Guid.NewGuid()};
             try
             {
                 await service.UserService.Add(user);
@@ -333,8 +332,8 @@ namespace Guard_Client.ViewModels
                 user.FirstName = FirstName;
                 user.MiddleName = MiddleName;
                 user.LastName = LastName;
-                user.Image = image;
-                await service.UserService.UpdateWithImage(user);
+                image.UserId = user.Id;
+                await service.UserService.UpdateImage(image);
             }
             catch (Exception e)
             {
@@ -367,7 +366,7 @@ namespace Guard_Client.ViewModels
         public ICommand GetAllLists => new AsyncCommand(async () =>
         {
             var UserColl = (IEnumerable<User>)await service.GetAll<User>();
-            Keys = (await service.GetAll(false)).MapToDetailsView();
+            Keys = (await service.GetAllKeys(false)).MapToDetailsView();
             Users = UserColl.MapToDetailsView();
             Permissions = ((IEnumerable<Permission>)await service.GetAll<Permission>()).MapToDetailsView();
         });

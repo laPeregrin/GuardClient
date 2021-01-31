@@ -32,14 +32,10 @@ namespace Guard_Client.Services.Implementations
                 _context.Images.Add(obj.Image);
             return base.Add(obj);
         }
-        public async Task UpdateWithImage(User pbj)
+        public async Task UpdateImage(Image UserImage)
         {
-            if (pbj.Image != null)
-            {
-                _context.Images.Add(pbj.Image);
+                await _context.AddAsync(UserImage);
                 await _context.SaveChangesAsync();
-            }
-            await base.Add(pbj);
         }
     }
 }

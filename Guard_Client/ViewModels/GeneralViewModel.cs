@@ -29,13 +29,13 @@ namespace Guard_Client.ViewModels
             
             users = new ObservableCollection<DetailsView>(CollUser.MapToDetailsView().OrderBy(x => x.LastName));
             
-            var KeyUser = Task.Run(async () => await _bigService.GetAll(false)).Result;
+            var KeyUser = Task.Run(async () => await _bigService.GetAllKeys(false)).Result;
 
             keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView().OrderBy(x=>x.KeyNumber));
         }
         public async Task UpdateCollection()
         {
-            var KeyUser = await _bigService.GetAll(false);
+            var KeyUser = await _bigService.GetAllKeys(false);
             keys = new ObservableCollection<DetailsView>(KeyUser.MapToDetailsView());
             RaisePropertyChanged(nameof(keys));
         }

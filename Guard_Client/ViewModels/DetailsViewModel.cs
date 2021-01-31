@@ -84,7 +84,7 @@ namespace Guard_Client.ViewModels
 
         public Task UpdateGenerealCollection()
         {
-            var items = Task.Run(async () => await _userAndKeyHandler.GetAll(true));
+            var items = Task.Run(async () => await _userAndKeyHandler.GetAllKeys(true));
             BookedKeyCollections = items.Result.MapToDetailsView();
             return Task.CompletedTask;
         }

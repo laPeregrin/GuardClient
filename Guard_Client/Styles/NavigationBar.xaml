@@ -118,7 +118,7 @@
                                                         Duration="0:0:0.100" To="13"/>
                                 </Storyboard>
                             </BeginStoryboard>
-                        </EventTrigger>
+                        </EventTrigger>-->
 
 
                         <Trigger Property="IsFocused" Value="True">
@@ -138,7 +138,7 @@
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" Value="DarkGray"/>
                             <Setter Property="Foreground" Value="{StaticResource BrushPrimary3}"/>
-                        </Trigger>-->
+                        </Trigger>
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

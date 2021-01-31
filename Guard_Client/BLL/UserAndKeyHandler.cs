@@ -67,7 +67,7 @@ namespace Guard_Client.BLL
         /// </summary>
         /// <param name="visible"></param>
         /// <returns></returns>
-        public async Task<IEnumerable<KeyObject>> GetAll(bool visible)
+        public async Task<IEnumerable<KeyObject>> GetAllKeys(bool visible = false)
         {
             return await _keyService.GetAll(x => x.IsBooked == visible);
         }
@@ -107,13 +107,17 @@ namespace Guard_Client.BLL
         /// <summary>
         /// GetAll permission via multyThreading
         /// </summary>
-        public async Task<IEnumerable<string>> GetAllPermissionByUserLastName(string lastName)
+        public async Task<string[]> GetAllPermissionByUserLastName(string lastName)
         {
+            if(string.IsNullOrEmpty(lastName))
+                return new Queue<string>().ToArray();
             var container = new ConcurrentQueue<string> { };
             var taskList = new ConcurrentQueue<Task>();
 
             var user = await _userService.GetByLastName(lastName);
             var permissions =  await _permissionService.GetAllWithUserCollectionAndKey();
+            if (permissions == null)
+                return new Queue<string>().ToArray();
             foreach (var permission in permissions)
             {
                 taskList.Enqueue(Task.Run(() =>
@@ -133,7 +137,7 @@ namespace Guard_Client.BLL
               await Task.WhenAll(taskList);
                 taskList.Clear();
             }
-                return container;
+                return container.ToArray();
         }
 
         public async Task<User> GetUserWithImageByCardId(string CardId)

@@ -50,7 +50,7 @@ namespace Guard_Client.Services.Implementations
                 _service.KeyObjects.Update(keyObject);
                 await _service.SaveChangesAsync();
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 GC.Collect();
                 throw;

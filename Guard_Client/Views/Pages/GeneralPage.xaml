@@ -126,25 +126,6 @@
                                            VerticalAlignment="Center"/>
                                     </Grid>
                                     <ControlTemplate.Triggers>
-
-
-                                        <EventTrigger RoutedEvent="PreviewMouseDown">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ThicknessAnimation Storyboard.TargetProperty="Padding"
-                                                        Duration="0:0:0.100" To="0"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                        <EventTrigger RoutedEvent="PreviewMouseUp">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <ThicknessAnimation Storyboard.TargetProperty="Padding"
-                                                        Duration="0:0:0.100" To="13"/>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-
                                         <DataTrigger Binding="{Binding CurrentUser}" Value="{x:Null}">
                                             <Setter Property="IsEnabled" Value="False"/>
                                         </DataTrigger>
